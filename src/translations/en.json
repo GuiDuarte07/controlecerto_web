@@ -1,0 +1,260 @@
+{
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to access your account",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "Your password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "signIn": "Sign in",
+      "signInLoading": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "errors": {
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email",
+        "passwordRequired": "Password is required",
+        "passwordTooShort": "Password must be at least 4 characters",
+        "invalidCredentials": "Invalid email or password",
+        "networkError": "Connection error. Please try again."
+      }
+    },
+    "register": {
+      "title": "Create account",
+      "subtitle": "Join now and start controlling your finances",
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "Create a password",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "signUp": "Create account",
+      "signUpLoading": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "terms": "I agree to the",
+      "termsLink": "Terms of Service",
+      "and": "and",
+      "privacyLink": "Privacy Policy",
+      "errors": {
+        "nameRequired": "Name is required",
+        "nameTooShort": "Name must be at least 5 characters",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email",
+        "emailAlreadyUsed": "This email is already registered",
+        "passwordRequired": "Password is required",
+        "passwordTooShort": "Password must be at least 4 characters",
+        "passwordTooLong": "Password must be at most 30 characters",
+        "passwordMismatch": "Passwords do not match",
+        "networkError": "Connection error. Please try again.",
+        "termsRequired": "You must accept the terms"
+      }
+    },
+    "logout": {
+      "button": "Sign out",
+      "loading": "Signing out..."
+    }
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "categories": "Categories",
+    "accounts": "Accounts",
+    "investments": "Investments",
+    "settings": "Settings",
+    "logout": "Sign out"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Welcome to your financial panel"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Adjust your preferences and account data"
+  },
+  "accounts": {
+    "title": "Accounts",
+    "description": "Manage your bank accounts and opening balances",
+    "actionLabel": "New Account",
+    "searchPlaceholder": "Search by bank or description",
+    "hint": "Use edit and deactivate actions to keep your account list organized.",
+    "summary": {
+      "totalAccounts": "Total accounts",
+      "totalBalance": "Total balance",
+      "filteredResult": "{count} account(s) found • Filtered balance: {balance}"
+    },
+    "empty": {
+      "title": "No accounts yet",
+      "description": "Create your first account to start organizing your balances."
+    },
+    "table": {
+      "bank": "Bank",
+      "description": "Description",
+      "balance": "Balance",
+      "color": "Color",
+      "actions": "Actions",
+      "noDescription": "No description"
+    },
+    "actions": {
+      "edit": "Edit",
+      "deactivate": "Deactivate",
+      "deactivating": "Deactivating...",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "retry": "Retry",
+      "clearFilters": "Clear"
+    },
+    "dialog": {
+      "createTitle": "New account",
+      "createDescription": "Fill in the details to create a new account.",
+      "editTitle": "Edit account",
+      "editDescription": "Update the selected account details.",
+      "balance": "Opening balance",
+      "bank": "Bank",
+      "bankPlaceholder": "Ex: Nubank, Chase, Revolut",
+      "description": "Description",
+      "descriptionPlaceholder": "Optional - up to 100 characters",
+      "color": "Color",
+      "colorHint": "Use the picker or type hexadecimal format (ex: #A1D2F4)."
+    },
+    "confirmDelete": {
+      "title": "Deactivate account?",
+      "description": "The account will be deactivated and hidden from active lists."
+    },
+    "feedback": {
+      "errorTitle": "We could not complete this action",
+      "loadError": "Could not load accounts.",
+      "createError": "Could not create the account.",
+      "updateError": "Could not update the account.",
+      "deleteError": "Could not deactivate the account."
+    },
+    "errors": {
+      "balanceInvalid": "Enter a valid balance.",
+      "balanceNonNegative": "Opening balance cannot be negative.",
+      "bankRequired": "Bank name is required.",
+      "bankTooLong": "Bank name can have up to 100 characters.",
+      "descriptionTooLong": "Description can have up to 100 characters.",
+      "colorInvalid": "Enter a valid hexadecimal color (ex: #A1D2F4).",
+      "idInvalid": "Invalid account identifier.",
+      "updateFailed": "Could not validate update payload."
+    }
+  },
+  "header": {
+    "profile": "My Profile",
+    "settings": "Settings",
+    "logout": "Sign out"
+  },
+  "userMenu": {
+    "menuTitle": "Preferences",
+    "theme": "Dark theme",
+    "language": "Language",
+    "languagePt": "Portuguese",
+    "languageEn": "English",
+    "moreSettings": "Open more settings",
+    "fallbackName": "User",
+    "fallbackEmail": "email@example.com"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "description": "Manage and monitor your financial activity",
+    "actionLabel": "New Transaction",
+    "filters": {
+      "title": "Filters",
+      "description": "Filter your transactions by period, account and more",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "account": "Account",
+      "selectAccount": "Select an account",
+      "allAccounts": "All accounts",
+      "includeInvoices": "Include Invoices"
+    },
+    "table": {
+      "title": "Transactions",
+      "empty": "No transactions found",
+      "description": "Description",
+      "category": "Category",
+      "account": "Account",
+      "date": "Date",
+      "amount": "Amount"
+    },
+    "stats": {
+      "total": "Total",
+      "income": "Income",
+      "expenses": "Expenses"
+    }
+  },
+  "categories": {
+    "title": "Categories",
+    "description": "Organize your expenses and income with categories",
+    "actionLabel": "New Category",
+    "searchPlaceholder": "Search categories...",
+    "addSubcategory": "Add subcategory",
+    "subcategories": "subcategories",
+    "limit": "Limit",
+    "empty": "No categories found",
+    "createFirst": "Create your first category to get started.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "cancel": "Cancel",
+    "deleteConfirmTitle": "Delete category?",
+    "deleteConfirmDescription": "The category will be deleted. This action cannot be undone and only works if there are no linked transactions.",
+    "dialog": {
+      "createTitle": "New Category",
+      "createDescription": "Create a category to organize your transactions.",
+      "editTitle": "Edit Category",
+      "editDescription": "Update the selected category details.",
+      "name": "Name",
+      "namePlaceholder": "E.g. Groceries",
+      "type": "Type",
+      "expense": "Expense",
+      "income": "Income",
+      "icon": "Icon",
+      "color": "Color",
+      "colorHint": "Use the preset colors or click 🎨 to choose a custom color.",
+      "parentCategory": "Parent Category",
+      "noParent": "None (root category)",
+      "limit": "Budget limit",
+      "limitOptional": "optional",
+      "limitPlaceholder": "E.g. 500.00",
+      "limitHint": "Set a maximum spending amount for this category per month.",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel"
+    },
+    "iconPicker": {
+      "title": "Choose an Icon",
+      "searchPlaceholder": "Search icon... (e.g. home, food)",
+      "noResults": "No icons found for this search."
+    },
+    "parentSelect": {
+      "searchPlaceholder": "Search parent category..."
+    },
+    "actions": {
+      "dismiss": "Dismiss"
+    },
+    "feedback": {
+      "errorTitle": "Could not complete the operation",
+      "loadError": "Could not load categories.",
+      "createError": "Could not create the category.",
+      "updateError": "Could not update the category.",
+      "deleteError": "Could not delete the category."
+    },
+    "errors": {
+      "nameRequired": "Enter the category name.",
+      "nameTooLong": "Name can contain up to 60 characters.",
+      "iconRequired": "Select an icon.",
+      "billTypeRequired": "Select the category type.",
+      "colorInvalid": "Enter a valid hex color (e.g. #3B82F6).",
+      "limitPositive": "Limit must be a positive value.",
+      "idInvalid": "Invalid category identifier.",
+      "saveFailed": "Could not save the category."
+    }
+  }
+}

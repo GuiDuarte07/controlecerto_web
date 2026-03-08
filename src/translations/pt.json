@@ -1,0 +1,260 @@
+{
+  "auth": {
+    "login": {
+      "title": "Bem-vindo de volta",
+      "subtitle": "Faça login para acessar sua conta",
+      "email": "Email",
+      "emailPlaceholder": "seu@email.com",
+      "password": "Senha",
+      "passwordPlaceholder": "Sua senha",
+      "rememberMe": "Lembrar-me",
+      "forgotPassword": "Esqueceu a senha?",
+      "signIn": "Entrar",
+      "signInLoading": "Entrando...",
+      "noAccount": "Não tem uma conta?",
+      "signUp": "Cadastre-se",
+      "errors": {
+        "emailRequired": "Email é obrigatório",
+        "emailInvalid": "Email inválido",
+        "passwordRequired": "Senha é obrigatória",
+        "passwordTooShort": "Senha deve ter pelo menos 4 caracteres",
+        "invalidCredentials": "Email ou senha inválidos",
+        "networkError": "Erro de conexão. Tente novamente."
+      }
+    },
+    "register": {
+      "title": "Criar conta",
+      "subtitle": "Junte-se agora e comece a controlar suas finanças",
+      "name": "Nome completo",
+      "namePlaceholder": "Seu nome",
+      "email": "Email",
+      "emailPlaceholder": "seu@email.com",
+      "password": "Senha",
+      "passwordPlaceholder": "Crie uma senha",
+      "confirmPassword": "Confirmar senha",
+      "confirmPasswordPlaceholder": "Confirme sua senha",
+      "signUp": "Criar conta",
+      "signUpLoading": "Criando conta...",
+      "haveAccount": "Já tem uma conta?",
+      "signIn": "Fazer login",
+      "terms": "Concordo com os",
+      "termsLink": "Termos de Serviço",
+      "and": "e",
+      "privacyLink": "Política de Privacidade",
+      "errors": {
+        "nameRequired": "Nome é obrigatório",
+        "nameTooShort": "Nome deve ter pelo menos 5 caracteres",
+        "emailRequired": "Email é obrigatório",
+        "emailInvalid": "Email inválido",
+        "emailAlreadyUsed": "Este email já está registrado",
+        "passwordRequired": "Senha é obrigatória",
+        "passwordTooShort": "Senha deve ter pelo menos 4 caracteres",
+        "passwordTooLong": "Senha deve ter no máximo 30 caracteres",
+        "passwordMismatch": "Senhas não conferem",
+        "networkError": "Erro de conexão. Tente novamente.",
+        "termsRequired": "Você deve aceitar os termos"
+      }
+    },
+    "logout": {
+      "button": "Sair",
+      "loading": "Saindo..."
+    }
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "transactions": "Transações",
+    "categories": "Categorias",
+    "accounts": "Contas",
+    "investments": "Investimentos",
+    "settings": "Configurações",
+    "logout": "Sair"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Bem-vindo ao seu painel financeiro"
+  },
+  "settings": {
+    "title": "Configurações",
+    "description": "Ajuste preferências e dados da sua conta"
+  },
+  "accounts": {
+    "title": "Contas",
+    "description": "Gerencie suas contas bancárias e saldos iniciais",
+    "actionLabel": "Nova Conta",
+    "searchPlaceholder": "Buscar por banco ou descrição",
+    "hint": "Use as ações de editar e desativar para manter sua lista de contas organizada.",
+    "summary": {
+      "totalAccounts": "Total de contas",
+      "totalBalance": "Saldo total",
+      "filteredResult": "{count} conta(s) encontrada(s) • Saldo filtrado: {balance}"
+    },
+    "empty": {
+      "title": "Nenhuma conta cadastrada",
+      "description": "Crie sua primeira conta para começar a organizar seus saldos."
+    },
+    "table": {
+      "bank": "Banco",
+      "description": "Descrição",
+      "balance": "Saldo",
+      "color": "Cor",
+      "actions": "Ações",
+      "noDescription": "Sem descrição"
+    },
+    "actions": {
+      "edit": "Editar",
+      "deactivate": "Desativar",
+      "deactivating": "Desativando...",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "cancel": "Cancelar",
+      "retry": "Tentar novamente",
+      "clearFilters": "Limpar"
+    },
+    "dialog": {
+      "createTitle": "Nova conta",
+      "createDescription": "Preencha os dados para cadastrar uma nova conta.",
+      "editTitle": "Editar conta",
+      "editDescription": "Atualize os dados da conta selecionada.",
+      "balance": "Saldo inicial",
+      "bank": "Banco",
+      "bankPlaceholder": "Ex: Nubank, Itaú, Mercado Pago",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Opcional - até 100 caracteres",
+      "color": "Cor",
+      "colorHint": "Use o seletor ou digite em hexadecimal (ex: #A1D2F4)."
+    },
+    "confirmDelete": {
+      "title": "Desativar conta?",
+      "description": "A conta será desativada e não aparecerá mais na listagem ativa."
+    },
+    "feedback": {
+      "errorTitle": "Não foi possível concluir a operação",
+      "loadError": "Não foi possível carregar as contas.",
+      "createError": "Não foi possível criar a conta.",
+      "updateError": "Não foi possível atualizar a conta.",
+      "deleteError": "Não foi possível desativar a conta."
+    },
+    "errors": {
+      "balanceInvalid": "Informe um saldo válido.",
+      "balanceNonNegative": "O saldo inicial não pode ser negativo.",
+      "bankRequired": "Informe o nome do banco.",
+      "bankTooLong": "O nome do banco pode conter até 100 caracteres.",
+      "descriptionTooLong": "A descrição pode conter até 100 caracteres.",
+      "colorInvalid": "Informe uma cor hexadecimal válida (ex: #A1D2F4).",
+      "idInvalid": "Identificador de conta inválido.",
+      "updateFailed": "Não foi possível validar os dados para atualização."
+    }
+  },
+  "header": {
+    "profile": "Meu Perfil",
+    "settings": "Configurações",
+    "logout": "Sair"
+  },
+  "userMenu": {
+    "menuTitle": "Preferências",
+    "theme": "Tema escuro",
+    "language": "Idioma",
+    "languagePt": "Português",
+    "languageEn": "Inglês",
+    "moreSettings": "Acessar mais configurações",
+    "fallbackName": "Usuário",
+    "fallbackEmail": "email@exemplo.com"
+  },
+  "transactions": {
+    "title": "Transações",
+    "description": "Gerencie e monitore sua atividade financeira",
+    "actionLabel": "Nova Transação",
+    "filters": {
+      "title": "Filtros",
+      "description": "Filtre suas transações por período, conta e mais",
+      "startDate": "Data Inicial",
+      "endDate": "Data Final",
+      "account": "Conta",
+      "selectAccount": "Selecione uma conta",
+      "allAccounts": "Todas as contas",
+      "includeInvoices": "Incluir Faturas"
+    },
+    "table": {
+      "title": "Transações",
+      "empty": "Nenhuma transação encontrada",
+      "description": "Descrição",
+      "category": "Categoria",
+      "account": "Conta",
+      "date": "Data",
+      "amount": "Valor"
+    },
+    "stats": {
+      "total": "Total",
+      "income": "Renda",
+      "expenses": "Despesas"
+    }
+  },
+  "categories": {
+    "title": "Categorias",
+    "description": "Organize suas despesas e receitas com categorias",
+    "actionLabel": "Nova Categoria",
+    "searchPlaceholder": "Buscar categorias...",
+    "addSubcategory": "Adicionar subcategoria",
+    "subcategories": "subcategorias",
+    "limit": "Limite",
+    "empty": "Nenhuma categoria encontrada",
+    "createFirst": "Crie sua primeira categoria para começar a organizar.",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "deleting": "Excluindo...",
+    "cancel": "Cancelar",
+    "deleteConfirmTitle": "Excluir categoria?",
+    "deleteConfirmDescription": "A categoria será excluída. Esta ação não pode ser desfeita e só funciona se não houver transações vinculadas.",
+    "dialog": {
+      "createTitle": "Nova Categoria",
+      "createDescription": "Crie uma categoria para organizar suas transações.",
+      "editTitle": "Editar Categoria",
+      "editDescription": "Atualize os dados da categoria selecionada.",
+      "name": "Nome",
+      "namePlaceholder": "Ex: Alimentação",
+      "type": "Tipo",
+      "expense": "Despesa",
+      "income": "Receita",
+      "icon": "Ícone",
+      "color": "Cor",
+      "colorHint": "Use as cores pré-definidas ou clique em 🎨 para escolher uma cor personalizada.",
+      "parentCategory": "Categoria Pai",
+      "noParent": "Nenhuma (categoria raiz)",
+      "limit": "Limite de orçamento",
+      "limitOptional": "opcional",
+      "limitPlaceholder": "Ex: 500.00",
+      "limitHint": "Defina um valor máximo de gastos para esta categoria por mês.",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "cancel": "Cancelar"
+    },
+    "iconPicker": {
+      "title": "Escolher Ícone",
+      "searchPlaceholder": "Buscar ícone... (ex: casa, comida)",
+      "noResults": "Nenhum ícone encontrado para esta busca."
+    },
+    "parentSelect": {
+      "searchPlaceholder": "Buscar categoria pai..."
+    },
+    "actions": {
+      "dismiss": "Fechar"
+    },
+    "feedback": {
+      "errorTitle": "Não foi possível concluir a operação",
+      "loadError": "Não foi possível carregar as categorias.",
+      "createError": "Não foi possível criar a categoria.",
+      "updateError": "Não foi possível atualizar a categoria.",
+      "deleteError": "Não foi possível excluir a categoria."
+    },
+    "errors": {
+      "nameRequired": "Informe o nome da categoria.",
+      "nameTooLong": "O nome pode conter até 60 caracteres.",
+      "iconRequired": "Selecione um ícone.",
+      "billTypeRequired": "Selecione o tipo da categoria.",
+      "colorInvalid": "Informe uma cor hexadecimal válida (ex: #3B82F6).",
+      "limitPositive": "O limite deve ser um valor positivo.",
+      "idInvalid": "Identificador de categoria inválido.",
+      "saveFailed": "Não foi possível salvar a categoria."
+    }
+  }
+}
