@@ -8,11 +8,13 @@ import { useLocale, useTranslations } from "next-intl";
 import {
   ChevronLeft,
   ChevronRight,
+  CreditCard,
   Landmark,
   Languages,
   LayoutDashboard,
   LogOut,
   Menu,
+  Receipt,
   Settings2,
   Tag,
 } from "lucide-react";
@@ -88,9 +90,21 @@ export function Sidebar() {
       requiresAuth: true,
     },
     {
+      icon: <Receipt className="h-5 w-5" />,
+      label: t("transactions"),
+      href: `/${locale}/transactions`,
+      requiresAuth: true,
+    },
+    {
       icon: <Tag className="h-5 w-5" />,
       label: t("categories"),
       href: `/${locale}/categories`,
+      requiresAuth: true,
+    },
+    {
+      icon: <CreditCard className="h-5 w-5" />,
+      label: t("creditCards"),
+      href: `/${locale}/credit-cards`,
       requiresAuth: true,
     },
     {

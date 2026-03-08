@@ -65,6 +65,7 @@
     "transactions": "Transações",
     "categories": "Categorias",
     "accounts": "Contas",
+    "creditCards": "Cartões de Crédito",
     "investments": "Investimentos",
     "settings": "Configurações",
     "logout": "Sair"
@@ -162,31 +163,190 @@
   },
   "transactions": {
     "title": "Transações",
-    "description": "Gerencie e monitore sua atividade financeira",
+    "description": "Visualize e gerencie todas as suas movimentações financeiras",
     "actionLabel": "Nova Transação",
+    "searchPlaceholder": "Buscar transações...",
+    "modeInvoice": "Faturas",
+    "modeStatement": "Extrato",
     "filters": {
       "title": "Filtros",
-      "description": "Filtre suas transações por período, conta e mais",
       "startDate": "Data Inicial",
       "endDate": "Data Final",
       "account": "Conta",
-      "selectAccount": "Selecione uma conta",
-      "allAccounts": "Todas as contas",
-      "includeInvoices": "Incluir Faturas"
+      "category": "Categoria"
     },
-    "table": {
-      "title": "Transações",
-      "empty": "Nenhuma transação encontrada",
-      "description": "Descrição",
+    "invoice": {
+      "otherTransactions": "Outras Transações do Mês",
+      "noInvoices": "Nenhuma fatura encontrada",
+      "noTransactions": "Nenhuma transação neste mês",
+      "invoicePaidStatus": "Paga",
+      "invoiceOpen": "Em aberto",
+      "invoiceClosing": "Fecha",
+      "invoiceDue": "Vence",
+      "invoiceTotal": "Total",
+      "invoicePaid": "Pago",
+      "payments": "Pagamentos",
+      "prevMonth": "Mês anterior",
+      "nextMonth": "Próximo mês",
+      "collapseOpen": "Ver transações",
+      "collapseClose": "Ocultar transações"
+    },
+    "statement": {
+      "noTransactions": "Nenhuma transação encontrada",
+      "filtersLabel": "Filtros",
+      "clearFilters": "Limpar filtros",
+      "applyFilters": "Aplicar",
+      "totalItems": "Total: {count} itens",
+      "page": "Página {page} de {total}",
+      "summary": {
+        "income": "Receitas",
+        "expense": "Despesas",
+        "creditCharges": "Cartão",
+        "invoicePayments": "Pgto Fatura",
+        "netBalance": "Saldo Líquido"
+      },
+      "filters": {
+        "card": "Cartão",
+        "sort": "Ordenar por",
+        "sortDateDesc": "Data (mais recente)",
+        "sortDateAsc": "Data (mais antigo)",
+        "sortAmountDesc": "Valor (maior)",
+        "sortAmountAsc": "Valor (menor)"
+      }
+    },
+    "types": {
+      "EXPENSE": "Despesa",
+      "INCOME": "Receita",
+      "CREDITEXPENSE": "Cartão",
+      "TRANSFERENCE": "Transferência",
+      "INVOICEPAYMENT": "Pgto Fatura"
+    },
+    "create": {
+      "title": "Nova Transação",
+      "selectType": "Selecione o tipo de transação",
+      "expense": "Despesa",
+      "income": "Receita",
+      "creditCard": "Cartão de Crédito",
+      "transference": "Transferência",
+      "amount": "Valor",
+      "amountPerInstallment": "Valor por Parcela",
+      "installments": "Parcelas",
+      "date": "Data",
       "category": "Categoria",
       "account": "Conta",
-      "date": "Data",
-      "amount": "Valor"
+      "card": "Cartão",
+      "accountOrigin": "Conta Origem",
+      "accountDestiny": "Conta Destino",
+      "destination": "Destino / Origem",
+      "description": "Descrição",
+      "observations": "Observações",
+      "justForRecord": "Só registro",
+      "justForRecordHint": "Se ativo, a transação não desconta o saldo da conta",
+      "cancel": "Cancelar",
+      "save": "Salvar",
+      "saving": "Salvando..."
     },
-    "stats": {
-      "total": "Total",
-      "income": "Renda",
-      "expenses": "Despesas"
+    "detail": {
+      "title": "Detalhes da Transação",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "confirmDelete": "Excluir esta transação?",
+      "confirmDeleteDescription": "Esta ação não pode ser desfeita.",
+      "justForRecord": "Só registro",
+      "installment": "Parcelas",
+      "totalPurchase": "Total da Compra",
+      "date": "Data",
+      "category": "Categoria",
+      "account": "Conta",
+      "noDescription": "Sem descrição"
+    },
+    "actions": {
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "retry": "Tentar novamente"
+    },
+    "feedback": {
+      "errorTitle": "Ocorreu um erro",
+      "loadError": "Não foi possível carregar as transações.",
+      "createError": "Não foi possível criar a transação.",
+      "updateError": "Não foi possível atualizar a transação.",
+      "deleteError": "Não foi possível excluir a transação."
+    },
+    "errors": {
+      "amountPositive": "O valor deve ser maior que zero.",
+      "dateRequired": "Informe a data.",
+      "categoryRequired": "Selecione uma categoria.",
+      "accountRequired": "Selecione uma conta.",
+      "cardRequired": "Selecione um cartão.",
+      "destinationRequired": "Informe o destino/origem.",
+      "destinationTooLong": "Máximo de 80 caracteres.",
+      "descriptionTooLong": "Máximo de 100 caracteres.",
+      "observationsTooLong": "Máximo de 300 caracteres.",
+      "installmentsMin": "Mínimo de 1 parcela.",
+      "sameAccountTransference": "Conta origem e destino devem ser diferentes."
+    }
+  },
+  "creditCards": {
+    "title": "Cartões de Crédito",
+    "description": "Gerencie seus cartões de crédito",
+    "actionLabel": "Novo Cartão",
+    "searchPlaceholder": "Buscar cartões...",
+    "empty": {
+      "title": "Nenhum cartão encontrado",
+      "description": "Adicione seu primeiro cartão de crédito para começar",
+      "filteredTitle": "Nenhum resultado",
+      "filteredDescription": "Tente ajustar sua busca"
+    },
+    "summary": {
+      "filteredResult": "{count, plural, one {# cartão encontrado} other {# cartões encontrados}}"
+    },
+    "dialog": {
+      "createTitle": "Novo Cartão de Crédito",
+      "createDescription": "Adicione um novo cartão de crédito à sua conta.",
+      "editTitle": "Editar Cartão",
+      "editDescription": "Altere o limite total ou a descrição do cartão.",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Ex: Cartão Principal",
+      "totalLimit": "Limite Total",
+      "totalLimitPlaceholder": "0,00",
+      "account": "Conta",
+      "accountPlaceholder": "Selecione uma conta",
+      "accountSearchPlaceholder": "Buscar conta...",
+      "accountClear": "Limpar",
+      "closeDay": "Dia de Fechamento",
+      "dueDay": "Dia de Vencimento",
+      "skipWeekend": "Pular Final de Semana",
+      "skipWeekendHint": "Se o vencimento cair no fim de semana, antecipa para a sexta-feira.",
+      "cancel": "Cancelar",
+      "save": "Salvar",
+      "saving": "Salvando..."
+    },
+    "card": {
+      "noDescription": "Sem descrição",
+      "available": "Disponível",
+      "limit": "Limite",
+      "closeDay": "Fecha dia {day}",
+      "dueDay": "Vence dia {day}",
+      "used": "Utilizado"
+    },
+    "actions": {
+      "edit": "Editar",
+      "viewInvoices": "Ver Faturas",
+      "clearFilters": "Limpar filtros",
+      "retry": "Tentar novamente"
+    },
+    "feedback": {
+      "errorTitle": "Não foi possível concluir a operação",
+      "loadError": "Não foi possível carregar os cartões de crédito.",
+      "createError": "Não foi possível criar o cartão de crédito.",
+      "updateError": "Não foi possível atualizar o cartão de crédito."
+    },
+    "errors": {
+      "totalLimitPositive": "O limite total deve ser maior que zero.",
+      "descriptionTooLong": "A descrição deve ter no máximo 100 caracteres.",
+      "accountRequired": "Selecione uma conta.",
+      "closeDayRange": "O dia de fechamento deve ser entre 1 e 31.",
+      "dueDayRange": "O dia de vencimento deve ser entre 1 e 31."
     }
   },
   "categories": {

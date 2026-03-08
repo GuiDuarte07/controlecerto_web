@@ -65,6 +65,7 @@
     "transactions": "Transactions",
     "categories": "Categories",
     "accounts": "Accounts",
+    "creditCards": "Credit Cards",
     "investments": "Investments",
     "settings": "Settings",
     "logout": "Sign out"
@@ -162,31 +163,190 @@
   },
   "transactions": {
     "title": "Transactions",
-    "description": "Manage and monitor your financial activity",
+    "description": "View and manage all your financial movements",
     "actionLabel": "New Transaction",
+    "searchPlaceholder": "Search transactions...",
+    "modeInvoice": "Invoices",
+    "modeStatement": "Statement",
     "filters": {
       "title": "Filters",
-      "description": "Filter your transactions by period, account and more",
       "startDate": "Start Date",
       "endDate": "End Date",
       "account": "Account",
-      "selectAccount": "Select an account",
-      "allAccounts": "All accounts",
-      "includeInvoices": "Include Invoices"
+      "category": "Category"
     },
-    "table": {
-      "title": "Transactions",
-      "empty": "No transactions found",
-      "description": "Description",
+    "invoice": {
+      "otherTransactions": "Other Transactions This Month",
+      "noInvoices": "No invoices found",
+      "noTransactions": "No transactions this month",
+      "invoicePaidStatus": "Paid",
+      "invoiceOpen": "Open",
+      "invoiceClosing": "Closes",
+      "invoiceDue": "Due",
+      "invoiceTotal": "Total",
+      "invoicePaid": "Paid",
+      "payments": "Payments",
+      "prevMonth": "Previous month",
+      "nextMonth": "Next month",
+      "collapseOpen": "View transactions",
+      "collapseClose": "Hide transactions"
+    },
+    "statement": {
+      "noTransactions": "No transactions found",
+      "filtersLabel": "Filters",
+      "clearFilters": "Clear filters",
+      "applyFilters": "Apply",
+      "totalItems": "Total: {count} items",
+      "page": "Page {page} of {total}",
+      "summary": {
+        "income": "Income",
+        "expense": "Expenses",
+        "creditCharges": "Credit Card",
+        "invoicePayments": "Invoice Payments",
+        "netBalance": "Net Balance"
+      },
+      "filters": {
+        "card": "Card",
+        "sort": "Sort by",
+        "sortDateDesc": "Date (newest)",
+        "sortDateAsc": "Date (oldest)",
+        "sortAmountDesc": "Amount (highest)",
+        "sortAmountAsc": "Amount (lowest)"
+      }
+    },
+    "types": {
+      "EXPENSE": "Expense",
+      "INCOME": "Income",
+      "CREDITEXPENSE": "Card",
+      "TRANSFERENCE": "Transfer",
+      "INVOICEPAYMENT": "Invoice Payment"
+    },
+    "create": {
+      "title": "New Transaction",
+      "selectType": "Select the transaction type",
+      "expense": "Expense",
+      "income": "Income",
+      "creditCard": "Credit Card",
+      "transference": "Transfer",
+      "amount": "Amount",
+      "amountPerInstallment": "Amount per Installment",
+      "installments": "Installments",
+      "date": "Date",
       "category": "Category",
       "account": "Account",
-      "date": "Date",
-      "amount": "Amount"
+      "card": "Card",
+      "accountOrigin": "Origin Account",
+      "accountDestiny": "Destination Account",
+      "destination": "Destination / Origin",
+      "description": "Description",
+      "observations": "Notes",
+      "justForRecord": "Record only",
+      "justForRecordHint": "If enabled, the transaction won't deduct from the account balance",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving..."
     },
-    "stats": {
-      "total": "Total",
-      "income": "Income",
-      "expenses": "Expenses"
+    "detail": {
+      "title": "Transaction Details",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Delete this transaction?",
+      "confirmDeleteDescription": "This action cannot be undone.",
+      "justForRecord": "Record only",
+      "installment": "Installments",
+      "totalPurchase": "Total Purchase",
+      "date": "Date",
+      "category": "Category",
+      "account": "Account",
+      "noDescription": "No description"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "retry": "Retry"
+    },
+    "feedback": {
+      "errorTitle": "An error occurred",
+      "loadError": "Could not load transactions.",
+      "createError": "Could not create the transaction.",
+      "updateError": "Could not update the transaction.",
+      "deleteError": "Could not delete the transaction."
+    },
+    "errors": {
+      "amountPositive": "Amount must be greater than zero.",
+      "dateRequired": "Please enter a date.",
+      "categoryRequired": "Please select a category.",
+      "accountRequired": "Please select an account.",
+      "cardRequired": "Please select a card.",
+      "destinationRequired": "Please enter a destination/origin.",
+      "destinationTooLong": "Maximum 80 characters.",
+      "descriptionTooLong": "Maximum 100 characters.",
+      "observationsTooLong": "Maximum 300 characters.",
+      "installmentsMin": "Minimum 1 installment.",
+      "sameAccountTransference": "Origin and destination accounts must be different."
+    }
+  },
+  "creditCards": {
+    "title": "Credit Cards",
+    "description": "Manage your credit cards",
+    "actionLabel": "New Card",
+    "searchPlaceholder": "Search cards...",
+    "empty": {
+      "title": "No cards found",
+      "description": "Add your first credit card to get started",
+      "filteredTitle": "No results",
+      "filteredDescription": "Try adjusting your search"
+    },
+    "summary": {
+      "filteredResult": "{count, plural, one {# card found} other {# cards found}}"
+    },
+    "dialog": {
+      "createTitle": "New Credit Card",
+      "createDescription": "Add a new credit card to your account.",
+      "editTitle": "Edit Card",
+      "editDescription": "Update the total limit or description of the card.",
+      "description": "Description",
+      "descriptionPlaceholder": "e.g. Main Card",
+      "totalLimit": "Total Limit",
+      "totalLimitPlaceholder": "0.00",
+      "account": "Account",
+      "accountPlaceholder": "Select an account",
+      "accountSearchPlaceholder": "Search account...",
+      "accountClear": "Clear",
+      "closeDay": "Closing Day",
+      "dueDay": "Due Day",
+      "skipWeekend": "Skip Weekend",
+      "skipWeekendHint": "If the due date falls on a weekend, it moves to Friday.",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "card": {
+      "noDescription": "No description",
+      "available": "Available",
+      "limit": "Limit",
+      "closeDay": "Closes day {day}",
+      "dueDay": "Due day {day}",
+      "used": "Used"
+    },
+    "actions": {
+      "edit": "Edit",
+      "viewInvoices": "View Invoices",
+      "clearFilters": "Clear filters",
+      "retry": "Retry"
+    },
+    "feedback": {
+      "errorTitle": "An error occurred",
+      "loadError": "Could not load credit cards.",
+      "createError": "Could not create the credit card.",
+      "updateError": "Could not update the credit card."
+    },
+    "errors": {
+      "totalLimitPositive": "Total limit must be greater than zero.",
+      "descriptionTooLong": "Description must be at most 100 characters.",
+      "accountRequired": "Select an account.",
+      "closeDayRange": "Closing day must be between 1 and 31.",
+      "dueDayRange": "Due day must be between 1 and 31."
     }
   },
   "categories": {

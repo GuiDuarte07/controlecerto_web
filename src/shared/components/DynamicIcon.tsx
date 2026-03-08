@@ -59,6 +59,7 @@ const ICON_MAP = {
   creditCard: LucideIcons.CreditCard,
   banknote: LucideIcons.Banknote,
   dollarSign: LucideIcons.DollarSign,
+  arrowLeftRight: LucideIcons.ArrowLeftRight,
 
   // Jurídico
   gavel: LucideIcons.Gavel,
@@ -232,6 +233,7 @@ export const ICON_META: Record<IconName, { keywords: string[] }> = {
   creditCard: { keywords: ["cartão", "card", "crédito", "credit", "pagamento", "payment", "débito", "debit", "banco"] },
   banknote: { keywords: ["nota", "banknote", "dinheiro", "money", "cédula", "bill", "grana", "reais"] },
   dollarSign: { keywords: ["dólar", "dollar", "dinheiro", "money", "cifrão", "currency", "renda", "income"] },
+  arrowLeftRight: { keywords: ["transferência", "transfer", "seta", "arrow", "troca", "swap", "mover", "move"] },
   gavel: { keywords: ["martelo", "gavel", "jurídico", "legal", "justiça", "justice", "lei", "law", "multa"] },
   scale: { keywords: ["balança", "scale", "jurídico", "legal", "justiça", "justice", "equilíbrio"] },
   home: { keywords: ["casa", "home", "moradia", "housing", "lar", "house", "aluguel", "rent"] },

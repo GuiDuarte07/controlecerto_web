@@ -1,6 +1,7 @@
 export { accountsService } from "./services";
 export { useAccountsStore } from "./context";
 export { AccountDialog, AccountsList, AccountsPageContent } from "./components";
+export { toAccountSearchableItem } from "./utils/accounts.utils";
 export {
   useAccountsActions,
   useAccountsData,
