@@ -1,4 +1,8 @@
-export type InvestmentHistoryType = "INVEST" | "WITHDRAW" | "ADJUSTMENT" | "YIELD";
+export type InvestmentHistoryType =
+  | "INVEST"
+  | "WITHDRAW"
+  | "ADJUSTMENT"
+  | "YIELD";
 
 export interface InvestmentHistoryAccount {
   id: number;

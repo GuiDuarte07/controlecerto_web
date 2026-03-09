@@ -22,7 +22,9 @@ async function getById(id: number): Promise<Investment> {
 }
 
 async function getHistory(id: number): Promise<InvestmentHistory[]> {
-  return apiFetch<InvestmentHistory[]>(`/api/investments/${id}/history`, { method: "GET" });
+  return apiFetch<InvestmentHistory[]>(`/api/investments/${id}/history`, {
+    method: "GET",
+  });
 }
 
 async function create(data: CreateInvestmentRequest): Promise<Investment> {
@@ -32,28 +34,40 @@ async function create(data: CreateInvestmentRequest): Promise<Investment> {
   });
 }
 
-async function update(id: number, data: UpdateInvestmentRequest): Promise<Investment> {
+async function update(
+  id: number,
+  data: UpdateInvestmentRequest,
+): Promise<Investment> {
   return apiFetch<Investment>(`/api/investments/${id}`, {
     method: "PATCH",
     body: JSON.stringify(data),
   });
 }
 
-async function deposit(id: number, data: DepositWithdrawRequest): Promise<Investment> {
+async function deposit(
+  id: number,
+  data: DepositWithdrawRequest,
+): Promise<Investment> {
   return apiFetch<Investment>(`/api/investments/${id}/deposit`, {
     method: "POST",
     body: JSON.stringify(data),
   });
 }
 
-async function withdraw(id: number, data: DepositWithdrawRequest): Promise<Investment> {
+async function withdraw(
+  id: number,
+  data: DepositWithdrawRequest,
+): Promise<Investment> {
   return apiFetch<Investment>(`/api/investments/${id}/withdraw`, {
     method: "POST",
     body: JSON.stringify(data),
   });
 }
 
-async function adjust(id: number, data: AdjustInvestmentRequest): Promise<Investment> {
+async function adjust(
+  id: number,
+  data: AdjustInvestmentRequest,
+): Promise<Investment> {
   return apiFetch<Investment>(`/api/investments/${id}/adjust`, {
     method: "POST",
     body: JSON.stringify(data),

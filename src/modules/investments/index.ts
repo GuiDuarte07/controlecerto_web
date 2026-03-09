@@ -1,4 +1,7 @@
-export { InvestmentsPageContent, InvestmentDetailPageContent } from "./components";
+export {
+  InvestmentsPageContent,
+  InvestmentDetailPageContent,
+} from "./components";
 export { useInvestmentsStore } from "./context/investmentsContext";
 export {
   useInvestmentsList,

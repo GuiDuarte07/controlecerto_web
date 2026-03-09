@@ -29,7 +29,9 @@ export function useInvestmentDetail(id: number) {
   const adjust = useInvestmentsStore((s) => s.adjust);
   const update = useInvestmentsStore((s) => s.update);
   const remove = useInvestmentsStore((s) => s.remove);
-  const setSelectedInvestment = useInvestmentsStore((s) => s.setSelectedInvestment);
+  const setSelectedInvestment = useInvestmentsStore(
+    (s) => s.setSelectedInvestment,
+  );
   const clearError = useInvestmentsStore((s) => s.clearError);
 
   useEffect(() => {

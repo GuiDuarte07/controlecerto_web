@@ -34,7 +34,10 @@ export const depositWithdrawSchema = z.object({
     .positive({ message: "investments.errors.amountPositive" }),
   accountId: z.number().optional(),
   occurredAt: z.date().optional(),
-  note: z.string().max(500, { message: "investments.errors.noteTooLong" }).optional(),
+  note: z
+    .string()
+    .max(500, { message: "investments.errors.noteTooLong" })
+    .optional(),
 });
 
 export const adjustSchema = z.object({
@@ -42,7 +45,10 @@ export const adjustSchema = z.object({
     .number({ error: "investments.errors.amountInvalid" })
     .min(0, { message: "investments.errors.amountNonNegative" }),
   occurredAt: z.date().optional(),
-  note: z.string().max(500, { message: "investments.errors.noteTooLong" }).optional(),
+  note: z
+    .string()
+    .max(500, { message: "investments.errors.noteTooLong" })
+    .optional(),
 });
 
 export type CreateInvestmentFormData = z.infer<typeof createInvestmentSchema>;

@@ -54,7 +54,10 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
       const investments = await investmentsService.getAll();
       set({ investments, isLoading: false });
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.loadError"), isLoading: false });
+      set({
+        error: toApiError(err, "investments.feedback.loadError"),
+        isLoading: false,
+      });
     }
   },
 
@@ -64,7 +67,10 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
       const investment = await investmentsService.getById(id);
       set({ selectedInvestment: investment, isLoading: false });
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.loadError"), isLoading: false });
+      set({
+        error: toApiError(err, "investments.feedback.loadError"),
+        isLoading: false,
+      });
     }
   },
 
@@ -80,7 +86,10 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
       await get().fetchAll();
       set({ isSubmitting: false });
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.createError"), isSubmitting: false });
+      set({
+        error: toApiError(err, "investments.feedback.createError"),
+        isSubmitting: false,
+      });
       throw err;
     }
   },
@@ -94,7 +103,9 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
         description: data.description,
       });
       set((state) => ({
-        investments: state.investments.map((i) => (i.id === id ? { ...i, ...updated } : i)),
+        investments: state.investments.map((i) =>
+          i.id === id ? { ...i, ...updated } : i,
+        ),
         selectedInvestment:
           state.selectedInvestment?.id === id
             ? { ...state.selectedInvestment, ...updated }
@@ -102,7 +113,10 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
         isSubmitting: false,
       }));
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.updateError"), isSubmitting: false });
+      set({
+        error: toApiError(err, "investments.feedback.updateError"),
+        isSubmitting: false,
+      });
       throw err;
     }
   },
@@ -118,7 +132,10 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
       });
       set({ selectedInvestment: updated, isSubmitting: false });
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.depositError"), isSubmitting: false });
+      set({
+        error: toApiError(err, "investments.feedback.depositError"),
+        isSubmitting: false,
+      });
       throw err;
     }
   },
@@ -134,7 +151,10 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
       });
       set({ selectedInvestment: updated, isSubmitting: false });
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.withdrawError"), isSubmitting: false });
+      set({
+        error: toApiError(err, "investments.feedback.withdrawError"),
+        isSubmitting: false,
+      });
       throw err;
     }
   },
@@ -149,7 +169,10 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
       });
       set({ selectedInvestment: updated, isSubmitting: false });
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.adjustError"), isSubmitting: false });
+      set({
+        error: toApiError(err, "investments.feedback.adjustError"),
+        isSubmitting: false,
+      });
       throw err;
     }
   },
@@ -163,12 +186,16 @@ export const useInvestmentsStore = create<InvestmentsStore>((set, get) => ({
         isSubmitting: false,
       }));
     } catch (err) {
-      set({ error: toApiError(err, "investments.feedback.deleteError"), isSubmitting: false });
+      set({
+        error: toApiError(err, "investments.feedback.deleteError"),
+        isSubmitting: false,
+      });
       throw err;
     }
   },
 
-  setSelectedInvestment: (investment) => set({ selectedInvestment: investment }),
+  setSelectedInvestment: (investment) =>
+    set({ selectedInvestment: investment }),
 
   clearError: () => set({ error: null }),
 }));
