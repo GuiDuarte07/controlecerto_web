@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useLocale, useTranslations } from "next-intl";
 import { Badge } from "@/shared/components/ui/badge";
@@ -125,7 +125,7 @@ export function TransactionRow({ transaction, onClick }: TransactionRowProps) {
             </>
           )}
           <span className="shrink-0 font-bold">
-            {format(new Date(transaction.purchaseDate), "dd/MM/yyyy", { locale: dateLocale })}
+            {(() => { const d = new Date(transaction.purchaseDate); return isValid(d) ? format(d, "dd/MM/yyyy", { locale: dateLocale }) : "—"; })()}
           </span>
         </div>
       </div>

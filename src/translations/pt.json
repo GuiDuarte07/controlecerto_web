@@ -416,5 +416,215 @@
       "idInvalid": "Identificador de categoria inválido.",
       "saveFailed": "Não foi possível salvar a categoria."
     }
+  },
+  "invoices": {
+    "title": "Faturas",
+    "noInvoice": {
+      "title": "Nenhuma fatura encontrada",
+      "description": "Não há fatura para este período"
+    },
+    "monthNav": {
+      "previous": "Mês anterior",
+      "next": "Próximo mês"
+    },
+    "status": {
+      "paid": "Paga",
+      "open": "Aberta",
+      "future": "Futura"
+    },
+    "summary": {
+      "total": "Total",
+      "paid": "Pago",
+      "remaining": "Restante",
+      "closingDate": "Fechamento",
+      "dueDate": "Vencimento"
+    },
+    "expenses": {
+      "title": "Compras",
+      "empty": "Nenhuma compra nesta fatura",
+      "installment": "{current}/{total}"
+    },
+    "payments": {
+      "title": "Pagamentos",
+      "empty": "Nenhum pagamento registrado",
+      "justForRecord": "Apenas registro"
+    },
+    "actions": {
+      "newPurchase": "Nova Compra",
+      "payInvoice": "Registrar Pagamento",
+      "edit": "Editar",
+      "cancel": "Cancelar",
+      "delete": "Excluir",
+      "deleteConfirmTitle": "Confirmar exclusão",
+      "deletePurchaseDescription": "A compra e todas as suas parcelas serão excluídas. Esta ação não pode ser desfeita.",
+      "deletePaymentDescription": "O pagamento será estornado na conta. Esta ação não pode ser desfeita."
+    },
+    "purchase": {
+      "createTitle": "Nova Compra",
+      "editTitle": "Editar Compra",
+      "name": "Descrição da compra",
+      "totalAmount": "Valor total",
+      "installments": "Parcelas",
+      "installmentAmountPreview": "{amount} por parcela",
+      "purchaseDate": "Data da compra",
+      "category": "Categoria",
+      "firstInvoiceDate": "Data da primeira fatura",
+      "firstInvoiceDatePlaceholder": "dd/mm/yyyy (opcional)",
+      "firstInvoiceDateHint": "Opcional — força em qual fatura cai a primeira parcela",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "errors": {
+        "nameRequired": "Informe a descrição da compra.",
+        "nameTooLong": "Máximo de 100 caracteres.",
+        "totalAmountRequired": "Informe o valor total.",
+        "totalAmountPositive": "O valor deve ser maior que zero.",
+        "installmentsMin": "Mínimo de 1 parcela.",
+        "categoryRequired": "Selecione uma categoria.",
+        "purchaseDateRequired": "Informe a data da compra."
+      }
+    },
+    "payment": {
+      "title": "Pagar Fatura",
+      "account": "Conta",
+      "amount": "Valor a pagar",
+      "description": "Descrição",
+      "paymentDate": "Data do pagamento",
+      "justForRecord": "Apenas registro",
+      "justForRecordHint": "Marca como pago sem movimentar a conta",
+      "save": "Confirmar pagamento",
+      "saving": "Confirmando...",
+      "errors": {
+        "accountRequired": "Selecione uma conta.",
+        "amountRequired": "Informe o valor a pagar.",
+        "amountPositive": "O valor deve ser maior que zero.",
+        "descriptionRequired": "Informe uma descrição.",
+        "paymentDateRequired": "Informe a data do pagamento."
+      }
+    },
+    "feedback": {
+      "errorTitle": "Não foi possível concluir a operação",
+      "loadError": "Não foi possível carregar a fatura.",
+      "purchaseCreateError": "Não foi possível criar a compra.",
+      "purchaseUpdateError": "Não foi possível atualizar a compra.",
+      "purchaseDeleteError": "Não foi possível excluir a compra.",
+      "paymentCreateError": "Não foi possível registrar o pagamento.",
+      "paymentDeleteError": "Não foi possível excluir o pagamento."
+    }
+  },
+  "investments": {
+    "title": "Investimentos",
+    "description": "Acompanhe e gerencie seus investimentos",
+    "empty": {
+      "title": "Nenhum investimento",
+      "description": "Adicione seu primeiro investimento para começar a acompanhar"
+    },
+    "list": {
+      "since": "Desde"
+    },
+    "summary": {
+      "total": "Patrimônio total",
+      "count": "{count, plural, one {# investimento} other {# investimentos}}"
+    },
+    "detail": {
+      "title": "Investimento",
+      "currentValue": "Valor atual",
+      "back": "Voltar"
+    },
+    "fields": {
+      "name": "Nome",
+      "namePlaceholder": "Ex: CDB SOFISA",
+      "initialAmount": "Valor inicial",
+      "initialAmountPlaceholder": "R$ 0,00 (opcional)",
+      "startDate": "Data inicial",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Opcional",
+      "amount": "Valor",
+      "newTotalValue": "Novo valor total",
+      "date": "Data",
+      "note": "Observações",
+      "notePlaceholder": "Opcional",
+      "accountPlaceholder": "Selecionar conta",
+      "accountSearchPlaceholder": "Buscar conta...",
+      "accountEmpty": "Nenhuma conta encontrada"
+    },
+    "create": {
+      "title": "Novo Investimento"
+    },
+    "edit": {
+      "title": "Editar Investimento"
+    },
+    "deposit": {
+      "title": "Depositar",
+      "accountLabel": "Conta de origem"
+    },
+    "withdraw": {
+      "title": "Sacar",
+      "accountLabel": "Conta de destino"
+    },
+    "adjust": {
+      "title": "Ajustar Valor",
+      "reduceTitle": "Atenção: Redução de Valor",
+      "reduceDescription": "O valor inserido ({newValue}) é menor que o valor atual ({currentValue}). Isso resultará em uma redução de {reduction}.",
+      "reduceSuggestion": "Se você deseja remover dinheiro do investimento, considere usar a opção \"Sacar\" ao invés de ajustar.",
+      "reduceConfirmQuestion": "Deseja realmente continuar com o ajuste?",
+      "confirmReduceButton": "Continuar com ajuste"
+    },
+    "delete": {
+      "title": "Excluir Investimento",
+      "description": "Tem certeza que deseja excluir {name}? Esta ação não poderá ser desfeita."
+    },
+    "tabs": {
+      "history": "Histórico",
+      "charts": "Gráficos"
+    },
+    "history": {
+      "empty": "Nenhum histórico",
+      "emptyDescription": "As movimentações aparecerão aqui",
+      "account": "Conta",
+      "types": {
+        "invest": "Depósito",
+        "withdraw": "Saque",
+        "adjustment": "Ajuste",
+        "yield": "Rendimento"
+      }
+    },
+    "charts": {
+      "noData": "Sem dados para exibir",
+      "evolution": "Evolução do Patrimônio",
+      "distribution": "Distribuição das Movimentações",
+      "balance": "Saldo"
+    },
+    "actions": {
+      "create": "Novo Investimento",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "deposit": "Depositar",
+      "withdraw": "Sacar",
+      "adjust": "Ajustar",
+      "edit": "Editar",
+      "delete": "Excluir"
+    },
+    "errors": {
+      "nameRequired": "Informe o nome do investimento.",
+      "nameTooLong": "Máximo de 100 caracteres.",
+      "amountInvalid": "Valor inválido.",
+      "amountPositive": "O valor deve ser maior que zero.",
+      "amountNonNegative": "O valor não pode ser negativo.",
+      "noteTooLong": "Máximo de 500 caracteres.",
+      "startDateRequired": "Informe a data inicial.",
+      "descriptionTooLong": "Máximo de 500 caracteres."
+    },
+    "feedback": {
+      "errorTitle": "Não foi possível concluir a operação",
+      "loadError": "Não foi possível carregar os investimentos.",
+      "createError": "Não foi possível criar o investimento.",
+      "updateError": "Não foi possível atualizar o investimento.",
+      "depositError": "Não foi possível realizar o depósito.",
+      "withdrawError": "Não foi possível realizar o saque.",
+      "adjustError": "Não foi possível realizar o ajuste.",
+      "deleteError": "Não foi possível excluir o investimento."
+    }
   }
 }

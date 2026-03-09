@@ -416,5 +416,215 @@
       "idInvalid": "Invalid category identifier.",
       "saveFailed": "Could not save the category."
     }
+  },
+  "invoices": {
+    "title": "Invoices",
+    "noInvoice": {
+      "title": "No invoice found",
+      "description": "There is no invoice for this period"
+    },
+    "monthNav": {
+      "previous": "Previous month",
+      "next": "Next month"
+    },
+    "status": {
+      "paid": "Paid",
+      "open": "Open",
+      "future": "Future"
+    },
+    "summary": {
+      "total": "Total",
+      "paid": "Paid",
+      "remaining": "Remaining",
+      "closingDate": "Closing date",
+      "dueDate": "Due date"
+    },
+    "expenses": {
+      "title": "Purchases",
+      "empty": "No purchases in this invoice",
+      "installment": "{current}/{total}"
+    },
+    "payments": {
+      "title": "Payments",
+      "empty": "No payments registered",
+      "justForRecord": "Record only"
+    },
+    "actions": {
+      "newPurchase": "New Purchase",
+      "payInvoice": "Register Payment",
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "deleteConfirmTitle": "Confirm deletion",
+      "deletePurchaseDescription": "The purchase and all its installments will be deleted. This action cannot be undone.",
+      "deletePaymentDescription": "The payment will be reversed in the account. This action cannot be undone."
+    },
+    "purchase": {
+      "createTitle": "New Purchase",
+      "editTitle": "Edit Purchase",
+      "name": "Purchase description",
+      "totalAmount": "Total amount",
+      "installments": "Installments",
+      "installmentAmountPreview": "{amount} per installment",
+      "purchaseDate": "Purchase date",
+      "category": "Category",
+      "firstInvoiceDate": "First invoice date",
+      "firstInvoiceDatePlaceholder": "dd/mm/yyyy (optional)",
+      "firstInvoiceDateHint": "Optional — forces which invoice gets the first installment",
+      "save": "Save",
+      "saving": "Saving...",
+      "errors": {
+        "nameRequired": "Enter the purchase description.",
+        "nameTooLong": "Maximum 100 characters.",
+        "totalAmountRequired": "Enter the total amount.",
+        "totalAmountPositive": "Amount must be greater than zero.",
+        "installmentsMin": "Minimum 1 installment.",
+        "categoryRequired": "Select a category.",
+        "purchaseDateRequired": "Enter the purchase date."
+      }
+    },
+    "payment": {
+      "title": "Pay Invoice",
+      "account": "Account",
+      "amount": "Amount to pay",
+      "description": "Description",
+      "paymentDate": "Payment date",
+      "justForRecord": "Record only",
+      "justForRecordHint": "Marks as paid without moving the account balance",
+      "save": "Confirm payment",
+      "saving": "Confirming...",
+      "errors": {
+        "accountRequired": "Select an account.",
+        "amountRequired": "Enter the amount to pay.",
+        "amountPositive": "Amount must be greater than zero.",
+        "descriptionRequired": "Enter a description.",
+        "paymentDateRequired": "Enter the payment date."
+      }
+    },
+    "feedback": {
+      "errorTitle": "Could not complete the operation",
+      "loadError": "Could not load the invoice.",
+      "purchaseCreateError": "Could not create the purchase.",
+      "purchaseUpdateError": "Could not update the purchase.",
+      "purchaseDeleteError": "Could not delete the purchase.",
+      "paymentCreateError": "Could not register the payment.",
+      "paymentDeleteError": "Could not delete the payment."
+    }
+  },
+  "investments": {
+    "title": "Investments",
+    "description": "Track and manage your investments",
+    "empty": {
+      "title": "No investments",
+      "description": "Add your first investment to start tracking"
+    },
+    "list": {
+      "since": "Since"
+    },
+    "summary": {
+      "total": "Total portfolio",
+      "count": "{count, plural, one {# investment} other {# investments}}"
+    },
+    "detail": {
+      "title": "Investment",
+      "currentValue": "Current value",
+      "back": "Back"
+    },
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "e.g. Treasury Bond",
+      "initialAmount": "Initial amount",
+      "initialAmountPlaceholder": "R$ 0.00 (optional)",
+      "startDate": "Start date",
+      "description": "Description",
+      "descriptionPlaceholder": "Optional",
+      "amount": "Amount",
+      "newTotalValue": "New total value",
+      "date": "Date",
+      "note": "Notes",
+      "notePlaceholder": "Optional",
+      "accountPlaceholder": "Select account",
+      "accountSearchPlaceholder": "Search account...",
+      "accountEmpty": "No accounts found"
+    },
+    "create": {
+      "title": "New Investment"
+    },
+    "edit": {
+      "title": "Edit Investment"
+    },
+    "deposit": {
+      "title": "Deposit",
+      "accountLabel": "Source account"
+    },
+    "withdraw": {
+      "title": "Withdraw",
+      "accountLabel": "Destination account"
+    },
+    "adjust": {
+      "title": "Adjust Value",
+      "reduceTitle": "Warning: Value Reduction",
+      "reduceDescription": "The entered value ({newValue}) is lower than the current value ({currentValue}). This will result in a reduction of {reduction}.",
+      "reduceSuggestion": "If you want to remove money from the investment, consider using the \"Withdraw\" option instead of adjusting.",
+      "reduceConfirmQuestion": "Do you really want to continue with the adjustment?",
+      "confirmReduceButton": "Continue with adjustment"
+    },
+    "delete": {
+      "title": "Delete Investment",
+      "description": "Are you sure you want to delete {name}? This action cannot be undone."
+    },
+    "tabs": {
+      "history": "History",
+      "charts": "Charts"
+    },
+    "history": {
+      "empty": "No history",
+      "emptyDescription": "Transactions will appear here",
+      "account": "Account",
+      "types": {
+        "invest": "Deposit",
+        "withdraw": "Withdrawal",
+        "adjustment": "Adjustment",
+        "yield": "Yield"
+      }
+    },
+    "charts": {
+      "noData": "No data to display",
+      "evolution": "Portfolio Evolution",
+      "distribution": "Transaction Distribution",
+      "balance": "Balance"
+    },
+    "actions": {
+      "create": "New Investment",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw",
+      "adjust": "Adjust",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "errors": {
+      "nameRequired": "Enter the investment name.",
+      "nameTooLong": "Maximum 100 characters.",
+      "amountInvalid": "Invalid amount.",
+      "amountPositive": "Amount must be greater than zero.",
+      "amountNonNegative": "Amount cannot be negative.",
+      "noteTooLong": "Maximum 500 characters.",
+      "startDateRequired": "Enter the start date.",
+      "descriptionTooLong": "Maximum 500 characters."
+    },
+    "feedback": {
+      "errorTitle": "Could not complete the operation",
+      "loadError": "Could not load investments.",
+      "createError": "Could not create the investment.",
+      "updateError": "Could not update the investment.",
+      "depositError": "Could not process the deposit.",
+      "withdrawError": "Could not process the withdrawal.",
+      "adjustError": "Could not process the adjustment.",
+      "deleteError": "Could not delete the investment."
+    }
   }
 }

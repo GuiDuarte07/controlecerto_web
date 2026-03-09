@@ -61,6 +61,7 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
         id: c.id,
         label: c.description || c.account.bank,
         color: c.account.color,
+        iconName: "creditCard",
       })),
     [creditCards],
   );

@@ -68,6 +68,7 @@ interface TransactionsActions {
   fetchStatementData: () => Promise<void>;
   goToPrevMonth: () => void;
   goToNextMonth: () => void;
+  setInvoiceMonth: (year: number, month: number) => void;
   setStatementFilters: (filters: TransactionFilters) => void;
   setStatementSearch: (search: string) => void;
   setStatementPage: (page: number) => void;
@@ -199,6 +200,11 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
   goToNextMonth: () => {
     const { invoiceMonthDate } = get();
     set({ invoiceMonthDate: addMonths(invoiceMonthDate, 1) });
+    void get().fetchInvoiceData();
+  },
+
+  setInvoiceMonth: (year, month) => {
+    set({ invoiceMonthDate: new Date(year, month - 1, 1) });
     void get().fetchInvoiceData();
   },
 

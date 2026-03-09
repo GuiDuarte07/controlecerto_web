@@ -17,6 +17,7 @@ import {
   Receipt,
   Settings2,
   Tag,
+  TrendingUp,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/shared/components/ui/button";
@@ -105,6 +106,12 @@ export function Sidebar() {
       icon: <CreditCard className="h-5 w-5" />,
       label: t("creditCards"),
       href: `/${locale}/credit-cards`,
+      requiresAuth: true,
+    },
+    {
+      icon: <TrendingUp className="h-5 w-5" />,
+      label: t("investments"),
+      href: `/${locale}/investments`,
       requiresAuth: true,
     },
     {

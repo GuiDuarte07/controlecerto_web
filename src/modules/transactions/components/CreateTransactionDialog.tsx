@@ -37,6 +37,8 @@ interface CreateTransactionDialogProps {
   mode?: "create" | "edit";
   transaction?: Transaction | null;
   onClose: () => void;
+  onCreditExpenseEditSubmit?: (data: CreditExpenseFormData) => Promise<void>;
+  onSuccess?: () => void;
 }
 
 function toExpenseIncomeInitial(tx: Transaction): Partial<ExpenseIncomeFormData> {
@@ -82,6 +84,8 @@ export function CreateTransactionDialog({
   mode = "create",
   transaction,
   onClose,
+  onCreditExpenseEditSubmit,
+  onSuccess,
 }: CreateTransactionDialogProps) {
   const t = useTranslations("transactions");
   const [selectedType, setSelectedType] = useState<SelectableType | null>(null);
@@ -143,6 +147,11 @@ export function CreateTransactionDialog({
   };
 
   const handleCreditExpenseSubmit = async (data: CreditExpenseFormData) => {
+    if (mode === "edit" && onCreditExpenseEditSubmit) {
+      await onCreditExpenseEditSubmit(data);
+      onClose();
+      return;
+    }
     if (mode === "edit" && transaction?.creditPurchase) {
       await updateCreditPurchase(transaction.creditPurchase.id, {
         id: transaction.creditPurchase.id,
@@ -167,6 +176,7 @@ export function CreateTransactionDialog({
         categoryId: data.categoryId,
       });
       setSelectedType(null);
+      onSuccess?.();
     }
   };
 

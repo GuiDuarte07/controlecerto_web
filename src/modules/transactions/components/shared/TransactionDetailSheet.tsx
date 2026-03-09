@@ -1,6 +1,6 @@
 "use client";
 
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useLocale, useTranslations } from "next-intl";
 import { Pencil, Trash2, X } from "lucide-react";
@@ -34,6 +34,7 @@ interface TransactionDetailSheetProps {
   transaction: Transaction | null;
   onClose: () => void;
   onEdit?: () => void;
+  onDelete?: () => Promise<void>;
 }
 
 function formatCurrency(amount: number, locale: string) {
@@ -70,7 +71,7 @@ function InfoCard({ label, value }: { label: string; value: React.ReactNode }) {
   );
 }
 
-export function TransactionDetailSheet({ open, transaction, onClose, onEdit }: TransactionDetailSheetProps) {
+export function TransactionDetailSheet({ open, transaction, onClose, onEdit, onDelete }: TransactionDetailSheetProps) {
   const t = useTranslations("transactions");
   const locale = useLocale();
   const dateLocale = locale === "pt" ? ptBR : undefined;
@@ -93,7 +94,11 @@ export function TransactionDetailSheet({ open, transaction, onClose, onEdit }: T
       : "-";
 
   const handleDelete = async () => {
-    await deleteTransaction(transaction.id);
+    if (onDelete) {
+      await onDelete();
+    } else {
+      await deleteTransaction(transaction.id);
+    }
   };
 
   const textColor = getContrastTextColor(categoryDisplay.color);
@@ -157,7 +162,7 @@ export function TransactionDetailSheet({ open, transaction, onClose, onEdit }: T
           <div className="grid grid-cols-2 gap-3">
             <InfoCard
               label={t("detail.date" as Parameters<typeof t>[0])}
-              value={format(new Date(transaction.purchaseDate), "dd/MM/yyyy", { locale: dateLocale })}
+              value={(() => { const d = new Date(transaction.purchaseDate); return isValid(d) ? format(d, "dd/MM/yyyy", { locale: dateLocale }) : "—"; })()}
             />
             {transaction.account && (
               <InfoCard

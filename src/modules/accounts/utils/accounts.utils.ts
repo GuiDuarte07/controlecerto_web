@@ -6,5 +6,6 @@ export function toAccountSearchableItem(account: Account): SearchableItem {
     id: account.id,
     label: account.bank,
     color: account.color,
+    iconName: "banknote",
   };
 }
