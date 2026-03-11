@@ -3,6 +3,7 @@
 import React from "react";
 import { Sidebar, Header } from "@/shared/components/layout";
 import { useProtectedRoute } from "@/modules/auth";
+import { NotesWidget } from "@/modules/notes";
 import { Spinner } from "@/shared/components/ui/spinner";
 
 interface AppLayoutProps {
@@ -33,6 +34,7 @@ export function AppLayout({ children }: AppLayoutProps) {
           {children}
         </main>
       </div>
+      <NotesWidget />
     </div>
   );
 }

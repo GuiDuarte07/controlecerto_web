@@ -18,6 +18,22 @@ function normalizeTransaction(t: Transaction): Transaction {
       : (rawType as TransactionType);
   return { ...t, type };
 }
+
+/**
+ * Converte TransactionType (string) para seu valor numérico correspondente (enum int)
+ * Necessário para enviar ao backend .NET que serializa enums como números
+ */
+function getTransactionTypeAsNumber(type: TransactionType): number {
+  const typeToNumber: Record<TransactionType, number> = {
+    EXPENSE: 0,
+    INCOME: 1,
+    CREDITEXPENSE: 2,
+    TRANSFERENCE: 3,
+    INVOICEPAYMENT: 4,
+  };
+  return typeToNumber[type] ?? 0;
+}
+
 import { transactionsService } from "../services/transactions.service";
 import {
   format,
@@ -229,7 +245,11 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
   createExpenseIncome: async (data) => {
     set({ isSubmitting: true, error: null });
     try {
-      await transactionsService.create(data);
+      // Converter type de string para número antes de enviar ao backend
+      await transactionsService.create({
+        ...data,
+        type: getTransactionTypeAsNumber(data.type) as unknown as TransactionType,
+      });
       set({ isSubmitting: false, isCreateDrawerOpen: false });
       const { mode } = get();
       if (mode === "invoice") {

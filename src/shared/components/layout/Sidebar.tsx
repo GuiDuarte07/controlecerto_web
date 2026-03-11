@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ import {
 } from "@/shared/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/shared/components/ui/sheet";
 import { Switch } from "@/shared/components/ui/switch";
-import { Avatar, AvatarFallback } from "@/shared/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/shared/components/ui/tooltip";
 import { useAuthStore } from "@/modules/auth";
 import { useSidebarCollapse } from "@/shared/hooks/use-sidebar-collapse";
@@ -71,11 +71,6 @@ export function Sidebar() {
   const { logout, user } = useAuthStore();
   const { isCollapsed, toggle } = useSidebarCollapse();
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const navItems: NavItem[] = [
     {
@@ -150,9 +145,11 @@ export function Sidebar() {
     }
   };
 
-  const isDarkTheme = mounted && resolvedTheme === "dark";
+  const isDarkTheme = resolvedTheme === "dark";
 
-  const NavContent = ({ showCloseOnSelect = false }: { showCloseOnSelect?: boolean }) => {
+  const renderNavContent = (showCloseOnSelect = false) => {
+    const isNavCollapsed = showCloseOnSelect ? false : isCollapsed;
+
     const closeSidebarIfNeeded = () => {
       if (showCloseOnSelect) {
         setIsOpen(false);
@@ -167,7 +164,7 @@ export function Sidebar() {
           <div className="relative flex items-center gap-3">
             <div className={cn(
               "shrink-0 overflow-hidden rounded-md shadow-sm transition-all",
-              isCollapsed ? "h-9 w-9" : "h-10 w-10"
+              isNavCollapsed ? "h-9 w-9" : "h-10 w-10"
             )}>
               <Image
                 src="/logo/controle_certo_logo_colorfull.png"
@@ -178,7 +175,7 @@ export function Sidebar() {
                 priority
               />
             </div>
-            {!isCollapsed && (
+            {!isNavCollapsed && (
               <div className="overflow-hidden">
                 <p className="text-sm font-semibold leading-tight">ControleCerto</p>
                 <p className="text-xs text-muted-foreground">Finance Hub</p>
@@ -188,7 +185,7 @@ export function Sidebar() {
         </div>
 
         {/* Navigation Items */}
-        <div className={cn("flex-1 space-y-2 py-4", isCollapsed ? "px-2" : "px-3")}>
+        <div className={cn("flex-1 space-y-2 py-4", isNavCollapsed ? "px-2" : "px-3")}>
           <TooltipProvider delayDuration={0}>
             {navItems.map((item) => {
               const button = (
@@ -197,19 +194,19 @@ export function Sidebar() {
                     variant={isActive(item.href) ? "default" : "ghost"}
                     className={cn(
                       "w-full rounded-xl text-sm transition-all",
-                      isCollapsed ? "h-11 justify-center px-0" : "h-11 justify-start gap-3",
+                      isNavCollapsed ? "h-11 justify-center px-0" : "h-11 justify-start gap-3",
                       isActive(item.href) &&
                         "bg-primary text-primary-foreground shadow-sm hover:bg-primary"
                     )}
                     onClick={closeSidebarIfNeeded}
                   >
                     {item.icon}
-                    {!isCollapsed && <span>{item.label}</span>}
+                    {!isNavCollapsed && <span>{item.label}</span>}
                   </Button>
                 </Link>
               );
 
-              if (isCollapsed) {
+              if (isNavCollapsed) {
                 return (
                   <Tooltip key={item.href}>
                     <TooltipTrigger asChild>
@@ -228,7 +225,7 @@ export function Sidebar() {
         </div>
 
         {/* Notice Card */}
-        {!isCollapsed && (
+        {!isNavCollapsed && (
           <div className="px-4 pb-3">
             <div className="rounded-xl border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
               Dashboard em evolucao continua.
@@ -238,7 +235,7 @@ export function Sidebar() {
 
         {/* User Profile Footer */}
         <div className="border-t p-3">
-          {isCollapsed ? (
+          {isNavCollapsed ? (
             // Collapsed: Only Avatar with Dropdown
             <TooltipProvider delayDuration={0}>
               <DropdownMenu>
@@ -250,6 +247,9 @@ export function Sidebar() {
                         className="h-11 w-full rounded-xl px-0"
                       >
                         <Avatar size="lg">
+                          {user?.avatarUrl && (
+                            <AvatarImage src={user.avatarUrl} alt={user.name} />
+                          )}
                           <AvatarFallback className="bg-primary/15 text-primary">
                             {getInitials(user?.name)}
                           </AvatarFallback>
@@ -331,6 +331,9 @@ export function Sidebar() {
             // Expanded: Full User Card
             <div className="flex items-center gap-3 rounded-xl border bg-muted/20 px-3 py-2.5">
               <Avatar size="lg" className="shrink-0">
+                {user?.avatarUrl && (
+                  <AvatarImage src={user.avatarUrl} alt={user.name} />
+                )}
                 <AvatarFallback className="bg-primary/15 text-primary">
                   {getInitials(user?.name)}
                 </AvatarFallback>
@@ -429,7 +432,7 @@ export function Sidebar() {
         "relative hidden h-screen shrink-0 border-r bg-card/70 backdrop-blur supports-backdrop-filter:bg-card/60 sm:sticky sm:top-0 sm:flex sm:flex-col overflow-visible transition-all duration-300",
         isCollapsed ? "sm:w-20" : "sm:w-72"
       )}>
-        <NavContent />
+        {renderNavContent()}
         <Button
           type="button"
           variant="outline"
@@ -459,7 +462,7 @@ export function Sidebar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-80 p-0">
-            <NavContent showCloseOnSelect />
+            {renderNavContent(true)}
           </SheetContent>
         </Sheet>
       </div>

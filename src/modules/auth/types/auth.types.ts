@@ -19,6 +19,7 @@ export interface AuthResponse {
     email: string;
     name: string;
     emailConfirmed?: boolean;
+    avatarUrl?: string | null;
   };
 }
 
@@ -27,6 +28,16 @@ export interface AuthUser {
   email: string;
   name: string;
   emailConfirmed?: boolean;
+  avatarUrl?: string | null;
+}
+
+export interface DetailsUserResponse {
+  id: number;
+  email: string;
+  name: string;
+  emailConfirmed: boolean;
+  avatarUrl?: string | null;
+  createdAt: string;
 }
 
 export interface AuthContextType {

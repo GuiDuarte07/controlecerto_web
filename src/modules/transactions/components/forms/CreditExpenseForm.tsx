@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
+import { format } from "date-fns";
+import { useEffect, useRef, useMemo, useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Form,
   FormControl,
@@ -14,12 +15,19 @@ import {
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
+import {
+  Card,
+  CardContent,
+} from "@/shared/components/ui/card";
+import { CreditCard as CreditCardIcon } from "lucide-react";
 import { SearchableItemSelect } from "@/shared/components/SearchableItemSelect";
 import { useCategoriesStore } from "@/modules/categories/context/categoriesContext";
 import { useCreditCardsStore } from "@/modules/credit-cards/context/creditCardsContext";
 import { BillTypeEnum, type ParentCategory } from "@/modules/categories";
 import type { SearchableItem } from "@/shared/components/SearchableItemSelect";
 import { creditExpenseFormSchema, type CreditExpenseFormData } from "../../schemas/transactions.schemas";
+import { transactionsService } from "../../services/transactions.service";
+import type { SimulatedCreditPurchaseInvoiceResponse } from "../../types/transactions.types";
 import { CurrencyInput } from "./CurrencyInput";
 import { DatePickerInput } from "./DatePickerInput";
 
@@ -44,11 +52,35 @@ function flattenExpenseCategories(parents: ParentCategory[]): SearchableItem[] {
     ]);
 }
 
+function formatCurrency(amount: number, locale: string): string {
+  return new Intl.NumberFormat(locale === "pt" ? "pt-BR" : "en-US", {
+    style: "currency",
+    currency: locale === "pt" ? "BRL" : "USD",
+  }).format(amount);
+}
+
+function formatMonth(dateValue: string, locale: string): string {
+  return new Intl.DateTimeFormat(locale === "pt" ? "pt-BR" : "en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(dateValue));
+}
+
+function formatDayOfMonth(dateValue: string): number {
+  return new Date(dateValue).getUTCDate();
+}
+
 export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialData }: CreditExpenseFormProps) {
   const t = useTranslations("transactions");
+  const locale = useLocale();
 
   const expenseCategories = useCategoriesStore((s) => s.expenseCategories);
   const creditCards = useCreditCardsStore((s) => s.creditCards);
+  const [simulatedInvoice, setSimulatedInvoice] =
+    useState<SimulatedCreditPurchaseInvoiceResponse | null>(null);
+  const [isLoadingInvoicePreview, setIsLoadingInvoicePreview] = useState(false);
+  const [invoicePreviewError, setInvoicePreviewError] = useState(false);
 
   const categoryOptions = useMemo(
     () => flattenExpenseCategories(expenseCategories),
@@ -98,6 +130,12 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
   const totalAmount = watch("totalAmount");
   const totalInstallment = watch("totalInstallment");
   const installmentAmount = watch("installmentAmount");
+  const purchaseDate = watch("purchaseDate");
+  const creditCardId = watch("creditCardId");
+  const purchaseDatePreviewValue =
+    purchaseDate && !Number.isNaN(purchaseDate.getTime())
+      ? format(purchaseDate, "yyyy-MM-dd'T'HH:mm:ss")
+      : null;
 
   useEffect(() => {
     if (lastEditedField.current === "total" || lastEditedField.current === null) return;
@@ -117,9 +155,56 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [installmentAmount]);
 
+  useEffect(() => {
+    if (!creditCardId || !purchaseDatePreviewValue) {
+      setSimulatedInvoice(null);
+      setIsLoadingInvoicePreview(false);
+      setInvoicePreviewError(false);
+      return;
+    }
+
+    let isCancelled = false;
+
+    const timeoutId = window.setTimeout(() => {
+      const runSimulation = async () => {
+        setIsLoadingInvoicePreview(true);
+        setInvoicePreviewError(false);
+
+        try {
+          const response = await transactionsService.simulateCreditPurchaseInvoice({
+            creditCardId,
+            purchaseDate: purchaseDatePreviewValue,
+          });
+
+          if (!isCancelled) {
+            setSimulatedInvoice(response);
+          }
+        } catch {
+          if (!isCancelled) {
+            setSimulatedInvoice(null);
+            setInvoicePreviewError(true);
+          }
+        } finally {
+          if (!isCancelled) {
+            setIsLoadingInvoicePreview(false);
+          }
+        }
+      };
+
+      void runSimulation();
+    }, 350);
+
+    return () => {
+      isCancelled = true;
+      window.clearTimeout(timeoutId);
+    };
+  }, [creditCardId, purchaseDatePreviewValue]);
+
   const handleSubmit = form.handleSubmit(async (data) => {
     await onSubmit(data);
   });
+
+  const showInvoicePreview = creditCardId && simulatedInvoice && !isLoadingInvoicePreview && !invoicePreviewError;
 
   return (
     <Form {...form}>
@@ -284,6 +369,54 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
             </FormItem>
           )}
         />
+
+        <div className="space-y-2">
+          <p className="text-sm font-medium text-foreground">{t("create.invoicePreview.title")}</p>
+
+          {!creditCardId && (
+            <p className="text-sm text-muted-foreground">{t("create.invoicePreview.selectCard")}</p>
+          )}
+
+          {creditCardId && isLoadingInvoicePreview && (
+            <p className="text-sm text-muted-foreground">{t("create.invoicePreview.loading")}</p>
+          )}
+
+          {creditCardId && !isLoadingInvoicePreview && invoicePreviewError && (
+            <p className="text-sm text-destructive">{t("create.invoicePreview.error")}</p>
+          )}
+
+          {showInvoicePreview && (
+            <Card className="border py-2 shadow-none dark:border-amber-200 border-amber-600">
+              <CardContent className="space-y-2 px-4">
+                <div className="flex items-center gap-2">
+                  <CreditCardIcon className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-semibold">{simulatedInvoice.creditCardDescription}</span>
+                </div>
+
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                  <span className="text-[13px] font-medium">
+                    {t("create.invoicePreview.invoiceMonthLabel", {
+                      month: formatMonth(simulatedInvoice.invoiceDate, locale),
+                    })}
+                  </span>
+
+                  <span className="text-xs text-muted-foreground">
+                    {t("create.invoicePreview.cycleInfo", {
+                      closingDay: formatDayOfMonth(simulatedInvoice.closingDate),
+                      dueDay: formatDayOfMonth(simulatedInvoice.dueDate),
+                    })}
+                  </span>
+                </div>
+
+                <p className="text-sm font-semibold">
+                  {t("create.invoicePreview.currentInvoiceTotalValue", {
+                    value: formatCurrency(simulatedInvoice.totalAmount, locale),
+                  })}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+        </div>
 
         <div className="flex gap-2 pt-2">
           <Button type="button" variant="outline" onClick={onCancel} className="flex-1">

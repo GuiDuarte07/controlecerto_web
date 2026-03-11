@@ -4,6 +4,8 @@ import type {
   CreateTransactionRequest,
   CreateTransferenceRequest,
   InvoiceListResponse,
+  SimulatedCreditPurchaseInvoiceResponse,
+  SimulateCreditPurchaseInvoiceRequest,
   StatementResponse,
   Transaction,
   UpdateCreditPurchaseRequest,
@@ -67,10 +69,23 @@ async function createTransference(
 async function createCreditPurchase(
   data: CreateCreditPurchaseRequest,
 ): Promise<Transaction> {
-  return apiFetch<Transaction>("/api/credit-purchases", {
+  return apiFetch<Transaction>("/api/credit-cards/purchases", {
     method: "POST",
     body: JSON.stringify(data),
   });
+}
+
+async function simulateCreditPurchaseInvoice(
+  params: SimulateCreditPurchaseInvoiceRequest,
+): Promise<SimulatedCreditPurchaseInvoiceResponse> {
+  const query = new URLSearchParams();
+  query.set("creditCardId", String(params.creditCardId));
+  query.set("purchaseDate", params.purchaseDate);
+
+  return apiFetch<SimulatedCreditPurchaseInvoiceResponse>(
+    `/api/credit-cards/purchases/simulate-invoice?${query.toString()}`,
+    { method: "GET" },
+  );
 }
 
 async function update(
@@ -87,7 +102,7 @@ async function updateCreditPurchase(
   id: number,
   data: UpdateCreditPurchaseRequest,
 ): Promise<Transaction> {
-  return apiFetch<Transaction>(`/api/credit-purchases/${id}`, {
+  return apiFetch<Transaction>(`/api/credit-cards/purchases/${id}`, {
     method: "PATCH",
     body: JSON.stringify(data),
   });
@@ -104,6 +119,7 @@ export const transactionsService = {
   create,
   createTransference,
   createCreditPurchase,
+  simulateCreditPurchaseInvoice,
   update,
   updateCreditPurchase,
   remove,

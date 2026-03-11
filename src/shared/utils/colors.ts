@@ -9,9 +9,14 @@ const DEFAULT_COLOR = "#CBD5E1";
  * @returns Cor normalizada em formato #RRGGBB ou cor padrão se inválida
  */
 export function normalizeHexColor(
-  color: string,
+  color: string | null | undefined,
   fallback = DEFAULT_COLOR,
 ): string {
+  // Handles undefined, null, or empty strings
+  if (!color || typeof color !== "string") {
+    return fallback;
+  }
+
   const normalized = color.trim().toUpperCase();
 
   // Adiciona # se não tiver
@@ -42,8 +47,11 @@ export function normalizeHexColor(
  * getContrastTextColor("#3B82F6") // "#FFFFFF" (branco para azul)
  * ```
  */
-export function getContrastTextColor(backgroundColor: string): string {
-  const hex = backgroundColor.replace("#", "");
+export function getContrastTextColor(
+  backgroundColor: string | null | undefined,
+): string {
+  const normalized = normalizeHexColor(backgroundColor);
+  const hex = normalized.replace("#", "");
   const red = Number.parseInt(hex.slice(0, 2), 16);
   const green = Number.parseInt(hex.slice(2, 4), 16);
   const blue = Number.parseInt(hex.slice(4, 6), 16);
@@ -61,7 +69,7 @@ export function getContrastTextColor(backgroundColor: string): string {
  * @param color - Cor em formato hexadecimal
  * @returns Objeto de estilo React com backgroundColor, color e borderColor
  */
-export function getColoredBadgeStyle(color: string) {
+export function getColoredBadgeStyle(color: string | null | undefined) {
   const backgroundColor = normalizeHexColor(color);
   const textColor = getContrastTextColor(backgroundColor);
 
@@ -81,8 +89,12 @@ export function getColoredBadgeStyle(color: string) {
  * @param threshold - Valor de luminância (0-255, padrão: 150)
  * @returns true se a cor for clara, false se for escura
  */
-export function isLightColor(color: string, threshold = 150): boolean {
-  const hex = color.replace("#", "");
+export function isLightColor(
+  color: string | null | undefined,
+  threshold = 150,
+): boolean {
+  const normalized = normalizeHexColor(color);
+  const hex = normalized.replace("#", "");
   const red = Number.parseInt(hex.slice(0, 2), 16);
   const green = Number.parseInt(hex.slice(2, 4), 16);
   const blue = Number.parseInt(hex.slice(4, 6), 16);

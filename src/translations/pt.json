@@ -70,13 +70,34 @@
     "settings": "Configurações",
     "logout": "Sair"
   },
-  "dashboard": {
-    "title": "Dashboard",
-    "description": "Bem-vindo ao seu painel financeiro"
-  },
   "settings": {
     "title": "Configurações",
-    "description": "Ajuste preferências e dados da sua conta"
+    "description": "Ajuste preferências e dados da sua conta",
+    "profile": {
+      "title": "Perfil",
+      "description": "Gerencie suas informações pessoais e foto de perfil",
+      "avatar": {
+        "label": "Foto de perfil",
+        "change": "Alterar foto",
+        "remove": "Remover foto",
+        "upload": "Enviar foto",
+        "uploading": "Enviando...",
+        "removing": "Removendo...",
+        "dragHint": "JPG, PNG, WebP ou GIF • Máximo 10MB",
+        "uploadSuccess": "Foto de perfil atualizada com sucesso!",
+        "removeSuccess": "Foto de perfil removida.",
+        "errorUpload": "Não foi possível enviar a imagem. Tente novamente.",
+        "errorSize": "A imagem deve ter no máximo 10MB.",
+        "errorType": "Apenas imagens JPG, PNG, WebP e GIF são aceitas."
+      },
+      "name": "Nome",
+      "email": "E-mail",
+      "memberSince": "Membro desde",
+      "emailStatus": {
+        "confirmed": "E-mail confirmado",
+        "unconfirmed": "E-mail não confirmado"
+      }
+    }
   },
   "accounts": {
     "title": "Contas",
@@ -244,7 +265,28 @@
       "justForRecordHint": "Se ativo, a transação não desconta o saldo da conta",
       "cancel": "Cancelar",
       "save": "Salvar",
-      "saving": "Salvando..."
+      "saving": "Salvando...",
+      "invoicePreview": {
+        "title": "A primeira parcela dessa compra entrará nessa fatura:",
+        "description": "Veja em qual fatura esta compra entrará.",
+        "firstInstallmentMonthInfo": "A primeira parcela entrará na fatura de {month}.",
+        "selectCard": "Selecione um cartão para simular a fatura.",
+        "loading": "Simulando fatura...",
+        "error": "Não foi possível simular a fatura no momento.",
+        "invoiceMonthLabel": "Fatura de {month}",
+        "cycleInfo": "Fecha dia {closingDay} · Vence dia {dueDay}",
+        "currentInvoiceTotalValue": "Valor atual: {value}",
+        "invoiceMonth": "Mês da Fatura",
+        "firstInstallment": "Primeira Parcela",
+        "closingDate": "Fechamento",
+        "dueDate": "Vencimento",
+        "currentInvoiceTotal": "Total Atual da Fatura",
+        "projectedInvoiceTotal": "Total Projetado da Fatura",
+        "badges": {
+          "existing": "Fatura existente",
+          "new": "Nova fatura"
+        }
+      }
     },
     "detail": {
       "title": "Detalhes da Transação",
@@ -625,6 +667,140 @@
       "withdrawError": "Não foi possível realizar o saque.",
       "adjustError": "Não foi possível realizar o ajuste.",
       "deleteError": "Não foi possível excluir o investimento."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Visão geral das suas finanças",
+    "cards": {
+      "totalIncome": "Receitas",
+      "totalExpense": "Despesas",
+      "netBalance": "Saldo Líquido",
+      "accountsBalance": "Saldo em Contas",
+      "creditUsed": "Crédito Usado",
+      "investments": "Investimentos"
+    },
+    "expensesByCategory": {
+      "title": "Gastos por Categoria",
+      "empty": "Nenhum gasto registrado",
+      "limit": "Limite",
+      "used": "usado"
+    },
+    "accounts": {
+      "title": "Contas",
+      "empty": "Nenhuma conta cadastrada",
+      "transactions": "transações"
+    },
+    "creditCards": {
+      "title": "Cartões de Crédito",
+      "empty": "Nenhum cartão cadastrado",
+      "used": "usado",
+      "available": "Disponível",
+      "currentInvoice": "Fatura Atual"
+    },
+    "monthlyTrends": {
+      "title": "Tendências Mensais",
+      "empty": "Sem dados de tendências",
+      "transactions": "transações",
+      "income": "Receitas",
+      "expense": "Despesas"
+    },
+    "recentTransactions": {
+      "title": "Transações Recentes",
+      "empty": "Nenhuma transação registrada"
+    },
+    "error": {
+      "title": "Erro ao carregar dados",
+      "description": "Não foi possível carregar os dados do dashboard"
+    }
+  },
+  "notes": {
+    "floating": {
+      "openAriaLabel": "Abrir anotações",
+      "expandAriaLabel": "Expandir painel de anotações",
+      "shrinkAriaLabel": "Reduzir painel de anotações",
+      "closeAriaLabel": "Fechar anotações"
+    },
+    "panel": {
+      "title": "Anotações",
+      "subtitle": "Lista de anotações"
+    },
+    "actions": {
+      "new": "Nova anotação",
+      "newBlock": "Novo Bloco",
+      "newGeneral": "Novo bloco geral",
+      "newPeriod": "Novo bloco do período",
+      "create": "Criar",
+      "creating": "Criando...",
+      "search": "Buscar",
+      "searching": "Buscando...",
+      "clearSearch": "Limpar busca",
+      "dismissError": "Fechar",
+      "back": "Voltar",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "delete": "Excluir",
+      "cancel": "Cancelar"
+    },
+    "sections": {
+      "currentMonth": "Mês atual",
+      "currentMonthEmpty": "Nenhuma anotação vinculada ao mês atual.",
+      "general": "Anotações gerais",
+      "generalEmpty": "Nenhuma anotação geral criada.",
+      "searchResult": "Busca: {month}/{year}",
+      "searchEmpty": "Nenhuma anotação encontrada para esse período."
+    },
+    "search": {
+      "monthLabel": "Mês",
+      "monthPlaceholder": "Selecione o mês",
+      "yearLabel": "Ano",
+      "yearPlaceholder": "Selecione o ano"
+    },
+    "list": {
+      "emptyContent": "Sem conteúdo"
+    },
+    "createDialog": {
+      "title": "Criar nova anotação",
+      "description": "Escolha se a anotação será geral ou vinculada a um mês e ano.",
+      "contextLabel": "Tipo de anotação",
+      "generalOption": "Anotação geral",
+      "periodOption": "Anotação por mês/ano"
+    },
+    "editor": {
+      "titleLabel": "Título",
+      "titlePlaceholder": "Digite o título da anotação",
+      "contentLabel": "Conteúdo",
+      "contentPlaceholder": "Escreva sua anotação aqui..."
+    },
+    "deleteDialog": {
+      "title": "Excluir anotação",
+      "description": "Tem certeza que deseja excluir esta anotação? Esta ação não pode ser desfeita."
+    },
+    "unsavedDialog": {
+      "title": "Alterações não salvas",
+      "description": "Você tem alterações não salvas. Se continuar, elas serão perdidas.",
+      "stay": "Continuar editando",
+      "discardAndContinue": "Descartar e continuar"
+    },
+    "defaults": {
+      "generalTitle": "Nova anotação geral",
+      "periodTitle": "Anotações - {month}/{year}"
+    },
+    "feedback": {
+      "loadError": "Não foi possível carregar as anotações.",
+      "searchError": "Não foi possível buscar as anotações desse período.",
+      "createError": "Não foi possível criar a anotação.",
+      "updateError": "Não foi possível atualizar a anotação.",
+      "deleteError": "Não foi possível excluir a anotação."
+    },
+    "errors": {
+      "titleRequired": "Informe o título da anotação.",
+      "titleTooLong": "O título deve ter no máximo 200 caracteres.",
+      "contentTooLong": "O conteúdo excede o limite permitido.",
+      "yearRequired": "Selecione o ano.",
+      "yearInvalid": "Ano inválido.",
+      "monthRequired": "Selecione o mês.",
+      "monthInvalid": "Mês inválido."
     }
   }
 }

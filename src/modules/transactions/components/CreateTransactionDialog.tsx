@@ -28,7 +28,7 @@ type SelectableType = "EXPENSE" | "INCOME" | "CREDITEXPENSE" | "TRANSFERENCE";
 const TYPE_COLORS: Record<SelectableType, string> = {
   EXPENSE: "#ef4444",
   INCOME: "#22c55e",
-  CREDITEXPENSE: "#a855f7",
+  CREDITEXPENSE: "#ffb900",
   TRANSFERENCE: "#3b82f6",
 };
 

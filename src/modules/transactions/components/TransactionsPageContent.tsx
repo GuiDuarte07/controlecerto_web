@@ -3,8 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/shared/components/ui/alert";
-import { Button } from "@/shared/components/ui/button";
+import { toast } from "sonner";
 import { usePageHeader } from "@/shared/hooks/use-page-header";
 import { useAccountsStore } from "@/modules/accounts/context/accountsContext";
 import { useCreditCardsStore } from "@/modules/credit-cards/context/creditCardsContext";
@@ -66,6 +65,23 @@ export function TransactionsPageContent() {
     void fetchIncome();
   }, [fetchAccounts, fetchCreditCards, fetchExpense, fetchIncome]);
 
+  useEffect(() => {
+    if (!error) return;
+
+    toast.error(t("feedback.errorTitle"), {
+      id: "transactions-error",
+      description: error.message || t("feedback.loadError"),
+      action: {
+        label: t("actions.retry"),
+        onClick: () => {
+          void refetch();
+        },
+      },
+    });
+
+    clearError();
+  }, [error, t, refetch, clearError]);
+
   const handleOpenCreate = useCallback(() => {
     openCreateDrawer();
   }, [openCreateDrawer]);
@@ -114,18 +130,6 @@ export function TransactionsPageContent() {
 
   return (
     <div className="flex flex-col gap-4 p-4 md:p-6">
-      {error && (
-        <Alert variant="destructive">
-          <AlertTitle>{t("feedback.errorTitle")}</AlertTitle>
-          <AlertDescription className="flex items-center justify-between gap-4">
-            {error.message}
-            <Button variant="outline" size="sm" onClick={clearError}>
-              {t("actions.retry")}
-            </Button>
-          </AlertDescription>
-        </Alert>
-      )}
-
       <TransactionModeToggle mode={mode} onModeChange={setMode} />
 
       {mode === "invoice" && (

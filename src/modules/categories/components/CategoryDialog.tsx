@@ -149,7 +149,7 @@ export function CategoryDialog({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="max-h-[calc(100dvh-2rem)] w-[95vw] overflow-y-auto sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>
               {mode === "edit" ? t("dialog.editTitle") : t("dialog.createTitle")}
@@ -228,7 +228,7 @@ export function CategoryDialog({
                             if (v !== "") field.onChange(Number(v) as BillTypeEnum);
                           }}
                           className="justify-start"
-                          disabled={isSubmitting || mode === "edit"}
+                          disabled={isSubmitting}
                         >
                           <ToggleGroupItem value={String(BillTypeEnum.EXPENSE)} className="flex-1 text-xs">
                             {t("dialog.expense")}

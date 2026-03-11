@@ -149,6 +149,19 @@ export interface CreateCreditPurchaseRequest {
   categoryId: number;
 }
 
+export interface SimulateCreditPurchaseInvoiceRequest {
+  creditCardId: number;
+  purchaseDate: string;
+}
+
+export interface SimulatedCreditPurchaseInvoiceResponse {
+  creditCardDescription: string;
+  invoiceDate: string;
+  closingDate: string;
+  dueDate: string;
+  totalAmount: number;
+}
+
 export interface CreateTransferenceRequest {
   amount: number;
   purchaseDate: string;
