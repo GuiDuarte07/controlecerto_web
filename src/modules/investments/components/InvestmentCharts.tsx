@@ -24,11 +24,28 @@ interface InvestmentChartsProps {
   histories: InvestmentHistory[];
 }
 
-const TYPE_COLORS: Record<string, string> = {
+type HistoryTypeTranslationKey =
+  | "invest"
+  | "withdraw"
+  | "adjustment"
+  | "yield"
+  | "initial_balance";
+
+type DistributionHistoryType = Exclude<InvestmentHistory["type"], "INITIAL_BALANCE">;
+
+const TYPE_COLORS: Record<DistributionHistoryType, string> = {
   INVEST: "#10b981",
   WITHDRAW: "#f43f5e",
   ADJUSTMENT: "#3b82f6",
   YIELD: "#8b5cf6",
+};
+
+const TYPE_TRANSLATION_KEY: Record<InvestmentHistory["type"], HistoryTypeTranslationKey> = {
+  INVEST: "invest",
+  WITHDRAW: "withdraw",
+  ADJUSTMENT: "adjustment",
+  YIELD: "yield",
+  INITIAL_BALANCE: "initial_balance",
 };
 
 export function InvestmentCharts({ histories }: InvestmentChartsProps) {
@@ -64,13 +81,28 @@ export function InvestmentCharts({ histories }: InvestmentChartsProps) {
   );
 
   const pieData = useMemo(() => {
-    const totals: Record<string, number> = { INVEST: 0, WITHDRAW: 0, ADJUSTMENT: 0, YIELD: 0 };
+    const totals: Record<DistributionHistoryType, number> = {
+      INVEST: 0,
+      WITHDRAW: 0,
+      ADJUSTMENT: 0,
+      YIELD: 0,
+    };
+
     for (const h of sorted) {
-      totals[h.type] = (totals[h.type] ?? 0) + Math.abs(h.changeAmount);
+      if (h.type === "INITIAL_BALANCE") {
+        continue;
+      }
+
+      totals[h.type] = totals[h.type] + Math.abs(h.changeAmount);
     }
-    return Object.entries(totals)
+
+    return (Object.entries(totals) as [DistributionHistoryType, number][])
       .filter(([, val]) => val > 0)
-      .map(([type, value]) => ({ name: t(`history.types.${type.toLowerCase() as "invest" | "withdraw" | "adjustment" | "yield"}`), value, type }));
+      .map(([type, value]) => ({
+        name: t(`history.types.${TYPE_TRANSLATION_KEY[type]}`),
+        value,
+        type,
+      }));
   }, [sorted, t]);
 
   if (sorted.length === 0) {

@@ -40,6 +40,20 @@ export interface DetailsUserResponse {
   createdAt: string;
 }
 
+export interface ChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
+}
+
+export interface ForgotPasswordEmailRequest {
+  email: string;
+}
+
+export interface ForgotPasswordResetRequest {
+  password: string;
+  confirmPassword: string;
+}
+
 export interface AuthContextType {
   user: AuthUser | null;
   accessToken: string | null;

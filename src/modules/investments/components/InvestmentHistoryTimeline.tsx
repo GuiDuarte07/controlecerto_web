@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, type ReactElement } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { isValid } from "date-fns";
 import { ArrowDownCircle, ArrowUpCircle, SlidersHorizontal, TrendingUp } from "lucide-react";
@@ -13,24 +13,44 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/shared/components/ui/empty";
-import type { InvestmentHistory as InvestmentHistoryType } from "../types/investments.types";
+import type {
+  InvestmentHistory as InvestmentHistoryItem,
+  InvestmentHistoryType,
+} from "../types/investments.types";
 
 interface InvestmentHistoryProps {
-  histories: InvestmentHistoryType[];
+  histories: InvestmentHistoryItem[];
 }
 
-const TYPE_ICON = {
+type HistoryTypeTranslationKey =
+  | "invest"
+  | "withdraw"
+  | "adjustment"
+  | "yield"
+  | "initial_balance";
+
+const TYPE_ICON: Record<InvestmentHistoryType, ReactElement> = {
   INVEST: <ArrowDownCircle className="h-4 w-4 text-emerald-500" />,
   WITHDRAW: <ArrowUpCircle className="h-4 w-4 text-rose-500" />,
   ADJUSTMENT: <SlidersHorizontal className="h-4 w-4 text-blue-500" />,
   YIELD: <TrendingUp className="h-4 w-4 text-violet-500" />,
+  INITIAL_BALANCE: <ArrowDownCircle className="h-4 w-4 text-amber-500" />,
 };
 
-const TYPE_BADGE_CLASS = {
+const TYPE_BADGE_CLASS: Record<InvestmentHistoryType, string> = {
   INVEST: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
   WITHDRAW: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400",
   ADJUSTMENT: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
   YIELD: "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400",
+  INITIAL_BALANCE: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+};
+
+const TYPE_TRANSLATION_KEY: Record<InvestmentHistoryType, HistoryTypeTranslationKey> = {
+  INVEST: "invest",
+  WITHDRAW: "withdraw",
+  ADJUSTMENT: "adjustment",
+  YIELD: "yield",
+  INITIAL_BALANCE: "initial_balance",
 };
 
 export function InvestmentHistoryTimeline({ histories }: InvestmentHistoryProps) {
@@ -79,8 +99,8 @@ export function InvestmentHistoryTimeline({ histories }: InvestmentHistoryProps)
             })
           : "—";
 
-        const isPositive = entry.type === "INVEST" || entry.type === "YIELD";
-        const changeSign = entry.type === "WITHDRAW" ? "-" : "+";
+        const isPositive = entry.changeAmount >= 0;
+        const changeSign = entry.changeAmount < 0 ? "-" : "+";
 
         return (
           <div key={entry.id} className="relative flex gap-4 pb-6 last:pb-0">
@@ -91,7 +111,7 @@ export function InvestmentHistoryTimeline({ histories }: InvestmentHistoryProps)
 
             {/* dot */}
             <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border bg-background">
-              {TYPE_ICON[entry.type] ?? TYPE_ICON.INVEST}
+              {TYPE_ICON[entry.type]}
             </div>
 
             <div className="flex flex-1 flex-col gap-1 pt-1.5">
@@ -100,7 +120,7 @@ export function InvestmentHistoryTimeline({ histories }: InvestmentHistoryProps)
                   variant="outline"
                   className={`text-xs font-medium ${TYPE_BADGE_CLASS[entry.type] ?? ""}`}
                 >
-                  {t(`history.types.${entry.type.toLowerCase() as "invest" | "withdraw" | "adjustment" | "yield"}`)}
+                  {t(`history.types.${TYPE_TRANSLATION_KEY[entry.type]}`)}
                 </Badge>
                 <span className="text-xs text-muted-foreground">{dateLabel}</span>
               </div>

@@ -58,6 +58,59 @@
     "logout": {
       "button": "Sign out",
       "loading": "Signing out..."
+    },
+    "forgotPasswordRequest": {
+      "title": "Recover password",
+      "subtitle": "Enter your email to receive a password reset link.",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "submit": "Send link",
+      "submitting": "Sending...",
+      "successTitle": "Link sent",
+      "successDescription": "If the email exists, you will receive a link to reset your password.",
+      "backToLogin": "Back to login",
+      "sendAgain": "Send again",
+      "error": "Could not send the recovery email right now.",
+      "errors": {
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email"
+      }
+    },
+    "resetPassword": {
+      "title": "Set new password",
+      "subtitle": "Enter your new password to finish account recovery.",
+      "password": "New password",
+      "passwordPlaceholder": "Type your new password",
+      "confirmPassword": "Confirm new password",
+      "confirmPasswordPlaceholder": "Repeat your new password",
+      "submit": "Save new password",
+      "submitting": "Saving...",
+      "checkingTitle": "Validating link",
+      "checkingDescription": "We are checking whether this link is still valid.",
+      "invalidTitle": "Invalid or expired link",
+      "invalidDescription": "Request a new email to reset your password.",
+      "requestNewToken": "Request new link",
+      "successTitle": "Password reset",
+      "successDescription": "Your password was changed successfully.",
+      "backToLogin": "Go to login",
+      "error": "Could not reset your password right now.",
+      "errors": {
+        "passwordRequired": "Password is required",
+        "passwordTooShort": "Password must be at least 4 characters",
+        "passwordTooLong": "Password must be at most 30 characters",
+        "confirmPasswordRequired": "Password confirmation is required",
+        "passwordMismatch": "Passwords do not match"
+      }
+    },
+    "confirmEmail": {
+      "checkingTitle": "Confirming email",
+      "checkingDescription": "We are validating your confirmation token.",
+      "successTitle": "Email confirmed",
+      "successDescription": "Your email was confirmed successfully.",
+      "errorTitle": "Could not confirm email",
+      "errorDescription": "This link may have expired. Generate a new link inside your account.",
+      "tryAgain": "Try again",
+      "goToLogin": "Go to login"
     }
   },
   "navigation": {
@@ -95,7 +148,38 @@
       "memberSince": "Member since",
       "emailStatus": {
         "confirmed": "Email confirmed",
-        "unconfirmed": "Email not confirmed"
+        "unconfirmed": "Email not confirmed",
+        "sendButton": "Send confirmation",
+        "sending": "Sending...",
+        "confirmationSent": "Confirmation email sent.",
+        "confirmationError": "Could not send confirmation email."
+      }
+    },
+    "security": {
+      "title": "Security",
+      "description": "Manage your account password.",
+      "changePassword": {
+        "menuTitle": "Reset password",
+        "menuDescription": "Click to expand and update your password.",
+        "oldPassword": "Current password",
+        "oldPasswordPlaceholder": "Enter your current password",
+        "newPassword": "New password",
+        "newPasswordPlaceholder": "Enter your new password",
+        "confirmNewPassword": "Confirm new password",
+        "confirmNewPasswordPlaceholder": "Repeat your new password",
+        "submit": "Update password",
+        "submitting": "Updating...",
+        "success": "Password updated successfully.",
+        "error": "Could not update password."
+      },
+      "errors": {
+        "oldPasswordRequired": "Current password is required",
+        "newPasswordRequired": "New password is required",
+        "confirmNewPasswordRequired": "New password confirmation is required",
+        "passwordTooShort": "Password must be at least 4 characters",
+        "passwordTooLong": "Password must be at most 30 characters",
+        "passwordMismatch": "Passwords do not match",
+        "samePassword": "New password must be different from current password"
       }
     }
   },
@@ -627,7 +711,8 @@
         "invest": "Deposit",
         "withdraw": "Withdrawal",
         "adjustment": "Adjustment",
-        "yield": "Yield"
+        "yield": "Yield",
+        "initial_balance": "Initial balance"
       }
     },
     "charts": {

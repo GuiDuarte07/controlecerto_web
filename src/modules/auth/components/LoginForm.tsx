@@ -126,7 +126,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
                 {t("rememberMe")}
               </Label>
             </div>
-            <Link href="#" className="text-sm text-primary hover:underline">
+            <Link href={`/${locale}/auth/forgot-password`} className="text-sm text-primary hover:underline">
               {t("forgotPassword")}
             </Link>
           </div>

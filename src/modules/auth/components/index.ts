@@ -3,3 +3,7 @@ export { RegisterForm } from "./RegisterForm";
 export { AuthLayout } from "./AuthLayout";
 export { LogoutButton } from "./LogoutButton";
 export { AuthRouteGuard } from "./AuthRouteGuard";
+export { ForgotPasswordRequestForm } from "./ForgotPasswordRequestForm";
+export { ResetPasswordForm } from "./ResetPasswordForm";
+export { ConfirmEmailResultCard } from "./ConfirmEmailResultCard";
+export { ChangePasswordSettingsCard } from "./ChangePasswordSettingsCard";

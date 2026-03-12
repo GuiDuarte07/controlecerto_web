@@ -58,6 +58,59 @@
     "logout": {
       "button": "Sair",
       "loading": "Saindo..."
+    },
+    "forgotPasswordRequest": {
+      "title": "Recuperar senha",
+      "subtitle": "Informe seu e-mail para receber o link de redefinição.",
+      "email": "E-mail",
+      "emailPlaceholder": "seu@email.com",
+      "submit": "Enviar link",
+      "submitting": "Enviando...",
+      "successTitle": "Link enviado",
+      "successDescription": "Se o e-mail existir na base, você receberá um link para redefinir sua senha.",
+      "backToLogin": "Voltar para login",
+      "sendAgain": "Enviar novamente",
+      "error": "Não foi possível enviar o e-mail de recuperação agora.",
+      "errors": {
+        "emailRequired": "E-mail é obrigatório",
+        "emailInvalid": "E-mail inválido"
+      }
+    },
+    "resetPassword": {
+      "title": "Definir nova senha",
+      "subtitle": "Informe sua nova senha para concluir a recuperação.",
+      "password": "Nova senha",
+      "passwordPlaceholder": "Digite a nova senha",
+      "confirmPassword": "Confirmar nova senha",
+      "confirmPasswordPlaceholder": "Repita a nova senha",
+      "submit": "Salvar nova senha",
+      "submitting": "Salvando...",
+      "checkingTitle": "Validando link",
+      "checkingDescription": "Estamos verificando se este link ainda é válido.",
+      "invalidTitle": "Link inválido ou expirado",
+      "invalidDescription": "Solicite um novo e-mail para redefinir sua senha.",
+      "requestNewToken": "Solicitar novo link",
+      "successTitle": "Senha redefinida",
+      "successDescription": "Sua senha foi alterada com sucesso.",
+      "backToLogin": "Ir para login",
+      "error": "Não foi possível redefinir sua senha agora.",
+      "errors": {
+        "passwordRequired": "Senha é obrigatória",
+        "passwordTooShort": "Senha deve ter pelo menos 4 caracteres",
+        "passwordTooLong": "Senha deve ter no máximo 30 caracteres",
+        "confirmPasswordRequired": "Confirmação de senha é obrigatória",
+        "passwordMismatch": "As senhas não conferem"
+      }
+    },
+    "confirmEmail": {
+      "checkingTitle": "Confirmando e-mail",
+      "checkingDescription": "Estamos validando seu token de confirmação.",
+      "successTitle": "E-mail confirmado",
+      "successDescription": "Seu e-mail foi confirmado com sucesso.",
+      "errorTitle": "Não foi possível confirmar",
+      "errorDescription": "Esse link pode ter expirado. Gere um novo link dentro da sua conta.",
+      "tryAgain": "Tentar novamente",
+      "goToLogin": "Ir para login"
     }
   },
   "navigation": {
@@ -95,7 +148,38 @@
       "memberSince": "Membro desde",
       "emailStatus": {
         "confirmed": "E-mail confirmado",
-        "unconfirmed": "E-mail não confirmado"
+        "unconfirmed": "E-mail não confirmado",
+        "sendButton": "Enviar confirmação",
+        "sending": "Enviando...",
+        "confirmationSent": "E-mail de confirmação enviado.",
+        "confirmationError": "Não foi possível enviar o e-mail de confirmação."
+      }
+    },
+    "security": {
+      "title": "Segurança",
+      "description": "Gerencie a senha da sua conta.",
+      "changePassword": {
+        "menuTitle": "Redefinir senha",
+        "menuDescription": "Clique para expandir e alterar sua senha.",
+        "oldPassword": "Senha atual",
+        "oldPasswordPlaceholder": "Digite sua senha atual",
+        "newPassword": "Nova senha",
+        "newPasswordPlaceholder": "Digite sua nova senha",
+        "confirmNewPassword": "Confirmar nova senha",
+        "confirmNewPasswordPlaceholder": "Repita a nova senha",
+        "submit": "Atualizar senha",
+        "submitting": "Atualizando...",
+        "success": "Senha atualizada com sucesso.",
+        "error": "Não foi possível atualizar a senha."
+      },
+      "errors": {
+        "oldPasswordRequired": "Senha atual é obrigatória",
+        "newPasswordRequired": "Nova senha é obrigatória",
+        "confirmNewPasswordRequired": "Confirmação da nova senha é obrigatória",
+        "passwordTooShort": "Senha deve ter pelo menos 4 caracteres",
+        "passwordTooLong": "Senha deve ter no máximo 30 caracteres",
+        "passwordMismatch": "As senhas não conferem",
+        "samePassword": "A nova senha deve ser diferente da senha atual"
       }
     }
   },
@@ -627,7 +711,8 @@
         "invest": "Depósito",
         "withdraw": "Saque",
         "adjustment": "Ajuste",
-        "yield": "Rendimento"
+        "yield": "Rendimento",
+        "initial_balance": "Saldo inicial"
       }
     },
     "charts": {

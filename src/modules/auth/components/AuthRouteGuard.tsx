@@ -16,6 +16,9 @@ function buildAuthPaths(locale: string) {
   return {
     loginPath: `/${locale}/auth/login`,
     registerPath: `/${locale}/auth/register`,
+    forgotPasswordPath: `/${locale}/auth/forgot-password`,
+    forgotPasswordTokenPrefix: `/${locale}/forgot-password/`,
+    confirmEmailTokenPrefix: `/${locale}/confirm-email/`,
     homePath: `/${locale}/home`,
     rootPath: `/${locale}`,
   };
@@ -30,11 +33,22 @@ export function AuthRouteGuard({ children, locale }: AuthRouteGuardProps) {
   const isLoading = useAuthStore((state) => state.isLoading);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated());
 
-  const { loginPath, registerPath, homePath, rootPath } =
+  const {
+    loginPath,
+    registerPath,
+    forgotPasswordPath,
+    forgotPasswordTokenPrefix,
+    confirmEmailTokenPrefix,
+    homePath,
+    rootPath,
+  } =
     buildAuthPaths(locale);
   const isPublicRoute =
     pathname === loginPath ||
     pathname === registerPath ||
+    pathname === forgotPasswordPath ||
+    pathname.startsWith(forgotPasswordTokenPrefix) ||
+    pathname.startsWith(confirmEmailTokenPrefix) ||
     pathname === homePath ||
     pathname === rootPath;
 

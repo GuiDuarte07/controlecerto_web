@@ -28,6 +28,7 @@ export function ProfileSettingsCard() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
+  const [isSendingConfirmEmail, setIsSendingConfirmEmail] = useState(false);
   const [avatarUploadError, setAvatarUploadError] = useState<string | null>(
     null,
   );
@@ -95,6 +96,22 @@ export function ProfileSettingsCard() {
       toast.error(t("avatar.errorType"));
     } finally {
       setIsRemoving(false);
+    }
+  };
+
+  const handleSendConfirmEmail = async () => {
+    setIsSendingConfirmEmail(true);
+    try {
+      await userService.sendConfirmEmail();
+      toast.success(t("emailStatus.confirmationSent"));
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message
+          ? error.message
+          : t("emailStatus.confirmationError");
+      toast.error(message);
+    } finally {
+      setIsSendingConfirmEmail(false);
     }
   };
 
@@ -205,10 +222,24 @@ export function ProfileSettingsCard() {
                 {t("emailStatus.confirmed")}
               </Badge>
             ) : (
-              <Badge variant="secondary" className="flex items-center gap-1 text-xs text-amber-600">
-                <XCircle className="h-3 w-3" />
-                {t("emailStatus.unconfirmed")}
-              </Badge>
+              <>
+                <Badge variant="secondary" className="flex items-center gap-1 text-xs text-amber-600">
+                  <XCircle className="h-3 w-3" />
+                  {t("emailStatus.unconfirmed")}
+                </Badge>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleSendConfirmEmail}
+                  disabled={isSendingConfirmEmail}
+                  className="h-6 px-2 text-[11px]"
+                >
+                  {isSendingConfirmEmail
+                    ? t("emailStatus.sending")
+                    : t("emailStatus.sendButton")}
+                </Button>
+              </>
             )}
           </dd>
         </div>

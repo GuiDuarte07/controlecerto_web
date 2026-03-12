@@ -7,6 +7,10 @@ export {
   AuthLayout,
   LogoutButton,
   AuthRouteGuard,
+  ForgotPasswordRequestForm,
+  ResetPasswordForm,
+  ConfirmEmailResultCard,
+  ChangePasswordSettingsCard,
 } from "./components";
 export { useProtectedRoute, useRedirectIfAuthenticated } from "./hooks";
 export {
@@ -15,5 +19,17 @@ export {
   validateName,
   authValidations,
 } from "./utils";
-export { loginSchema, registerSchema } from "./schemas/auth.schemas";
-export type { LoginFormData, RegisterFormData } from "./schemas/auth.schemas";
+export {
+  loginSchema,
+  registerSchema,
+  forgotPasswordRequestSchema,
+  resetPasswordSchema,
+  changePasswordSchema,
+} from "./schemas/auth.schemas";
+export type {
+  LoginFormData,
+  RegisterFormData,
+  ForgotPasswordRequestFormData,
+  ResetPasswordFormData,
+  ChangePasswordFormData,
+} from "./schemas/auth.schemas";
