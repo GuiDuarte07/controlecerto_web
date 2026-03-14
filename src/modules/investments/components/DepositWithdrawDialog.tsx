@@ -55,7 +55,7 @@ export function DepositWithdrawDialog({
   );
 
   const form = (useForm<DepositWithdrawFormData>({
-    // @ts-expect-error — Zod v4 + RHF resolver type mismatch
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(depositWithdrawSchema),
     defaultValues: {
       amount: undefined,

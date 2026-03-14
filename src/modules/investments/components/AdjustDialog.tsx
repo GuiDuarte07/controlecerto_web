@@ -62,7 +62,7 @@ export function AdjustDialog({
   });
 
   const form = (useForm<AdjustFormData>({
-    // @ts-expect-error — Zod v4 + RHF resolver type mismatch
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(adjustSchema),
     defaultValues: {
       newTotalValue: undefined,

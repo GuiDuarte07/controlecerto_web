@@ -109,7 +109,7 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
   };
 
   const form = (useForm<CreditExpenseFormData>({
-    // @ts-expect-error — Zod v4 + RHF resolver type mismatch
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(creditExpenseFormSchema),
     defaultValues: {
       totalAmount: initialData?.totalAmount ?? undefined,

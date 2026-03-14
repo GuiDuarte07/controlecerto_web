@@ -82,7 +82,7 @@ export function ExpenseIncomeForm({ type, onSubmit, onCancel, isSubmitting, init
   };
 
   const form = (useForm<ExpenseIncomeFormData>({
-    // @ts-expect-error — Zod v4 + RHF resolver type mismatch
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(expenseIncomeFormSchema),
     defaultValues: {
       amount: initialData?.amount ?? undefined,

@@ -44,7 +44,7 @@ export function CreateInvestmentDialog({
   const t = useTranslations("investments");
 
   const form = (useForm<CreateInvestmentFormData>({
-    // @ts-expect-error — Zod v4 + RHF resolver type mismatch
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(createInvestmentSchema),
     defaultValues: {
       name: "",

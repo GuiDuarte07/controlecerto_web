@@ -48,7 +48,7 @@ export function TransferenceForm({ onSubmit, onCancel, isSubmitting, initialData
   };
 
   const form = (useForm<TransferenceFormData>({
-    // @ts-expect-error — Zod v4 + RHF resolver type mismatch
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(transferenceFormSchema),
     defaultValues: {
       amount: initialData?.amount ?? undefined,
