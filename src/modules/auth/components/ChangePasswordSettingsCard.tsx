@@ -26,7 +26,7 @@ export function ChangePasswordSettingsCard() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<ChangePasswordFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
       oldPassword: "",
