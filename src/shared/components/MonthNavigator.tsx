@@ -26,7 +26,7 @@ interface MonthNavigatorProps {
   date?: Date;
   onSelect?: (year: number, month: number) => void;
 }
-
+ 
 export function MonthNavigator({
   label,
   onPrev,
