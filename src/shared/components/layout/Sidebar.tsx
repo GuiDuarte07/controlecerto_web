@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import {
+  Bell,
   ChevronLeft,
   ChevronRight,
   CreditCard,
@@ -107,6 +108,12 @@ export function Sidebar() {
       icon: <TrendingUp className="h-5 w-5" />,
       label: t("investments"),
       href: `/${locale}/investments`,
+      requiresAuth: true,
+    },
+    {
+      icon: <Bell className="h-5 w-5" />,
+      label: t("notifications"),
+      href: `/${locale}/notifications`,
       requiresAuth: true,
     },
     {

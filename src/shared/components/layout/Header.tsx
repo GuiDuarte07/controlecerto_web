@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { Bell, Plus, Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { usePageHeaderState } from "@/shared/hooks/use-page-header";
+import { NotificationBell } from "@/modules/notifications";
 
 export function Header() {
   const {
@@ -60,10 +61,7 @@ export function Header() {
             </Button>
           )}
 
-          <Button variant="ghost" size="icon" className="relative rounded-full">
-            <Bell className="h-5 w-5" />
-            <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full" />
-          </Button>
+          <NotificationBell />
         </div>
       </div>
     </header>

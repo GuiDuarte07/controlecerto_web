@@ -120,6 +120,7 @@
     "accounts": "Accounts",
     "creditCards": "Credit Cards",
     "investments": "Investments",
+    "notifications": "Notifications",
     "settings": "Settings",
     "logout": "Sign out"
   },
@@ -752,6 +753,62 @@
       "withdrawError": "Could not process the withdrawal.",
       "adjustError": "Could not process the adjustment.",
       "deleteError": "Could not delete the investment."
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "description": "Track system alerts and pending actions",
+    "searchPlaceholder": "Search notifications...",
+    "bell": {
+      "ariaLabel": "Open notifications",
+      "title": "Recent notifications",
+      "markAllRead": "Mark all",
+      "viewAll": "View all",
+      "empty": "No recent notifications",
+      "markAsRead": "Mark as read",
+      "openAction": "Open action",
+      "delete": "Delete"
+    },
+    "filters": {
+      "title": "Filters",
+      "includeExpired": "Include expired"
+    },
+    "actions": {
+      "markVisibleRead": "Mark visible as read",
+      "refresh": "Refresh",
+      "markRead": "Mark as read",
+      "openAction": "Open action",
+      "delete": "Delete"
+    },
+    "pagination": {
+      "page": "Page {page}",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "labels": {
+      "unread": "Unread"
+    },
+    "types": {
+      "systemupdate": "System update",
+      "systemalert": "System alert",
+      "invoicepending": "Pending invoice",
+      "confirmrecurrence": "Confirm recurrence",
+      "categoryspendinglimit": "Category limit"
+    },
+    "empty": {
+      "title": "No notifications found",
+      "description": "There are no items for the current filters."
+    },
+    "feedback": {
+      "errorTitle": "Could not load notifications",
+      "loadRecentError": "Could not load recent notifications.",
+      "loadUnreadError": "Could not refresh unread counter.",
+      "loadAllError": "Could not load notifications list.",
+      "markReadError": "Could not mark notification as read.",
+      "markAllReadSuccess": "Notifications marked as read.",
+      "markVisibleReadSuccess": "Visible notifications marked as read.",
+      "deleteError": "Could not delete notification.",
+      "deleteSuccess": "Notification deleted."
     }
   },
   "dashboard": {

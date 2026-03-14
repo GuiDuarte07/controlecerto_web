@@ -120,6 +120,7 @@
     "accounts": "Contas",
     "creditCards": "Cartões de Crédito",
     "investments": "Investimentos",
+    "notifications": "Notificações",
     "settings": "Configurações",
     "logout": "Sair"
   },
@@ -752,6 +753,62 @@
       "withdrawError": "Não foi possível realizar o saque.",
       "adjustError": "Não foi possível realizar o ajuste.",
       "deleteError": "Não foi possível excluir o investimento."
+    }
+  },
+  "notifications": {
+    "title": "Notificações",
+    "description": "Acompanhe avisos do sistema e ações pendentes",
+    "searchPlaceholder": "Buscar notificações...",
+    "bell": {
+      "ariaLabel": "Abrir notificações",
+      "title": "Notificações recentes",
+      "markAllRead": "Marcar todas",
+      "viewAll": "Ver todas",
+      "empty": "Nenhuma notificação recente",
+      "markAsRead": "Marcar como lida",
+      "openAction": "Abrir ação",
+      "delete": "Excluir"
+    },
+    "filters": {
+      "title": "Filtros",
+      "includeExpired": "Incluir expiradas"
+    },
+    "actions": {
+      "markVisibleRead": "Marcar visíveis como lidas",
+      "refresh": "Atualizar",
+      "markRead": "Marcar como lida",
+      "openAction": "Abrir ação",
+      "delete": "Excluir"
+    },
+    "pagination": {
+      "page": "Página {page}",
+      "previous": "Anterior",
+      "next": "Próxima"
+    },
+    "labels": {
+      "unread": "Não lida"
+    },
+    "types": {
+      "systemupdate": "Atualização do sistema",
+      "systemalert": "Alerta do sistema",
+      "invoicepending": "Fatura pendente",
+      "confirmrecurrence": "Confirmar recorrência",
+      "categoryspendinglimit": "Limite de categoria"
+    },
+    "empty": {
+      "title": "Nenhuma notificação encontrada",
+      "description": "Não há itens para os filtros atuais."
+    },
+    "feedback": {
+      "errorTitle": "Não foi possível carregar notificações",
+      "loadRecentError": "Não foi possível carregar as notificações recentes.",
+      "loadUnreadError": "Não foi possível atualizar o contador de não lidas.",
+      "loadAllError": "Não foi possível carregar a lista de notificações.",
+      "markReadError": "Não foi possível marcar a notificação como lida.",
+      "markAllReadSuccess": "Notificações marcadas como lidas.",
+      "markVisibleReadSuccess": "Notificações visíveis marcadas como lidas.",
+      "deleteError": "Não foi possível excluir a notificação.",
+      "deleteSuccess": "Notificação excluída."
     }
   },
   "dashboard": {
