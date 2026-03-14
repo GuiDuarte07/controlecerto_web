@@ -87,13 +87,13 @@ export function CreditCardDialog({
   };
 
   const createForm = (useForm<CreditCardFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(creditCardFormSchema),
     defaultValues: resolveDefaultValues(card),
   }) as unknown) as UseFormReturn<CreditCardFormData>;
 
   const editForm = (useForm<UpdateCreditCardFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(updateCreditCardFormSchema),
     defaultValues: resolveEditValues(card),
   }) as unknown) as UseFormReturn<UpdateCreditCardFormData>;

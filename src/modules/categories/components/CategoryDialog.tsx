@@ -103,7 +103,7 @@ export function CategoryDialog({
   const [iconPickerOpen, setIconPickerOpen] = useState(false);
 
   const form = (useForm<CategoryFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(categoryFormSchema),
     defaultValues: resolveDefaultValues(category, defaultBillType, defaultParentId),
   }) as unknown) as UseFormReturn<CategoryFormData>;

@@ -30,7 +30,7 @@ export function ForgotPasswordRequestForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<ForgotPasswordRequestFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(forgotPasswordRequestSchema),
     defaultValues: {
       email: "",

@@ -38,7 +38,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     watch,
     setValue,
   } = useForm<LoginFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",

@@ -67,7 +67,7 @@ export function AccountDialog({
     watch,
     formState: { errors },
   } = useForm<AccountFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(accountFormSchema),
     defaultValues: resolveDialogValues(account),
   });

@@ -81,7 +81,7 @@ export function NotesEditor({
   const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
 
   const form = (useForm<NoteEditorFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(noteEditorSchema),
     defaultValues: {
       title: note.title,

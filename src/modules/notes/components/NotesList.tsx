@@ -139,7 +139,7 @@ export function NotesList({
   const locale = useLocale();
 
   const form = (useForm<SearchPeriodFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(searchPeriodSchema),
     defaultValues: getSearchDefaults(),
   }) as unknown) as UseFormReturn<SearchPeriodFormData>;

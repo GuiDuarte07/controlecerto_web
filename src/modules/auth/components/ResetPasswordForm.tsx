@@ -37,7 +37,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<ResetPasswordFormData>({
-    // @ts-expect-error - Zod v4 incompatibility with @hookform/resolvers
+    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       password: "",
