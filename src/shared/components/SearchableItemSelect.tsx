@@ -66,7 +66,9 @@ export function SearchableItemSelect({
 }: SearchableItemSelectProps) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const selectedItem = useMemo(
     () => items.find((item) => item.id === value) ?? null,
@@ -91,14 +93,20 @@ export function SearchableItemSelect({
       onOpenChange={(isOpen) => {
         setOpen(isOpen);
         if (isOpen) {
+          const dialogContent = triggerRef.current?.closest(
+            '[data-slot="dialog-content"]',
+          ) as HTMLElement | null;
+          setPortalContainer(dialogContent ?? null);
           setTimeout(() => searchRef.current?.focus(), 50);
         } else {
           setSearch("");
+          setPortalContainer(null);
         }
       }}
     >
       <PopoverTrigger asChild disabled={disabled}>
         <Button
+          ref={triggerRef}
           variant="outline"
           role="combobox"
           aria-expanded={open}
@@ -114,6 +122,7 @@ export function SearchableItemSelect({
       </PopoverTrigger>
 
       <PopoverContent
+        portalContainer={portalContainer}
         className="w-(--radix-popover-trigger-width) p-0"
         align="start"
         sideOffset={4}

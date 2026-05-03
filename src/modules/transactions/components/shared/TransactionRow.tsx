@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { format, isValid } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -32,7 +32,7 @@ function getCategoryDisplay(transaction: Transaction) {
   }
   switch (transaction.type) {
     case "INVOICEPAYMENT":
-      return { color: "#22c55e", icon: "banknote", name: "" };
+      return { color: "#ffb900", icon: "banknote", name: "" };
     case "TRANSFERENCE":
       return { color: "#3b82f6", icon: "arrowLeftRight", name: "" };
     default:
@@ -43,8 +43,9 @@ function getCategoryDisplay(transaction: Transaction) {
 function getAmountColor(type: Transaction["type"]): string {
   switch (type) {
     case "INCOME":
-    case "INVOICEPAYMENT":
       return "text-green-600 dark:text-green-400";
+    case "INVOICEPAYMENT":
+      return "text-amber-600 dark:text-amber-400";
     case "EXPENSE":
     case "CREDITEXPENSE":
       return "text-red-600 dark:text-red-400";
@@ -56,8 +57,9 @@ function getAmountColor(type: Transaction["type"]): string {
 function getTypeBadgeClass(type: Transaction["type"]): string {
   switch (type) {
     case "INCOME":
-    case "INVOICEPAYMENT":
       return "text-green-600 border-green-200 dark:text-green-400 dark:border-green-800";
+    case "INVOICEPAYMENT":
+      return "text-amber-600 border-amber-200 dark:text-amber-400 dark:border-amber-800";
     case "EXPENSE":
       return "text-red-600 border-red-200 dark:text-red-400 dark:border-red-800";
     case "CREDITEXPENSE":
@@ -79,7 +81,7 @@ export function TransactionRow({ transaction, onClick }: TransactionRowProps) {
   const amountColorClass = getAmountColor(transaction.type);
 
   const sign =
-    transaction.type === "INCOME" || transaction.type === "INVOICEPAYMENT"
+    transaction.type === "INCOME"
       ? "+"
       : transaction.type === "TRANSFERENCE"
       ? ""

@@ -26,6 +26,7 @@ interface AuthActions {
   clearError: () => void;
   isAuthenticated: () => boolean;
   updateAvatar: (avatarUrl: string | null) => void;
+  updateUser: (user: AuthUser) => void;
 }
 
 type AuthStore = AuthState & AuthActions;
@@ -177,6 +178,21 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         });
       }
       return { user: updatedUser };
+    });
+  },
+
+  updateUser: (user: AuthUser) => {
+    set((state) => {
+      const storedSession = readStoredAuthSession();
+      const accessToken = storedSession?.accessToken ?? state.accessToken;
+      if (accessToken) {
+        persistStoredAuthSession({
+          user,
+          accessToken,
+          refreshToken: storedSession?.refreshToken ?? state.refreshToken,
+        });
+      }
+      return { user };
     });
   },
 }));

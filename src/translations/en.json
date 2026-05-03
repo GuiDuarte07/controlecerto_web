@@ -121,14 +121,119 @@
     "creditCards": "Credit Cards",
     "investments": "Investments",
     "notifications": "Notifications",
+    "tickets": "Help / Tickets",
+    "adminTickets": "Tickets (Admin)",
     "settings": "Settings",
-    "logout": "Sign out"
+    "logout": "Sign out",
+    "helpCta": {
+      "title": "Need help?",
+      "description": "Open a ticket with attachments and follow the conversation."
+    },
+    "aboutCta": {
+      "title": "About the system",
+      "description": "Version, contacts and useful details."
+    },
+    "aboutModal": {
+      "title": "About ControleCerto",
+      "description": "Application details and contact channels.",
+      "systemName": "ControleCerto",
+      "systemSubtitle": "Complete system for expense and income management.",
+      "versionLabel": "Version",
+      "creatorLabel": "Creator",
+      "emailLabel": "System email",
+      "linkedinLabel": "LinkedIn",
+      "copyrightLabel": "Copyright"
+    }
+  },
+  "tickets": {
+    "title": "Tickets",
+    "description": "Open and track questions and system issues.",
+    "admin": {
+      "title": "Tickets (Admin)",
+      "description": "Support queue and triage.",
+      "detailTitle": "Ticket #{id}",
+      "controls": "Support",
+      "status": "Status",
+      "priority": "Priority",
+      "apply": "Apply"
+    },
+    "filters": {
+      "title": "Filters",
+      "searchPlaceholder": "Search by subject",
+      "statusPlaceholder": "Status",
+      "all": "All"
+    },
+    "create": {
+      "newTicket": "New ticket",
+      "title": "Open ticket",
+      "subjectLabel": "Subject",
+      "subjectPlaceholder": "Describe briefly",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Explain your question/issue. For bugs, include evidence.",
+      "attachmentsLabel": "Attachments",
+      "attachmentsHint": "Recommended for bugs (screenshots, videos, logs). Max 10 files (10MB each).",
+      "attach": "Attach",
+      "submit": "Create"
+    },
+    "list": {
+      "updatedAt": "Updated at {date}",
+      "waitingYou": "Waiting for your reply"
+    },
+    "detail": {
+      "title": "Ticket #{id}",
+      "lastUpdate": "Last update: {date}",
+      "actions": "Actions",
+      "close": "Close ticket",
+      "reopen": "Reopen ticket",
+      "attachments": "Ticket attachments",
+      "messagePlaceholder": "Write a message…",
+      "attach": "Attach",
+      "send": "Send",
+      "authorAdmin": "Admin",
+      "authorYou": "You",
+      "authorUser": "User"
+    },
+    "status": {
+      "OPEN": "Open",
+      "INPROGRESS": "In progress",
+      "WAITINGUSER": "Waiting user",
+      "RESOLVED": "Resolved",
+      "CLOSED": "Closed"
+    },
+    "priority": {
+      "LOW": "Low",
+      "NORMAL": "Normal",
+      "HIGH": "High"
+    },
+    "errors": {
+      "subjectRequired": "Please enter a subject.",
+      "subjectTooLong": "Subject must be at most 140 characters.",
+      "descriptionRequired": "Please enter a ticket description.",
+      "messageRequired": "Please write a message.",
+      "attachmentsTooMany": "You can attach up to 10 files.",
+      "attachmentTooLarge": "One or more attachments exceed 10MB."
+    },
+    "feedback": {
+      "created": "Ticket created.",
+      "closed": "Ticket closed.",
+      "reopened": "Ticket reopened.",
+      "updated": "Ticket updated.",
+      "messageSent": "Message sent.",
+      "notFound": "Ticket not found.",
+      "loadListError": "Couldn't load tickets.",
+      "loadAdminListError": "Couldn't load admin queue.",
+      "loadDetailError": "Couldn't load ticket.",
+      "createError": "Couldn't create ticket.",
+      "sendMessageError": "Couldn't send message.",
+      "updateStatusError": "Couldn't update ticket."
+    }
   },
   "settings": {
     "title": "Settings",
     "description": "Adjust your account preferences and data",
     "profile": {
       "title": "Profile",
+      "adminTag": "Administrator",
       "description": "Manage your personal information and profile picture",
       "avatar": {
         "label": "Profile picture",
@@ -793,7 +898,8 @@
       "systemalert": "System alert",
       "invoicepending": "Pending invoice",
       "confirmrecurrence": "Confirm recurrence",
-      "categoryspendinglimit": "Category limit"
+      "categoryspendinglimit": "Category limit",
+      "ticketupdate": "Ticket"
     },
     "empty": {
       "title": "No notifications found",

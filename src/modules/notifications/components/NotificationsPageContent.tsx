@@ -29,13 +29,14 @@ import {
 
 const TYPE_TRANSLATION_KEY: Record<
   NotificationTypeKey,
-  "systemupdate" | "systemalert" | "invoicepending" | "confirmrecurrence" | "categoryspendinglimit"
+  "systemupdate" | "systemalert" | "invoicepending" | "confirmrecurrence" | "categoryspendinglimit" | "ticketupdate"
 > = {
   SYSTEMUPDATE: "systemupdate",
   SYSTEMALERT: "systemalert",
   INVOICEPENDING: "invoicepending",
   CONFIRMRECURRENCE: "confirmrecurrence",
   CATEGORYSPENDINGLIMIT: "categoryspendinglimit",
+  TICKETUPDATE: "ticketupdate",
 };
 
 function resolveActionPath(actionPath: string, locale: string) {

@@ -121,14 +121,119 @@
     "creditCards": "Cartões de Crédito",
     "investments": "Investimentos",
     "notifications": "Notificações",
+    "tickets": "Ajuda / Chamados",
+    "adminTickets": "Chamados (Admin)",
     "settings": "Configurações",
-    "logout": "Sair"
+    "logout": "Sair",
+    "helpCta": {
+      "title": "Precisa de ajuda?",
+      "description": "Abra um chamado com anexos e acompanhe a conversa."
+    },
+    "aboutCta": {
+      "title": "Sobre o sistema",
+      "description": "Versão, contatos e informações úteis."
+    },
+    "aboutModal": {
+      "title": "Sobre o ControleCerto",
+      "description": "Informações da aplicação e canais de contato.",
+      "systemName": "ControleCerto",
+      "systemSubtitle": "Sistema completo para gestão de despesas e receitas.",
+      "versionLabel": "Versão",
+      "creatorLabel": "Criador",
+      "emailLabel": "E-mail do sistema",
+      "linkedinLabel": "LinkedIn",
+      "copyrightLabel": "Direitos"
+    }
+  },
+  "tickets": {
+    "title": "Chamados",
+    "description": "Abra e acompanhe dúvidas e problemas do sistema.",
+    "admin": {
+      "title": "Chamados (Admin)",
+      "description": "Fila de atendimento e triagem.",
+      "detailTitle": "Chamado #{id}",
+      "controls": "Atendimento",
+      "status": "Status",
+      "priority": "Prioridade",
+      "apply": "Aplicar"
+    },
+    "filters": {
+      "title": "Filtros",
+      "searchPlaceholder": "Buscar por assunto",
+      "statusPlaceholder": "Status",
+      "all": "Todos"
+    },
+    "create": {
+      "newTicket": "Novo chamado",
+      "title": "Abrir chamado",
+      "subjectLabel": "Assunto",
+      "subjectPlaceholder": "Descreva em poucas palavras",
+      "descriptionLabel": "Descrição",
+      "descriptionPlaceholder": "Explique sua dúvida/problema. Em caso de bug, inclua detalhes e evidências.",
+      "attachmentsLabel": "Anexos",
+      "attachmentsHint": "Recomendado para bugs (prints, vídeos, logs). Máximo 10 arquivos (10MB cada).",
+      "attach": "Anexar",
+      "submit": "Criar"
+    },
+    "list": {
+      "updatedAt": "Atualizado em {date}",
+      "waitingYou": "Aguardando sua resposta"
+    },
+    "detail": {
+      "title": "Chamado #{id}",
+      "lastUpdate": "Última atualização: {date}",
+      "actions": "Ações",
+      "close": "Encerrar chamado",
+      "reopen": "Reabrir chamado",
+      "attachments": "Anexos do chamado",
+      "messagePlaceholder": "Escreva sua mensagem…",
+      "attach": "Anexar",
+      "send": "Enviar",
+      "authorAdmin": "Admin",
+      "authorYou": "Você",
+      "authorUser": "Usuário"
+    },
+    "status": {
+      "OPEN": "Aberto",
+      "INPROGRESS": "Em atendimento",
+      "WAITINGUSER": "Aguardando usuário",
+      "RESOLVED": "Resolvido",
+      "CLOSED": "Fechado"
+    },
+    "priority": {
+      "LOW": "Baixa",
+      "NORMAL": "Normal",
+      "HIGH": "Alta"
+    },
+    "errors": {
+      "subjectRequired": "Informe o assunto.",
+      "subjectTooLong": "O assunto deve ter no máximo 140 caracteres.",
+      "descriptionRequired": "Informe a descrição do chamado.",
+      "messageRequired": "Digite uma mensagem.",
+      "attachmentsTooMany": "Você pode anexar no máximo 10 arquivos.",
+      "attachmentTooLarge": "Um ou mais anexos excedem 10MB."
+    },
+    "feedback": {
+      "created": "Chamado criado.",
+      "closed": "Chamado encerrado.",
+      "reopened": "Chamado reaberto.",
+      "updated": "Chamado atualizado.",
+      "messageSent": "Mensagem enviada.",
+      "notFound": "Chamado não encontrado.",
+      "loadListError": "Não foi possível carregar os chamados.",
+      "loadAdminListError": "Não foi possível carregar a fila de chamados.",
+      "loadDetailError": "Não foi possível carregar o chamado.",
+      "createError": "Não foi possível criar o chamado.",
+      "sendMessageError": "Não foi possível enviar a mensagem.",
+      "updateStatusError": "Não foi possível atualizar o chamado."
+    }
   },
   "settings": {
     "title": "Configurações",
     "description": "Ajuste preferências e dados da sua conta",
     "profile": {
       "title": "Perfil",
+      "adminTag": "Administrador",
       "description": "Gerencie suas informações pessoais e foto de perfil",
       "avatar": {
         "label": "Foto de perfil",
@@ -793,7 +898,8 @@
       "systemalert": "Alerta do sistema",
       "invoicepending": "Fatura pendente",
       "confirmrecurrence": "Confirmar recorrência",
-      "categoryspendinglimit": "Limite de categoria"
+      "categoryspendinglimit": "Limite de categoria",
+      "ticketupdate": "Chamado"
     },
     "empty": {
       "title": "Nenhuma notificação encontrada",

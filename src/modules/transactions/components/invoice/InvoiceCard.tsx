@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Badge } from "@/shared/components/ui/badge";
@@ -25,6 +26,7 @@ function formatCurrency(amount: number, locale: string) {
 
 export function InvoiceCard({ invoice, onTransactionClick }: InvoiceCardProps) {
   const t = useTranslations("transactions");
+  const tCreditCards = useTranslations("creditCards");
   const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const dateLocale = locale === "pt" ? ptBR : undefined;
@@ -36,11 +38,7 @@ export function InvoiceCard({ invoice, onTransactionClick }: InvoiceCardProps) {
   return (
     <div className="rounded-lg border bg-card shadow-xs">
       {/* Card header — always visible */}
-      <button
-        type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-start gap-3 p-4 text-left"
-      >
+      <div className="flex w-full items-start gap-3 p-4 text-left">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-semibold text-base truncate">
@@ -91,11 +89,25 @@ export function InvoiceCard({ invoice, onTransactionClick }: InvoiceCardProps) {
               {t("invoice.invoicePaid")}: {formatCurrency(invoice.totalPaid, locale)}
             </span>
           )}
-          <span className="text-muted-foreground mt-1">
-            {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-          </span>
+          <div className="mt-1 flex items-center gap-1">
+            <Button asChild size="sm" variant="outline" className="h-7 px-2 text-xs">
+              <Link href={`/${locale}/credit-cards/${invoice.creditCard.id}/invoices`}>
+                {tCreditCards("actions.viewInvoices")}
+              </Link>
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="h-7 w-7 text-muted-foreground"
+              aria-label={isOpen ? t("invoice.collapseClose") : t("invoice.collapseOpen")}
+            >
+              {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            </Button>
+          </div>
         </div>
-      </button>
+      </div>
 
       {/* Collapsible content */}
       {isOpen && (

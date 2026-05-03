@@ -4,6 +4,7 @@ export const NOTIFICATION_TYPE_KEYS = [
   "INVOICEPENDING",
   "CONFIRMRECURRENCE",
   "CATEGORYSPENDINGLIMIT",
+  "TICKETUPDATE",
 ] as const;
 
 export type NotificationTypeKey = (typeof NOTIFICATION_TYPE_KEYS)[number];

@@ -9,6 +9,7 @@ import {
   Bell,
   ChevronLeft,
   ChevronRight,
+  CircleHelp,
   CreditCard,
   Landmark,
   Languages,
@@ -22,6 +23,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/shared/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/shared/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,6 +47,7 @@ interface NavItem {
   label: string;
   href: string;
   requiresAuth?: boolean;
+  requiresAdmin?: boolean;
 }
 
 type SupportedLocale = "en" | "pt";
@@ -72,6 +75,9 @@ export function Sidebar() {
   const { logout, user } = useAuthStore();
   const { isCollapsed, toggle } = useSidebarCollapse();
   const [isOpen, setIsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
+  const isAdmin = !!user && (user.isAdmin || user.userType === "ADMIN" || user.userType === 1);
 
   const navItems: NavItem[] = [
     {
@@ -115,6 +121,19 @@ export function Sidebar() {
       label: t("notifications"),
       href: `/${locale}/notifications`,
       requiresAuth: true,
+    },
+    {
+      icon: <CircleHelp className="h-5 w-5" />,
+      label: t("tickets"),
+      href: `/${locale}/tickets`,
+      requiresAuth: true,
+    },
+    {
+      icon: <CircleHelp className="h-5 w-5" />,
+      label: t("adminTickets"),
+      href: `/${locale}/admin/tickets`,
+      requiresAuth: true,
+      requiresAdmin: true,
     },
     {
       icon: <Settings2 className="h-5 w-5" />,
@@ -194,7 +213,12 @@ export function Sidebar() {
         {/* Navigation Items */}
         <div className={cn("flex-1 space-y-2 py-4", isNavCollapsed ? "px-2" : "px-3")}>
           <TooltipProvider delayDuration={0}>
-            {navItems.map((item) => {
+            {navItems
+              .filter((item) => {
+                if (item.requiresAdmin && !isAdmin) return false;
+                return true;
+              })
+              .map((item) => {
               const button = (
                 <Link key={item.href} href={item.href} className="block">
                   <Button
@@ -234,9 +258,20 @@ export function Sidebar() {
         {/* Notice Card */}
         {!isNavCollapsed && (
           <div className="px-4 pb-3">
-            <div className="rounded-xl border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
-              Dashboard em evolucao continua.
-            </div>
+            <Button
+              type="button"
+              variant="outline"
+              className="h-auto w-full justify-start gap-2 rounded-xl px-3 py-2"
+              onClick={() => setIsAboutOpen(true)}
+            >
+              <CircleHelp className="h-4 w-4" />
+              <div className="flex flex-col items-start">
+                <span className="text-xs font-semibold">{t("aboutCta.title")}</span>
+                <span className="text-xs text-muted-foreground">
+                  {t("aboutCta.description")}
+                </span>
+              </div>
+            </Button>
           </div>
         )}
 
@@ -473,6 +508,60 @@ export function Sidebar() {
           </SheetContent>
         </Sheet>
       </div>
+
+      <Dialog open={isAboutOpen} onOpenChange={setIsAboutOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{t("aboutModal.title")}</DialogTitle>
+            <DialogDescription>{t("aboutModal.description")}</DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-3 text-sm">
+            <div className="rounded-lg border bg-muted/30 p-3">
+              <p className="font-medium">{t("aboutModal.systemName")}</p>
+              <p className="text-muted-foreground">{t("aboutModal.systemSubtitle")}</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <div className="rounded-lg border p-3">
+                <p className="text-xs text-muted-foreground">{t("aboutModal.versionLabel")}</p>
+                <p className="font-medium">1.2.2</p>
+              </div>
+              <div className="rounded-lg border p-3">
+                <p className="text-xs text-muted-foreground">{t("aboutModal.creatorLabel")}</p>
+                <p className="font-medium">Guilherme Duarte</p>
+              </div>
+            </div>
+
+            <div className="rounded-lg border p-3">
+              <p className="text-xs text-muted-foreground">{t("aboutModal.emailLabel")}</p>
+              <a
+                href="mailto:controlecerto.app@gmail.com"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                controlecerto.app@gmail.com
+              </a>
+            </div>
+
+            <div className="rounded-lg border p-3">
+              <p className="text-xs text-muted-foreground">{t("aboutModal.linkedinLabel")}</p>
+              <a
+                href="https://www.linkedin.com/in/guilduarte07/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                linkedin.com/in/guilduarte07
+              </a>
+            </div>
+
+            <div className="rounded-lg border p-3">
+              <p className="text-xs text-muted-foreground">{t("aboutModal.copyrightLabel")}</p>
+              <p className="font-medium">© {new Date().getFullYear()} ControleCerto</p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

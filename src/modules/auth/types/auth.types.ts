@@ -20,6 +20,8 @@ export interface AuthResponse {
     name: string;
     emailConfirmed?: boolean;
     avatarUrl?: string | null;
+    isAdmin?: boolean;
+    userType?: "USER" | "ADMIN" | number;
   };
 }
 
@@ -29,6 +31,8 @@ export interface AuthUser {
   name: string;
   emailConfirmed?: boolean;
   avatarUrl?: string | null;
+  isAdmin?: boolean;
+  userType?: "USER" | "ADMIN" | number;
 }
 
 export interface DetailsUserResponse {
@@ -37,6 +41,8 @@ export interface DetailsUserResponse {
   name: string;
   emailConfirmed: boolean;
   avatarUrl?: string | null;
+  isAdmin?: boolean;
+  userType?: "USER" | "ADMIN" | number;
   createdAt: string;
 }
 
