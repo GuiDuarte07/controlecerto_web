@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@/shared/lib/api-client";
 import { Button } from "@/shared/components/ui/button";
@@ -18,6 +18,7 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { Textarea } from "@/shared/components/ui/textarea";
+import { CurrencyInput } from "@/modules/transactions/components/forms/CurrencyInput";
 import {
   accountFormSchema,
   type AccountFormData,
@@ -65,6 +66,7 @@ export function AccountDialog({
     reset,
     setValue,
     watch,
+    control,
     formState: { errors },
   } = useForm<AccountFormData>({
     // @ts-ignore - Temporary Zod v4 resolver typing mismatch
@@ -137,13 +139,17 @@ export function AccountDialog({
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="account-balance">{t("dialog.balance")}</Label>
-              <Input
-                id="account-balance"
-                type="number"
-                step="0.01"
-                min="0"
-                disabled={isSubmitting}
-                {...register("balance", { valueAsNumber: true })}
+              <Controller
+                control={control}
+                name="balance"
+                render={({ field }) => (
+                  <CurrencyInput
+                    id="account-balance"
+                    value={field.value}
+                    onChange={(value) => field.onChange(value ?? 0)}
+                    disabled={isSubmitting}
+                  />
+                )}
               />
               {errors.balance && (
                 <p className="text-xs text-destructive">
