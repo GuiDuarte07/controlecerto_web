@@ -4,6 +4,7 @@ import { useId, useState } from "react";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 import { toast } from "sonner";
 import { Paperclip, Send, X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
@@ -20,10 +21,11 @@ export function TicketMessageComposer({ disabled, onSend }: TicketMessageCompose
   const t = useTranslations("tickets");
   const [files, setFiles] = useState<File[]>([]);
   const fileInputId = useId();
+  const resolver =
+    zodResolver(createTicketMessageSchema as never) as Resolver<CreateTicketMessageFormData>;
 
   const form = useForm<CreateTicketMessageFormData>({
-    // @ts-expect-error -- Temporary Zod v4 resolver typing mismatch
-    resolver: zodResolver(createTicketMessageSchema),
+    resolver,
     defaultValues: {
       body: "",
       attachments: [],
