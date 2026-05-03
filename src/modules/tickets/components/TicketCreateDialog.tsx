@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 import { toast } from "sonner";
 import { Paperclip, Plus, X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
@@ -43,10 +44,10 @@ export function TicketCreateDialog({
 
   const open = controlledOpen ?? internalOpen;
   const setOpen = onOpenChange ?? setInternalOpen;
+  const resolver = zodResolver(createTicketSchema as never) as Resolver<CreateTicketFormData>;
 
   const form = useForm<CreateTicketFormData>({
-    // @ts-expect-error -- Temporary Zod v4 resolver typing mismatch
-    resolver: zodResolver(createTicketSchema),
+    resolver,
     defaultValues: {
       subject: "",
       description: "",
