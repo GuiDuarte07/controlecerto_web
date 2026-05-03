@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFormState } from "react-hook-form";
+import { useForm, useFormState, useWatch } from "react-hook-form";
 import type { UseFormReturn } from "react-hook-form";
+import Quill from "quill";
 import { ArrowLeft, Plus, Save, Trash2 } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -26,7 +27,6 @@ import {
   FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
-import { Textarea } from "@/shared/components/ui/textarea";
 import { noteEditorSchema, type NoteEditorFormData } from "../schemas/notes.schemas";
 import type { Note } from "../types/notes.types";
 
@@ -41,6 +41,16 @@ interface NotesEditorProps {
   onDelete: (noteId: number) => Promise<void>;
   onDirtyChange?: (isDirty: boolean) => void;
 }
+
+const QUILL_TOOLBAR = [
+  [{ header: [1, 2, 3, false] }],
+  ["bold", "italic", "underline", "strike"],
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ indent: "-1" }, { indent: "+1" }],
+  [{ color: [] }, { background: [] }],
+  ["blockquote", "code-block", "link"],
+  ["clean"],
+] as const;
 
 function normalizeHtml(html: string): string {
   return html.trim();
@@ -63,6 +73,9 @@ export function NotesEditor({
   onDirtyChange,
 }: NotesEditorProps) {
   const t = useTranslations("notes");
+  const quillContainerRef = useRef<HTMLDivElement | null>(null);
+  const quillRef = useRef<Quill | null>(null);
+  const initializingRef = useRef(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isUnsavedDialogOpen, setIsUnsavedDialogOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
@@ -76,6 +89,10 @@ export function NotesEditor({
     },
   }) as unknown) as UseFormReturn<NoteEditorFormData>;
 
+  const contentValue = useWatch({
+    control: form.control,
+    name: "content",
+  });
   const { isDirty } = useFormState({ control: form.control });
 
   useEffect(() => {
@@ -88,6 +105,88 @@ export function NotesEditor({
       content: note.content,
     });
   }, [form, note.content, note.id, note.title]);
+
+  useEffect(() => {
+    if (!quillContainerRef.current || quillRef.current) {
+      return;
+    }
+
+    const mountNode = quillContainerRef.current;
+    const parentNode = mountNode.parentElement;
+
+    if (parentNode) {
+      parentNode
+        .querySelectorAll(":scope > .ql-toolbar")
+        .forEach((toolbar) => toolbar.remove());
+    }
+
+    mountNode.innerHTML = "";
+
+    const instance = new Quill(mountNode, {
+      theme: "snow",
+      modules: {
+        toolbar: QUILL_TOOLBAR,
+      },
+      placeholder: t("editor.contentPlaceholder"),
+    });
+
+    quillRef.current = instance;
+
+    const initialContent = normalizeHtml(form.getValues("content") ?? "");
+
+    if (initialContent.length > 0) {
+      instance.clipboard.dangerouslyPasteHTML(initialContent);
+    }
+
+    const handleTextChange = () => {
+      if (initializingRef.current) {
+        return;
+      }
+
+      const html = instance.root.innerHTML;
+      form.setValue("content", html, {
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+    };
+
+    instance.on("text-change", handleTextChange);
+
+    return () => {
+      instance.off("text-change", handleTextChange);
+      quillRef.current = null;
+      mountNode.innerHTML = "";
+
+      if (parentNode) {
+        parentNode
+          .querySelectorAll(":scope > .ql-toolbar")
+          .forEach((toolbar) => toolbar.remove());
+      }
+    };
+  }, [form, t]);
+
+  useEffect(() => {
+    const instance = quillRef.current;
+
+    if (!instance) return;
+
+    const normalizedCurrent = normalizeHtml(instance.root.innerHTML);
+    const normalizedNext = normalizeHtml(contentValue ?? "");
+
+    if (normalizedCurrent === normalizedNext) {
+      return;
+    }
+
+    initializingRef.current = true;
+
+    if (normalizedNext.length === 0) {
+      instance.setContents([]);
+    } else {
+      instance.clipboard.dangerouslyPasteHTML(normalizedNext);
+    }
+
+    initializingRef.current = false;
+  }, [contentValue]);
 
   const onSubmit = form.handleSubmit(async (data) => {
     const nextTitle = data.title.trim();
@@ -225,17 +324,13 @@ export function NotesEditor({
           <FormField
             control={form.control}
             name="content"
-            render={({ field, fieldState }) => (
+            render={({ fieldState }) => (
               <FormItem className="flex min-h-0 flex-1 flex-col">
                 <FormLabel>{t("editor.contentLabel")}</FormLabel>
                 <FormControl>
-                  <Textarea
-                    {...field}
-                    rows={12}
-                    placeholder={t("editor.contentPlaceholder")}
-                    disabled={isSubmitting}
-                    className="w-full resize-none"
-                  />
+                  <div className="notes-quill flex min-h-0 flex-1 flex-col rounded-md border bg-background">
+                    <div ref={quillContainerRef} className="min-h-0 flex-1" />
+                  </div>
                 </FormControl>
                 <FormMessage>
                   {resolveFormMessage(fieldState.error?.message)}
