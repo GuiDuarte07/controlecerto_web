@@ -33,7 +33,8 @@ export const creditExpenseFormSchema = z.object({
   totalInstallment: z
     .number({ error: "errors.installmentsMin" })
     .int()
-    .min(1, { message: "errors.installmentsMin" }),
+    .min(1, { message: "errors.installmentsMin" })
+    .max(100, { message: "errors.installmentsMax" }),
   installmentAmount: z
     .number({ error: "errors.amountPositive" })
     .positive({ message: "errors.amountPositive" }),
@@ -110,6 +111,7 @@ export const updateCreditPurchaseFormSchema = z.object({
     .number({ error: "errors.installmentsMin" })
     .int()
     .min(1, { message: "errors.installmentsMin" })
+    .max(100, { message: "errors.installmentsMax" })
     .optional(),
   purchaseDate: z.date().optional(),
   destination: z

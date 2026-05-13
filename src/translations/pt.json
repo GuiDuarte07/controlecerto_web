@@ -515,6 +515,7 @@
       "descriptionTooLong": "Máximo de 100 caracteres.",
       "observationsTooLong": "Máximo de 300 caracteres.",
       "installmentsMin": "Mínimo de 1 parcela.",
+      "installmentsMax": "Máximo de 100 parcelas.",
       "sameAccountTransference": "Conta origem e destino devem ser diferentes."
     }
   },

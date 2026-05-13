@@ -81,6 +81,9 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
     useState<SimulatedCreditPurchaseInvoiceResponse | null>(null);
   const [isLoadingInvoicePreview, setIsLoadingInvoicePreview] = useState(false);
   const [invoicePreviewError, setInvoicePreviewError] = useState(false);
+  const [installmentsInput, setInstallmentsInput] = useState<string>(() =>
+    String(initialData?.totalInstallment ?? 1),
+  );
 
   const categoryOptions = useMemo(
     () => flattenExpenseCategories(expenseCategories),
@@ -139,7 +142,7 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
 
   useEffect(() => {
     if (lastEditedField.current === "total" || lastEditedField.current === null) return;
-    if (totalAmount !== undefined && totalInstallment >= 1) {
+    if (totalAmount !== undefined && typeof totalInstallment === "number" && totalInstallment >= 1) {
       const calculated = totalAmount / totalInstallment;
       setValue("installmentAmount", Math.round(calculated * 100) / 100, { shouldValidate: false });
     }
@@ -148,12 +151,16 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
 
   useEffect(() => {
     if (lastEditedField.current !== "installment") return;
-    if (installmentAmount !== undefined && totalInstallment >= 1) {
+    if (installmentAmount !== undefined && typeof totalInstallment === "number" && totalInstallment >= 1) {
       const calculated = installmentAmount * totalInstallment;
       setValue("totalAmount", Math.round(calculated * 100) / 100, { shouldValidate: false });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [installmentAmount]);
+
+  useEffect(() => {
+    setInstallmentsInput(String(initialData?.totalInstallment ?? 1));
+  }, [initialData?.totalInstallment]);
 
   useEffect(() => {
     if (!creditCardId || !purchaseDatePreviewValue) {
@@ -244,17 +251,56 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
                 <FormLabel>{t("create.installments")}</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
-                    min={1}
-                    {...field}
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    autoComplete="off"
+                    maxLength={3}
+                    name={field.name}
+                    ref={field.ref}
+                    disabled={isSubmitting}
+                    value={installmentsInput}
                     onChange={(e) => {
                       lastEditedField.current = "total";
-                      const v = parseInt(e.target.value, 10);
-                      field.onChange(isNaN(v) ? 1 : v);
-                      if (totalAmount !== undefined && !isNaN(v) && v >= 1) {
-                        setValue("installmentAmount", Math.round((totalAmount / v) * 100) / 100, {
+                      const raw = e.target.value;
+
+                      if (raw === "") {
+                        setInstallmentsInput("");
+                        field.onChange(undefined);
+                        return;
+                      }
+
+                      const digitsOnly = raw.replace(/\D/g, "");
+                      if (digitsOnly === "") {
+                        setInstallmentsInput("");
+                        field.onChange(undefined);
+                        return;
+                      }
+
+                      const v = parseInt(digitsOnly, 10);
+                      if (Number.isNaN(v)) {
+                        setInstallmentsInput("");
+                        field.onChange(undefined);
+                        return;
+                      }
+
+                      const bounded = Math.min(Math.max(v, 1), 100);
+                      setInstallmentsInput(String(bounded));
+                      field.onChange(bounded);
+                      if (totalAmount !== undefined && bounded >= 1) {
+                        setValue("installmentAmount", Math.round((totalAmount / bounded) * 100) / 100, {
                           shouldValidate: false,
                         });
+                      }
+                    }}
+                    onBlur={() => {
+                      const v = parseInt(installmentsInput, 10);
+                      if (installmentsInput === "") return;
+                      if (Number.isNaN(v)) return;
+                      const bounded = Math.min(Math.max(v, 1), 100);
+                      if (String(bounded) !== installmentsInput) {
+                        setInstallmentsInput(String(bounded));
+                        field.onChange(bounded);
                       }
                     }}
                   />
