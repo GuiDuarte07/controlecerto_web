@@ -103,7 +103,7 @@ export function CategoryDialog({
   const [iconPickerOpen, setIconPickerOpen] = useState(false);
 
   const form = (useForm<CategoryFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(categoryFormSchema),
     defaultValues: resolveDefaultValues(category, defaultBillType, defaultParentId),
   }) as unknown) as UseFormReturn<CategoryFormData>;
@@ -118,7 +118,6 @@ export function CategoryDialog({
 
   // eslint-disable-next-line react-hooks/incompatible-library
   const watchedColor = watch("color") ?? PRESET_COLORS[8];
-  // eslint-disable-next-line react-hooks/incompatible-library
   const watchedIcon = watch("icon") ?? "leaf";
 
   const safeColor = useMemo(
@@ -134,6 +133,11 @@ export function CategoryDialog({
   const resolveErrorMessage = (message?: string) => {
     if (!message) return "";
     if (t.has(message)) return t(message as never);
+    const namespacePrefix = "categories.";
+    if (message.startsWith(namespacePrefix)) {
+      const scopedMessage = message.slice(namespacePrefix.length);
+      if (t.has(scopedMessage)) return t(scopedMessage as never);
+    }
     return message;
   };
 

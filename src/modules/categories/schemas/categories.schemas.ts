@@ -18,8 +18,12 @@ export const categoryFormSchema = z.object({
   }),
   parentId: z.number().int().positive().nullable().optional(),
   limit: z.preprocess(
-    (val) =>
-      val === "" || val === null || val === undefined ? null : Number(val),
+    (val) => {
+      if (val === "" || val === null || val === undefined) return null;
+
+      const value = Number(val);
+      return value === 0 ? null : value;
+    },
     z
       .number()
       .positive({ message: "categories.errors.limitPositive" })

@@ -3,6 +3,13 @@
 import { useLocale } from "next-intl";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { cn } from "@/shared/lib/utils";
+import {
+  centsToDigits,
+  countDigits,
+  digitsToCents,
+  MAX_CENTS,
+  parsePastedCurrencyToCents,
+} from "./currency-input.utils";
 
 interface CurrencyInputProps {
   value?: number;
@@ -13,8 +20,6 @@ interface CurrencyInputProps {
   id?: string;
 }
 
-const MAX_CENTS = 99999999; // R$ 999.999,99
-
 function formatCents(cents: number, isPtBR: boolean): string {
   return new Intl.NumberFormat(isPtBR ? "pt-BR" : "en-US", {
     style: "currency",
@@ -22,27 +27,6 @@ function formatCents(cents: number, isPtBR: boolean): string {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(cents / 100);
-}
-
-function countDigits(value: string): number {
-  let count = 0;
-  for (let i = 0; i < value.length; i++) {
-    const ch = value[i];
-    if (ch >= "0" && ch <= "9") count++;
-  }
-  return count;
-}
-
-function centsToDigits(cents: number): string {
-  const safe = Number.isFinite(cents) && cents > 0 ? Math.floor(cents) : 0;
-  const integerPart = Math.floor(safe / 100);
-  const centsPart = safe % 100;
-  return `${integerPart}${String(centsPart).padStart(2, "0")}`;
-}
-
-function digitsToCents(digits: string): number {
-  const parsed = Number.parseInt(digits.replace(/^0+(?=\d)/, ""), 10);
-  return Number.isFinite(parsed) ? parsed : 0;
 }
 
 export function CurrencyInput({
@@ -68,6 +52,8 @@ export function CurrencyInput({
       isOwnChange.current = false;
       return;
     }
+    // Sync controlled form resets/initial values from React Hook Form.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCents(value !== undefined ? Math.round(value * 100) : 0);
   }, [value]);
 
@@ -125,6 +111,29 @@ export function CurrencyInput({
     [cents, onChange],
   );
 
+  const handlePaste = useCallback(
+    (e: React.ClipboardEvent<HTMLInputElement>) => {
+      e.preventDefault();
+
+      const pastedText = e.clipboardData.getData("text");
+      const nextCents = parsePastedCurrencyToCents(pastedText);
+
+      if (nextCents === undefined) return;
+
+      isOwnChange.current = true;
+      setCents(nextCents);
+      onChange(nextCents > 0 ? nextCents / 100 : undefined);
+
+      requestAnimationFrame(() => {
+        const el = inputRef.current;
+        if (!el) return;
+        const end = el.value.length;
+        el.setSelectionRange(end, end);
+      });
+    },
+    [onChange],
+  );
+
   return (
     <input
       id={id}
@@ -135,6 +144,7 @@ export function CurrencyInput({
       placeholder={placeholder ?? (isPtBR ? "R$ 0,00" : "$ 0.00")}
       disabled={disabled}
       onKeyDown={handleKeyDown}
+      onPaste={handlePaste}
       onChange={() => {}}
       className={cn(
         "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors",
