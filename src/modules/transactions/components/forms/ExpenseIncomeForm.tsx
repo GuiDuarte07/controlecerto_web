@@ -2,6 +2,7 @@
 
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { z } from "zod";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import {
@@ -81,8 +82,7 @@ export function ExpenseIncomeForm({ type, onSubmit, onCancel, isSubmitting, init
     }
   };
 
-  const form = (useForm<ExpenseIncomeFormData>({
-    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
+  const form = (useForm<z.input<typeof expenseIncomeFormSchema>, unknown, ExpenseIncomeFormData>({
     resolver: zodResolver(expenseIncomeFormSchema),
     defaultValues: {
       amount: initialData?.amount ?? undefined,

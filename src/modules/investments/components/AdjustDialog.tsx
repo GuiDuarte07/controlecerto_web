@@ -62,7 +62,6 @@ export function AdjustDialog({
   });
 
   const form = useForm<AdjustFormData>({
-    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     resolver: zodResolver(adjustSchema),
     defaultValues: {
       newTotalValue: undefined,

@@ -32,7 +32,6 @@ export function AnalyticsFilters({ records, isLoading }: Props) {
   const fetchExpenseCategories = useCategoriesStore(s => s.fetchExpense);
   const fetchIncomeCategories = useCategoriesStore(s => s.fetchIncome);
   const form = useForm<Filters>({
-    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     resolver: zodResolver(analyticsFiltersSchema), defaultValues: filters,
   });
   useEffect(() => form.reset(filters), [filters, form]);

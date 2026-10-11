@@ -13,7 +13,6 @@ const validCategory = {
 
 describe("categoryFormSchema", () => {
   it.each([undefined, null, 0, ""])("submits a color-only edit without requiring a budget (%s)", async (limit) => {
-    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     const resolver = zodResolver(categoryFormSchema);
     const result = await resolver(
       { ...validCategory, color: "#A855F7", limit },

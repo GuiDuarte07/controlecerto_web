@@ -26,7 +26,6 @@ export function InvestmentAnalyticsFilters({ investments, isLoading }: Props) {
   const filters = useInvestmentAnalyticsStore(state => state.filters);
   const applyFilters = useInvestmentAnalyticsStore(state => state.applyFilters);
   const form = useForm<InvestmentAnalyticsFilters>({
-    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     resolver: zodResolver(investmentAnalyticsFiltersSchema),
     defaultValues: filters,
   });

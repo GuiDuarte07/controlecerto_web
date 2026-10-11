@@ -44,7 +44,6 @@ export function CreateInvestmentDialog({
   const t = useTranslations("investments");
 
   const form = useForm<CreateInvestmentFormData>({
-    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     resolver: zodResolver(createInvestmentSchema),
     defaultValues: {
       name: "",

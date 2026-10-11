@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { z } from "zod";
 import type { ApiError } from "@/shared/lib/api-client";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -67,8 +68,7 @@ export function AccountDialog({
     setValue,
     control,
     formState: { errors },
-  } = useForm<AccountFormData>({
-    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
+  } = useForm<z.input<typeof accountFormSchema>, unknown, AccountFormData>({
     resolver: zodResolver(accountFormSchema),
     defaultValues: resolveDialogValues(account),
   });
@@ -144,7 +144,7 @@ export function AccountDialog({
                 render={({ field }) => (
                   <CurrencyInput
                     id="account-balance"
-                    value={field.value}
+                    value={typeof field.value === "number" ? field.value : 0}
                     onChange={(value) => field.onChange(value ?? 0)}
                     disabled={isSubmitting}
                   />

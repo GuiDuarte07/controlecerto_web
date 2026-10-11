@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useForm, Controller } from "react-hook-form";
 import type { UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { z } from "zod";
 import { Palette } from "lucide-react";
 import type { ApiError } from "@/shared/lib/api-client";
 import { Button } from "@/shared/components/ui/button";
@@ -95,8 +96,7 @@ export function CategoryDialog({
   const t = useTranslations("categories");
   const [iconPickerOpen, setIconPickerOpen] = useState(false);
 
-  const form = (useForm<CategoryFormData>({
-    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
+  const form = (useForm<z.input<typeof categoryFormSchema>, unknown, CategoryFormData>({
     resolver: zodResolver(categoryFormSchema),
     defaultValues: resolveDefaultValues(category, defaultBillType, defaultParentId),
   }) as unknown) as UseFormReturn<CategoryFormData>;

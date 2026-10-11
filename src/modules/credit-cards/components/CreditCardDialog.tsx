@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useForm, Controller } from "react-hook-form";
 import type { UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { z } from "zod";
 import type { ApiError } from "@/shared/lib/api-client";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -87,8 +88,7 @@ export function CreditCardDialog({
     return message;
   };
 
-  const createForm = (useForm<CreditCardFormData>({
-    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
+  const createForm = (useForm<z.input<typeof creditCardFormSchema>, unknown, CreditCardFormData>({
     resolver: zodResolver(creditCardFormSchema),
     defaultValues: resolveDefaultValues(card),
   }) as unknown) as UseFormReturn<CreditCardFormData>;

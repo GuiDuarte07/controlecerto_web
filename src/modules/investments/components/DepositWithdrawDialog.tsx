@@ -55,7 +55,6 @@ export function DepositWithdrawDialog({
   );
 
   const form = useForm<DepositWithdrawFormData>({
-    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     resolver: zodResolver(depositWithdrawSchema),
     defaultValues: {
       amount: undefined,

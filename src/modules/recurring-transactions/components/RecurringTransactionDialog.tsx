@@ -86,7 +86,6 @@ export function RecurringTransactionDialog({ open, transaction, isSubmitting, on
   const incomeCategories = useCategoriesStore((state) => state.incomeCategories);
 
   const form = (useForm<RecurringTransactionFormData>({
-    // @ts-expect-error Zod v4 resolver typing mismatch
     resolver: zodResolver(recurringTransactionFormSchema),
     defaultValues: getDefaultValues(transaction),
   }) as unknown) as UseFormReturn<RecurringTransactionFormData>;

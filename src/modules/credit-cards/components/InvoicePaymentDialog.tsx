@@ -2,6 +2,7 @@
 
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { z } from "zod";
 import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 import {
@@ -73,8 +74,7 @@ export function InvoicePaymentDialog({
     }
   };
 
-  const form = (useForm<InvoicePaymentFormData>({
-    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
+  const form = (useForm<z.input<typeof invoicePaymentFormSchema>, unknown, InvoicePaymentFormData>({
     resolver: zodResolver(invoicePaymentFormSchema),
     defaultValues: {
       accountId: undefined,
