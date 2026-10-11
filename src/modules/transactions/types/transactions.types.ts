@@ -5,7 +5,7 @@ export type TransactionType =
   | "TRANSFERENCE"
   | "INVOICEPAYMENT";
 
-export type TransactionMode = "invoice" | "statement";
+export type TransactionMode = "invoice" | "statement" | "analytics";
 export type SortDirection = "asc" | "desc";
 
 export interface TransactionAccount {
@@ -35,6 +35,7 @@ export interface CreditPurchaseInfo {
   paid: boolean;
   destination: string;
   description?: string;
+  observations?: string;
   creditCardId: number;
 }
 
@@ -145,6 +146,7 @@ export interface CreateCreditPurchaseRequest {
   purchaseDate: string;
   destination: string;
   description?: string;
+  observations?: string;
   creditCardId: number;
   categoryId: number;
 }
@@ -188,6 +190,7 @@ export interface UpdateCreditPurchaseRequest {
   purchaseDate?: string;
   destination?: string;
   description?: string;
+  observations?: string;
   creditCardId?: number;
   categoryId?: number;
 }

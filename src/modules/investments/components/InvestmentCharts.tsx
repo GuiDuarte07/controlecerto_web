@@ -132,6 +132,11 @@ export function InvestmentCharts({ histories }: InvestmentChartsProps) {
                 className="fill-muted-foreground"
               />
               <YAxis
+                domain={([min, max]: [number, number]) => [
+                  min,
+                  min === max ? max + Math.max(Math.abs(max) * 0.01, 1) : max,
+                ]}
+                padding={{ top: 8, bottom: 8 }}
                 tickFormatter={(v: number) => currencyFormatter.format(v)}
                 tick={{ fontSize: 11 }}
                 tickLine={false}
@@ -146,9 +151,9 @@ export function InvestmentCharts({ histories }: InvestmentChartsProps) {
               <Line
                 type="monotone"
                 dataKey="value"
-                stroke="hsl(var(--primary))"
+                stroke="var(--primary)"
                 strokeWidth={2}
-                dot={false}
+                dot={lineData.length === 1 ? { r: 4 } : false}
                 activeDot={{ r: 4 }}
               />
             </LineChart>

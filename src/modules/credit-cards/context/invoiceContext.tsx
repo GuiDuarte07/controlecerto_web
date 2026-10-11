@@ -21,7 +21,7 @@ interface InvoiceState {
 }
 
 interface InvoiceActions {
-  init: (creditCardId: number) => Promise<void>;
+  init: (creditCardId: number, year?: number, month?: number) => Promise<void>;
   loadByDate: (creditCardId: number, year: number, month: number) => Promise<void>;
   loadById: (invoiceId: number) => Promise<void>;
   navigateNext: () => Promise<void>;
@@ -59,10 +59,17 @@ const initialState: InvoiceState = {
 export const useInvoiceStore = create<InvoiceStore>((set, get) => ({
   ...initialState,
 
-  init: async (creditCardId) => {
+  init: async (creditCardId, year, month) => {
     const now = new Date();
+    const hasValidPeriod = year !== undefined && month !== undefined &&
+      Number.isInteger(year) && year >= 100 && year <= 9999 &&
+      Number.isInteger(month) && month >= 1 && month <= 12;
     set({ creditCardId });
-    await get().loadByDate(creditCardId, now.getFullYear(), now.getMonth() + 1);
+    await get().loadByDate(
+      creditCardId,
+      hasValidPeriod ? year : now.getFullYear(),
+      hasValidPeriod ? month : now.getMonth() + 1,
+    );
   },
 
   loadByDate: async (creditCardId, year, month) => {
@@ -130,6 +137,7 @@ export const useInvoiceStore = create<InvoiceStore>((set, get) => ({
         totalAmount: data.totalAmount,
         purchaseDate: format(data.purchaseDate, "yyyy-MM-dd'T'HH:mm:ss"),
         installments: data.installments,
+        observations: data.observations,
         firstInvoiceDate: data.firstInvoiceDate
           ? format(data.firstInvoiceDate, "yyyy-MM-dd'T'HH:mm:ss")
           : undefined,
@@ -153,6 +161,7 @@ export const useInvoiceStore = create<InvoiceStore>((set, get) => ({
         installments: data.installments,
         purchaseDate: format(data.purchaseDate, "yyyy-MM-dd'T'HH:mm:ss"),
         categoryId: data.categoryId,
+        observations: data.observations,
       });
       set({ isSubmitting: false, isPurchaseDialogOpen: false, selectedPurchase: null });
       if (currentInvoice) await get().loadById(currentInvoice.id);

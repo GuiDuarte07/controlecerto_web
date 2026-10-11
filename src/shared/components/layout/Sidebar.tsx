@@ -17,6 +17,7 @@ import {
   LogOut,
   Menu,
   Receipt,
+  Repeat2,
   Settings2,
   Tag,
   TrendingUp,
@@ -96,6 +97,12 @@ export function Sidebar() {
       icon: <Receipt className="h-5 w-5" />,
       label: t("transactions"),
       href: `/${locale}/transactions`,
+      requiresAuth: true,
+    },
+    {
+      icon: <Repeat2 className="h-5 w-5" />,
+      label: t("recurringTransactions"),
+      href: `/${locale}/recurring-transactions`,
       requiresAuth: true,
     },
     {

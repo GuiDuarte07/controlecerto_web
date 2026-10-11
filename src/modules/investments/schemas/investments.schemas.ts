@@ -7,7 +7,7 @@ export const createInvestmentSchema = z.object({
     .max(100, { message: "investments.errors.nameTooLong" }),
   initialAmount: z
     .number({ error: "investments.errors.amountInvalid" })
-    .positive({ message: "investments.errors.amountPositive" })
+    .min(0, { message: "investments.errors.amountNonNegative" })
     .optional(),
   startDate: z.date({ error: "investments.errors.startDateRequired" }),
   description: z

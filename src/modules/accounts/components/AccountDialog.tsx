@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@/shared/lib/api-client";
 import { Button } from "@/shared/components/ui/button";
@@ -42,7 +42,7 @@ const HEX_COLOR_REGEX = /^#[0-9A-Fa-f]{6}$/;
 
 function resolveDialogValues(account: Account | null): AccountFormData {
   return {
-    balance: account?.balance ?? 0,
+    balance: Math.max(0, account?.balance ?? 0),
     bank: account?.bank ?? "",
     description: account?.description ?? "",
     color: account?.color ?? "#2563EB",
@@ -65,11 +65,10 @@ export function AccountDialog({
     handleSubmit,
     reset,
     setValue,
-    watch,
     control,
     formState: { errors },
   } = useForm<AccountFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(accountFormSchema),
     defaultValues: resolveDialogValues(account),
   });
@@ -80,8 +79,8 @@ export function AccountDialog({
     }
   }, [account, open, reset]);
 
-  const colorValue = watch("color") ?? "#2563EB";
-  const descriptionValue = watch("description") ?? "";
+  const colorValue = useWatch({ control, name: "color" }) ?? "#2563EB";
+  const descriptionValue = useWatch({ control, name: "description" }) ?? "";
 
   const pickerColorValue = useMemo(() => {
     if (HEX_COLOR_REGEX.test(colorValue)) {

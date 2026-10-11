@@ -14,6 +14,10 @@ export const creditPurchaseFormSchema = z.object({
     .int()
     .min(1, { message: "purchase.errors.installmentsMin" }),
   categoryId: z.number({ error: "purchase.errors.categoryRequired" }),
+  observations: z
+    .string()
+    .max(300, { message: "purchase.errors.observationsTooLong" })
+    .optional(),
   firstInvoiceDate: z.date().optional(),
 });
 

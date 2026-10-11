@@ -127,14 +127,7 @@ const initialState: TransactionsState = {
 export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
   ...initialState,
 
-  setMode: (mode) => {
-    set({ mode });
-    if (mode === "invoice") {
-      void get().fetchInvoiceData();
-    } else {
-      void get().fetchStatementData();
-    }
-  },
+  setMode: (mode) => set({ mode }),
 
   fetchInvoiceData: async () => {
     set({ isLoading: true, error: null, invoices: [], invoiceTransactions: [] });
@@ -254,7 +247,7 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
       const { mode } = get();
       if (mode === "invoice") {
         void get().fetchInvoiceData();
-      } else {
+      } else if (mode === "statement") {
         void get().fetchStatementData();
       }
     } catch (err) {
@@ -272,7 +265,7 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
       const { mode } = get();
       if (mode === "invoice") {
         void get().fetchInvoiceData();
-      } else {
+      } else if (mode === "statement") {
         void get().fetchStatementData();
       }
     } catch (err) {
@@ -290,7 +283,7 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
       const { mode } = get();
       if (mode === "invoice") {
         void get().fetchInvoiceData();
-      } else {
+      } else if (mode === "statement") {
         void get().fetchStatementData();
       }
     } catch (err) {
@@ -308,7 +301,7 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
       const { mode } = get();
       if (mode === "invoice") {
         void get().fetchInvoiceData();
-      } else {
+      } else if (mode === "statement") {
         void get().fetchStatementData();
       }
     } catch (err) {
@@ -326,7 +319,7 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
       const { mode } = get();
       if (mode === "invoice") {
         void get().fetchInvoiceData();
-      } else {
+      } else if (mode === "statement") {
         void get().fetchStatementData();
       }
     } catch (err) {
@@ -344,7 +337,7 @@ export const useTransactionsStore = create<TransactionsStore>((set, get) => ({
       const { mode } = get();
       if (mode === "invoice") {
         void get().fetchInvoiceData();
-      } else {
+      } else if (mode === "statement") {
         void get().fetchStatementData();
       }
     } catch (err) {

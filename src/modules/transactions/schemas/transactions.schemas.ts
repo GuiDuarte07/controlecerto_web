@@ -53,6 +53,10 @@ export const creditExpenseFormSchema = z.object({
     .string()
     .max(100, { message: "errors.descriptionTooLong" })
     .optional(),
+  observations: z
+    .string()
+    .max(300, { message: "errors.observationsTooLong" })
+    .optional(),
 });
 
 export const transferenceFormSchema = z

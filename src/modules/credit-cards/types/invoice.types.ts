@@ -69,6 +69,7 @@ export interface CreateCreditPurchaseRequest {
   totalAmount: number;
   purchaseDate: string;
   installments: number;
+  observations?: string;
   firstInvoiceDate?: string;
 }
 
@@ -79,6 +80,7 @@ export interface UpdateCreditPurchaseRequest {
   purchaseDate?: string;
   categoryId?: number;
   creditCardId?: number;
+  observations?: string;
 }
 
 export interface CreateInvoicePaymentRequest {

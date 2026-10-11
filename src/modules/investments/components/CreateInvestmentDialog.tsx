@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import {
@@ -43,8 +43,8 @@ export function CreateInvestmentDialog({
 }: CreateInvestmentDialogProps) {
   const t = useTranslations("investments");
 
-  const form = (useForm<CreateInvestmentFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+  const form = useForm<CreateInvestmentFormData>({
+    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     resolver: zodResolver(createInvestmentSchema),
     defaultValues: {
       name: "",
@@ -52,7 +52,7 @@ export function CreateInvestmentDialog({
       startDate: new Date(),
       description: "",
     },
-  }) as unknown) as UseFormReturn<CreateInvestmentFormData>;
+  });
 
   useEffect(() => {
     if (open) {
@@ -68,7 +68,7 @@ export function CreateInvestmentDialog({
   const resolveError = (message?: string) => {
     if (!message) return "";
     try {
-      return t(message as Parameters<typeof t>[0]);
+      return t(message.replace(/^investments\./, "") as Parameters<typeof t>[0]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {
       return message;

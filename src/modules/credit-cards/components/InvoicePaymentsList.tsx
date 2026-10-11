@@ -24,7 +24,7 @@ interface InvoicePaymentsListProps {
   payments: InvoicePayment[];
   isSubmitting?: boolean;
   onDelete: (id: number) => void;
-  onAdd: () => void;
+  onAdd?: () => void;
 }
 
 export function InvoicePaymentsList({
@@ -102,9 +102,11 @@ export function InvoicePaymentsList({
           </div>
         )}
 
-        <Button variant="outline" size="sm" onClick={onAdd} disabled={isSubmitting}>
-          {t("actions.payInvoice")}
-        </Button>
+        {onAdd && (
+          <Button variant="outline" size="sm" onClick={onAdd} disabled={isSubmitting}>
+            {t("actions.payInvoice")}
+          </Button>
+        )}
       </div>
 
       <AlertDialog open={deletingId !== null} onOpenChange={(o) => !o && setDeletingId(null)}>

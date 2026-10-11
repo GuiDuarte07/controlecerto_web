@@ -12,12 +12,15 @@ import { useInvestmentsStore } from "../context/investmentsContext";
 import { InvestmentsList } from "./InvestmentsList";
 import { CreateInvestmentDialog } from "./CreateInvestmentDialog";
 import type { CreateInvestmentFormData } from "../schemas/investments.schemas";
+import { InvestmentModeToggle, type InvestmentMode } from "./InvestmentModeToggle";
+import { InvestmentAnalytics } from "./analytics/InvestmentAnalytics";
 
 export function InvestmentsPageContent() {
   const t = useTranslations("investments");
   const locale = useLocale();
 
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [mode, setMode] = useState<InvestmentMode>("portfolio");
   const { investments, isLoading, error } = useInvestmentsList();
   const isSubmitting = useInvestmentsStore((s) => s.isSubmitting);
   const create = useInvestmentsStore((s) => s.create);
@@ -45,9 +48,9 @@ export function InvestmentsPageContent() {
   usePageHeader({
     title: t("title"),
     description: t("description"),
-    actionLabel: t("actions.create"),
-    actionIcon: Plus,
-    onAction: handleOpenCreate,
+    actionLabel: mode === "portfolio" ? t("actions.create") : undefined,
+    actionIcon: mode === "portfolio" ? Plus : undefined,
+    onAction: mode === "portfolio" ? handleOpenCreate : undefined,
   });
 
   const handleCreate = async (data: CreateInvestmentFormData) => {
@@ -65,8 +68,9 @@ export function InvestmentsPageContent() {
         </Alert>
       )}
 
-      {/* Totalizer */}
-      {isLoading ? (
+      <InvestmentModeToggle mode={mode} onChange={setMode} />
+
+      {mode === "portfolio" && (isLoading ? (
         <Skeleton className="h-20 w-full rounded-xl" />
       ) : investments.length > 0 ? (
         <Card>
@@ -82,14 +86,16 @@ export function InvestmentsPageContent() {
             </div>
           </CardContent>
         </Card>
-      ) : null}
+      ) : null)}
 
-      <InvestmentsList
+      {mode === "portfolio" && <InvestmentsList
         investments={investments}
         isLoading={isLoading}
         onCreate={handleOpenCreate}
         locale={locale}
-      />
+      />}
+
+      {mode === "analytics" && <InvestmentAnalytics investments={investments} />}
 
       <CreateInvestmentDialog
         open={isCreateDialogOpen}

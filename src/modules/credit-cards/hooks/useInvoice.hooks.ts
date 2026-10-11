@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useInvoiceStore } from "../context/invoiceContext";
 
-export function useInvoiceData(creditCardId: number) {
+export function useInvoiceData(creditCardId: number, initialYear?: number, initialMonth?: number) {
   const currentInvoice = useInvoiceStore((s) => s.currentInvoice);
   const nextInvoiceId = useInvoiceStore((s) => s.nextInvoiceId);
   const prevInvoiceId = useInvoiceStore((s) => s.prevInvoiceId);
@@ -14,9 +14,9 @@ export function useInvoiceData(creditCardId: number) {
   const reset = useInvoiceStore((s) => s.reset);
 
   useEffect(() => {
-    void init(creditCardId);
+    void init(creditCardId, initialYear, initialMonth);
     return () => reset();
-  }, [creditCardId, init, reset]);
+  }, [creditCardId, initialYear, initialMonth, init, reset]);
 
   return {
     currentInvoice,

@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
+import { Textarea } from "@/shared/components/ui/textarea";
 import { Button } from "@/shared/components/ui/button";
 import {
   Card,
@@ -112,7 +113,7 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
   };
 
   const form = (useForm<CreditExpenseFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(creditExpenseFormSchema),
     defaultValues: {
       totalAmount: initialData?.totalAmount ?? undefined,
@@ -123,6 +124,7 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
       creditCardId: initialData?.creditCardId ?? undefined,
       destination: initialData?.destination ?? "",
       description: initialData?.description ?? "",
+      observations: initialData?.observations ?? "",
     },
   }) as unknown) as UseFormReturn<CreditExpenseFormData>;
 
@@ -412,6 +414,26 @@ export function CreditExpenseForm({ onSubmit, onCancel, isSubmitting, initialDat
                 <Input {...field} maxLength={100} placeholder={t("create.description")} />
               </FormControl>
               <FormMessage>{errors.description && resolveErrorMessage(errors.description.message)}</FormMessage>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="observations"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("create.observations")}</FormLabel>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  maxLength={300}
+                  placeholder={t("create.observations")}
+                  className="resize-none"
+                  rows={3}
+                />
+              </FormControl>
+              <FormMessage>{errors.observations && resolveErrorMessage(errors.observations.message)}</FormMessage>
             </FormItem>
           )}
         />

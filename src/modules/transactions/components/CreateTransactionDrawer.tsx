@@ -74,6 +74,7 @@ export function CreateTransactionDrawer({ open, onClose }: CreateTransactionDraw
       purchaseDate: format(data.purchaseDate, "yyyy-MM-dd'T'HH:mm:ss"),
       destination: data.destination,
       description: data.description || undefined,
+      observations: data.observations || undefined,
       creditCardId: data.creditCardId,
       categoryId: data.categoryId,
     });

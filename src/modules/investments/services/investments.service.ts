@@ -7,6 +7,8 @@ import type {
   UpdateInvestmentRequest,
   DepositWithdrawRequest,
   AdjustInvestmentRequest,
+  InvestmentAnalyticsQuery,
+  InvestmentAnalyticsResponse,
 } from "../types/investments.types";
 
 function toDateStr(date: Date) {
@@ -78,6 +80,12 @@ async function remove(id: number): Promise<void> {
   return apiFetch<void>(`/api/investments/${id}`, { method: "DELETE" });
 }
 
+async function getAnalytics(query: InvestmentAnalyticsQuery, signal?: AbortSignal): Promise<InvestmentAnalyticsResponse> {
+  const params = new URLSearchParams({ startDate: query.startDate, endDate: query.endDate });
+  if (query.investmentId) params.set("investmentId", String(query.investmentId));
+  return apiFetch<InvestmentAnalyticsResponse>(`/api/investments/analytics?${params}`, { method: "GET", signal });
+}
+
 export { toDateStr };
 
 export const investmentsService = {
@@ -90,4 +98,5 @@ export const investmentsService = {
   withdraw,
   adjust,
   remove,
+  getAnalytics,
 };

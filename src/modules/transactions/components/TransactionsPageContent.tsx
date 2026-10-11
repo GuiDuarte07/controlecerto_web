@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
+import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { usePageHeader } from "@/shared/hooks/use-page-header";
 import { useAccountsStore } from "@/modules/accounts/context/accountsContext";
@@ -15,6 +16,8 @@ import { CreateTransactionDialog } from "./CreateTransactionDialog";
 import { TransactionDetailSheet } from "./shared/TransactionDetailSheet";
 import { useTransactionsPage } from "../hooks/useTransactions.hooks";
 import type { Transaction, TransactionFilters } from "../types/transactions.types";
+
+const TransactionsAnalytics = dynamic(() => import("./analytics/TransactionsAnalytics").then(module => module.TransactionsAnalytics));
 
 export function TransactionsPageContent() {
   const t = useTranslations("transactions");
@@ -131,6 +134,8 @@ export function TransactionsPageContent() {
   return (
     <div className="flex flex-col gap-4 p-4 md:p-6">
       <TransactionModeToggle mode={mode} onModeChange={setMode} />
+
+      {mode === "analytics" && <TransactionsAnalytics />}
 
       {mode === "invoice" && (
         <InvoiceView

@@ -2,7 +2,7 @@
 
 import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 import {
   Dialog,
@@ -35,6 +35,7 @@ import {
 interface InvoicePaymentDialogProps {
   open: boolean;
   remainingAmount: number;
+  invoiceDate: string;
   isSubmitting: boolean;
   onClose: () => void;
   onSubmit: (data: InvoicePaymentFormData) => Promise<void>;
@@ -43,11 +44,18 @@ interface InvoicePaymentDialogProps {
 export function InvoicePaymentDialog({
   open,
   remainingAmount,
+  invoiceDate,
   isSubmitting,
   onClose,
   onSubmit,
 }: InvoicePaymentDialogProps) {
   const t = useTranslations("invoices");
+  const locale = useLocale();
+  const invoicePeriod = new Date(`${invoiceDate.slice(0, 10)}T00:00:00Z`);
+  const defaultDescription = t("payment.defaultDescription", {
+    month: new Intl.DateTimeFormat(locale, { month: "long", timeZone: "UTC" }).format(invoicePeriod),
+    year: invoicePeriod.getUTCFullYear(),
+  });
   const accounts = useAccountsStore((s) => s.accounts);
 
   const accountOptions = useMemo(
@@ -66,12 +74,12 @@ export function InvoicePaymentDialog({
   };
 
   const form = (useForm<InvoicePaymentFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(invoicePaymentFormSchema),
     defaultValues: {
       accountId: undefined,
       amountPaid: remainingAmount > 0 ? remainingAmount : undefined,
-      description: "",
+      description: defaultDescription,
       paymentDate: new Date(),
       justForRecord: false,
     },

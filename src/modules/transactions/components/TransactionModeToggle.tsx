@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { cn } from "@/shared/lib/utils";
+import { ToggleGroup, ToggleGroupItem } from "@/shared/components/ui/toggle-group";
 import type { TransactionMode } from "../types/transactions.types";
 
 interface TransactionModeToggleProps {
@@ -13,31 +13,24 @@ export function TransactionModeToggle({ mode, onModeChange }: TransactionModeTog
   const t = useTranslations("transactions");
 
   return (
-    <div className="flex rounded-lg border bg-muted/30 p-1 w-fit">
-      <button
-        type="button"
-        onClick={() => onModeChange("invoice")}
-        className={cn(
-          "rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
-          mode === "invoice"
-            ? "bg-background shadow-sm text-foreground"
-            : "text-muted-foreground hover:text-foreground",
-        )}
-      >
+    <ToggleGroup
+      type="single"
+      value={mode}
+      onValueChange={(value) => {
+        if (value) onModeChange(value as TransactionMode);
+      }}
+      variant="outline"
+      className="w-full flex-wrap justify-start sm:w-fit"
+    >
+      <ToggleGroupItem value="invoice" className="text-xs sm:text-sm">
         {t("modeInvoice")}
-      </button>
-      <button
-        type="button"
-        onClick={() => onModeChange("statement")}
-        className={cn(
-          "rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
-          mode === "statement"
-            ? "bg-background shadow-sm text-foreground"
-            : "text-muted-foreground hover:text-foreground",
-        )}
-      >
+      </ToggleGroupItem>
+      <ToggleGroupItem value="statement" className="text-xs sm:text-sm">
         {t("modeStatement")}
-      </button>
-    </div>
+      </ToggleGroupItem>
+      <ToggleGroupItem value="analytics" className="text-xs sm:text-sm">
+        {t("analytics.title")}
+      </ToggleGroupItem>
+    </ToggleGroup>
   );
 }

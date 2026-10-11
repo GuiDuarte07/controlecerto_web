@@ -1,9 +1,11 @@
 "use client";
 
+import { useAnalyticsStore } from "../context/analyticsContext";
 import { useEffect } from "react";
 import { useTransactionsStore } from "../context/transactionsContext";
 
 export function useTransactionsData(autoFetch = true) {
+  const fetchAnalytics = useAnalyticsStore(s => s.fetchData);
   const mode = useTransactionsStore((s) => s.mode);
   const invoices = useTransactionsStore((s) => s.invoices);
   const invoiceTransactions = useTransactionsStore(
@@ -25,7 +27,7 @@ export function useTransactionsData(autoFetch = true) {
     if (autoFetch) {
       if (mode === "invoice") {
         void fetchInvoiceData();
-      } else {
+      } else if (mode === "statement") {
         void fetchStatementData();
       }
     }
@@ -40,7 +42,7 @@ export function useTransactionsData(autoFetch = true) {
     statementSummary,
     isLoading,
     error,
-    refetch: mode === "invoice" ? fetchInvoiceData : fetchStatementData,
+    refetch: mode === "invoice" ? fetchInvoiceData : mode === "statement" ? fetchStatementData : fetchAnalytics,
   };
 }
 

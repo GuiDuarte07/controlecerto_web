@@ -114,6 +114,7 @@
     }
   },
   "navigation": {
+    "recurringTransactions": "Recurring",
     "dashboard": "Dashboard",
     "transactions": "Transactions",
     "categories": "Categories",
@@ -379,6 +380,20 @@
     "searchPlaceholder": "Search transactions...",
     "modeInvoice": "Invoices",
     "modeStatement": "Statement",
+    "analytics": {
+      "title": "Analytics",
+      "subtitle": "Visualize income, expenses, and credit-card spending by period, category, and account.",
+      "loading": "Loading analytics...",
+      "refresh": "Refresh",
+      "export": "Export CSV",
+      "customize": "Customize",
+      "customizeDescription": "Choose visible charts and organize the analysis your way.",
+      "startDate": "Start date", "endDate": "End date", "creditDateBasis": "Count card spending by",
+      "basis": { "invoice": "Invoice month", "transaction": "Transaction date" }, "apply": "Analyze", "filters": "More filters", "clearFilters": "Clear filters", "pendingFilters": "There are unapplied filters.", "all": "All", "account": "Account", "card": "Card", "category": "Category", "type": "Type", "search": "Search", "searchPlaceholder": "Description, destination, category, or account", "minAmount": "Minimum amount", "maxAmount": "Maximum amount", "includeRecordOnly": "Include record-only entries",
+      "presets": { "month": "This month", "previousMonth": "Previous month", "quarter": "Last 90 days", "year": "This year", "twelveMonths": "12 months" }, "types": { "all": "All", "income": "Income", "expense": "Expenses", "credit": "Credit card only", "cash": "Cash/debit only" }, "income": "Income", "expense": "Expenses", "net": "Net balance", "savingsRate": "Savings rate", "totalPeriod": "Period total", "creditIncluded": "Includes {value} on credit cards", "netDescription": "Income minus expenses", "dailyAverage": "Daily average: {value}", "change": "{value} versus previous period", "noBaseline": "No prior-period baseline", "unchanged": "No change", "netDifference": "Difference: {value}", "notAvailable": "—", "comparedWith": "Compared with {start} — {end}",
+      "methodology": "Transfers and invoice payments are excluded from totals to prevent double counting.", "invoiceMethod": "Credit-card purchases count in the invoice month.", "transactionMethod": "Credit-card purchases count on their transaction date.", "scope": "{count} entries across {days} days", "chartsUseAll": "Charts include all filtered results.", "emptyTitle": "No entries found", "emptyDescription": "Adjust the period or remove filters to build your analysis.", "noDistribution": "There is no data to distribute in this period.", "others": "Other",
+      "widgets": { "evolution": "Income and expense trend", "distribution": "Category distribution", "comparison": "Comparison with previous period", "categories": "Categories and subcategories", "accounts": "Account summary", "transactions": "Detailed entries" }, "widgetDescriptions": { "evolution": "Track inflows, outflows, and balance over time.", "distribution": "Click a category to detail its entries.", "comparison": "Compare this period to the previous period of the same duration.", "categories": "Open a category to view its subcategories.", "accounts": "See how each account contributes to the result.", "transactions": "All entries that form the metrics and charts." }, "granularity": "Group trend by", "granularities": { "day": "Day", "week": "Week", "month": "Month" }, "chartType": "Chart type", "chartTypes": { "area": "Area", "line": "Line", "bar": "Bars" }, "categoryLevel": "Category level", "levels": { "parent": "Main categories", "subcategory": "Subcategories" }, "distributionMetric": "Distribute", "topCount": "Items in chart", "cumulative": "Show cumulative trend", "compare": "Compare with previous period", "visibleWidgets": "Visible panels and order", "moveUp": "Move {name} up", "moveDown": "Move {name} down", "resetLayout": "Restore default layout", "cumulativeHint": "Values accumulate from the beginning of the period.", "currentPeriod": "Current period", "previousPeriod": "Previous period", "subcategory": "Subcategory", "share": "Share", "directCategory": "No subcategory", "categorySummary": "{count} entries · balance {value}", "explore": "Filter", "entries": "{count} entries", "expenseShare": "Expense share for {name}", "sort": "Sort", "sorting": { "dateDesc": "Date: newest", "dateAsc": "Date: oldest", "amountDesc": "Amount: highest", "amountAsc": "Amount: lowest" }, "date": "Date", "transactionDate": "Transaction date", "description": "Description", "destination": "Destination", "amount": "Amount", "recordOnly": "Record only", "noDescription": "No description", "yes": "Yes", "no": "No", "pageSize": "Items per page", "perPage": "{count} per page", "pagination": "Page {page} of {pages}", "previousPage": "Previous page", "nextPage": "Next page", "transactionDetails": "Entry details", "viewInvoice": "View invoice", "clearCategory": "Clear category", "categoryFilter": "Category: {category}", "clearAccount": "Clear account", "errors": { "load": "Could not load the analysis.", "date": "Enter a valid date.", "order": "End date must be equal to or after start date.", "range": "Query no more than five years at a time.", "amount": "Enter a valid amount.", "amountOrder": "Maximum amount must be greater than or equal to minimum.", "search": "Use no more than 200 characters." }, "retryHint": "Try refreshing the analysis."
+    },
     "filters": {
       "title": "Filters",
       "startDate": "Start Date",
@@ -713,11 +728,13 @@
         "totalAmountPositive": "Amount must be greater than zero.",
         "installmentsMin": "Minimum 1 installment.",
         "categoryRequired": "Select a category.",
-        "purchaseDateRequired": "Enter the purchase date."
+        "purchaseDateRequired": "Enter the purchase date.",
+        "observationsTooLong": "Maximum 300 characters."
       }
     },
     "payment": {
       "title": "Pay Invoice",
+      "defaultDescription": "Invoice Payment {month} {year}",
       "account": "Account",
       "amount": "Amount to pay",
       "description": "Description",
@@ -747,6 +764,67 @@
   "investments": {
     "title": "Investments",
     "description": "Track and manage your investments",
+    "modes": {
+      "portfolio": "Portfolio",
+      "analytics": "Analytics"
+    },
+    "analytics": {
+      "title": "Investment analytics",
+      "description": "Understand your contributions, returns, and portfolio growth over time.",
+      "refresh": "Refresh analytics",
+      "loading": "Analyzing...",
+      "analyze": "Analyze",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "investment": "Investment",
+      "allInvestments": "All investments",
+      "presets": {
+        "months": "{count} months",
+        "year": "This year",
+        "all": "All history"
+      },
+      "methodology": "Contributions and opening balances form invested capital. Withdrawals are outflows. Adjustments and yields represent gains or losses. The period return uses earnings divided by the average balance held in the investment.",
+      "endingBalance": "End-of-period portfolio",
+      "contributions": "Contributions",
+      "earnings": "Earnings",
+      "returnRate": "Estimated return",
+      "averageMonthlyContribution": "Average monthly contribution",
+      "averageMonthlyEarnings": "Average monthly earnings",
+      "openingBalanceDetail": "Opening balance: {value}",
+      "withdrawalsDetail": "Withdrawals in period: {value}",
+      "averageBalanceDetail": "Average balance in period: {value}",
+      "monthsDetail": "{positive} positive months · {negative} negative months",
+      "monthlyAverage": "Average across months in the selected range",
+      "share": "Share",
+      "noData": "No data for this period",
+      "emptyTitle": "No activity in this period",
+      "emptyDescription": "Choose another range or investment to view its evolution.",
+      "series": {
+        "contributions": "Contributions",
+        "earnings": "Earnings",
+        "closingBalance": "Portfolio value"
+      },
+      "charts": {
+        "evolution": "Portfolio evolution",
+        "evolutionDescription": "Compare monthly contributions and earnings with the accumulated balance.",
+        "monthlyReturn": "Monthly return",
+        "monthlyReturnDescription": "Gain or loss percentage calculated over the average monthly balance.",
+        "distribution": "Portfolio distribution",
+        "distributionDescription": "Each investment's share of the end-of-period portfolio."
+      },
+      "performance": {
+        "title": "Performance by investment",
+        "description": "Compare portfolio value, contributions, and returns in the selected range."
+      },
+      "errors": {
+        "load": "Could not load investment analytics.",
+        "retry": "Try refreshing the analytics.",
+        "date": "Enter a valid date.",
+        "order": "End date must be equal to or after start date.",
+        "future": "End date cannot be in the future.",
+        "range": "Query no more than ten years at a time."
+      }
+    },
     "empty": {
       "title": "No investments",
       "description": "Add your first investment to start tracking"
@@ -1051,5 +1129,25 @@
       "monthRequired": "Select a month.",
       "monthInvalid": "Invalid month."
     }
+  },
+  "recurringTransactions": {
+    "title": "Recurring transactions",
+    "description": "Schedule income and expenses, then confirm each occurrence when it is due.",
+    "types": { "expense": "Expense", "income": "Income" },
+    "frequency": { "daily": "Daily", "weekly": "Weekly", "monthly": "Monthly", "yearly": "Yearly" },
+    "weekdays": { "0": "Sun", "1": "Mon", "2": "Tue", "3": "Wed", "4": "Thu", "5": "Fri", "6": "Sat" },
+    "months": { "1": "January", "2": "February", "3": "March", "4": "April", "5": "May", "6": "June", "7": "July", "8": "August", "9": "September", "10": "October", "11": "November", "12": "December" },
+    "actions": { "create": "New recurrence", "edit": "Edit", "delete": "Delete", "cancel": "Cancel", "save": "Save", "saving": "Saving...", "refresh": "Refresh" },
+    "fields": { "type": "Type", "amount": "Amount", "description": "Description", "descriptionPlaceholder": "E.g. Rent", "destination": "Payee", "destinationPlaceholder": "E.g. Landlord", "account": "Account", "accountPlaceholder": "Select an account", "category": "Category", "categoryPlaceholder": "Select a category", "startDate": "Start date", "endDate": "End date", "justForRecord": "Record only", "isActive": "Recurrence active" },
+    "recurrence": { "title": "Recurrence rule", "description": "Define when a new pending occurrence should be created.", "frequency": "Frequency", "interval": "Every", "everyDay": "Every day", "dayOfWeek": "Day of week", "dayOfMonth": "Day of month", "lastDay": "Last day of the month", "month": "Month" },
+    "dialog": { "createTitle": "New recurring transaction", "createDescription": "Occurrences are created as pending items for your confirmation.", "editTitle": "Edit recurring transaction", "editDescription": "Changes will be used for future occurrences." },
+    "pending": { "title": "Pending confirmations", "description": "Confirm to record the transaction or reject it when it should not happen.", "empty": "There are no pending recurrences.", "selectAll": "Select all", "confirm": "Confirm", "reject": "Reject", "confirmSelected": "Confirm selected", "rejectSelected": "Reject selected" },
+    "list": { "title": "Your recurrences", "description": "Manage the rules that create your scheduled transactions.", "emptyTitle": "No recurrences yet", "emptyDescription": "Create a recurrence so you do not forget your financial commitments." },
+    "status": { "active": "Active", "inactive": "Paused" },
+    "labels": { "starts": "Starts", "ends": "Ends", "noEndDate": "No end date", "pending": "Pending", "confirmed": "Confirmed", "everyInterval": "every {interval}", "dayOfMonth": "day {day}" },
+    "deleteDialog": { "title": "Delete recurrence?", "description": "The recurrence \"{description}\" and its pending items will be removed. This cannot be undone." },
+    "rejectDialog": { "title": "Reject recurrence", "description": "Optionally enter a reason to keep in the history.", "placeholder": "Reason (optional)" },
+    "feedback": { "errorTitle": "Could not complete the action", "loadError": "Could not load recurrences.", "createError": "Could not create the recurrence.", "updateError": "Could not update the recurrence.", "deleteError": "Could not delete the recurrence.", "processError": "Could not process pending items.", "createSuccess": "Recurrence created.", "updateSuccess": "Recurrence updated.", "deleteSuccess": "Recurrence deleted.", "confirmSuccess": "Pending item confirmed.", "rejectSuccess": "Pending item rejected." },
+    "errors": { "amountPositive": "Enter an amount greater than zero.", "descriptionRequired": "Enter a description.", "descriptionTooLong": "Description must be at most 200 characters.", "destinationTooLong": "Payee must be at most 80 characters.", "accountRequired": "Select an account.", "categoryRequired": "Select a category.", "startDateRequired": "Enter the start date.", "endDateAfterStart": "The end date must be after the start date.", "intervalRequired": "Interval must be greater than zero.", "daysOfWeekRequired": "Select at least one weekday.", "daysOfWeekInvalid": "Weekdays are invalid.", "dayOfWeekRequired": "Select a weekday.", "dayOfMonthRequired": "Select a day of the month.", "yearlyDateRequired": "Select the month and day." }
   }
 }

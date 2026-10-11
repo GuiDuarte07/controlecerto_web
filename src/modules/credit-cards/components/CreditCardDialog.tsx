@@ -23,6 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/components/ui/form";
+import { CurrencyInput } from "@/modules/transactions/components/forms/CurrencyInput";
 import { Input } from "@/shared/components/ui/input";
 import { Switch } from "@/shared/components/ui/switch";
 import { Label } from "@/shared/components/ui/label";
@@ -87,13 +88,13 @@ export function CreditCardDialog({
   };
 
   const createForm = (useForm<CreditCardFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(creditCardFormSchema),
     defaultValues: resolveDefaultValues(card),
   }) as unknown) as UseFormReturn<CreditCardFormData>;
 
   const editForm = (useForm<UpdateCreditCardFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+    // @ts-expect-error - Temporary Zod v4 resolver typing mismatch
     resolver: zodResolver(updateCreditCardFormSchema),
     defaultValues: resolveEditValues(card),
   }) as unknown) as UseFormReturn<UpdateCreditCardFormData>;
@@ -141,13 +142,10 @@ export function CreditCardDialog({
                   <FormItem>
                     <FormLabel>{t("dialog.totalLimit")}</FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        step="0.01"
-                        min="0"
+                      <CurrencyInput
                         placeholder={t("dialog.totalLimitPlaceholder")}
-                        {...field}
-                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                        value={field.value}
+                        onChange={(value) => field.onChange(value ?? 0)}
                       />
                     </FormControl>
                     <FormMessage>
@@ -222,13 +220,10 @@ export function CreditCardDialog({
                   <FormItem>
                     <FormLabel>{t("dialog.totalLimit")}</FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        step="0.01"
-                        min="0"
+                      <CurrencyInput
                         placeholder={t("dialog.totalLimitPlaceholder")}
-                        {...field}
-                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                        value={field.value}
+                        onChange={(value) => field.onChange(value ?? 0)}
                       />
                     </FormControl>
                     <FormMessage>

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { BillTypeEnum } from "../types/categories.types";
 import { categoryFormSchema } from "./categories.schemas";
 
@@ -11,6 +12,18 @@ const validCategory = {
 };
 
 describe("categoryFormSchema", () => {
+  it.each([undefined, null, 0, ""])("submits a color-only edit without requiring a budget (%s)", async (limit) => {
+    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
+    const resolver = zodResolver(categoryFormSchema);
+    const result = await resolver(
+      { ...validCategory, color: "#A855F7", limit },
+      undefined,
+      { fields: {}, shouldUseNativeValidation: false },
+    );
+    expect(result.errors).toEqual({});
+    expect(result.values).toMatchObject({ color: "#A855F7", limit: null });
+  });
+
   it.each([
     ["empty string", ""],
     ["null", null],

@@ -24,6 +24,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/components/ui/form";
+import { CurrencyInput } from "@/modules/transactions/components/forms/CurrencyInput";
+import { getContrastTextColor } from "@/shared/utils/colors";
 import { Input } from "@/shared/components/ui/input";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { ToggleGroup, ToggleGroupItem } from "@/shared/components/ui/toggle-group";
@@ -75,15 +77,6 @@ function resolveDefaultValues(
     parentId: (category as Category)?.parentId ?? defaultParentId ?? null,
     limit: category?.limit ?? null,
   };
-}
-
-function getContrastColor(hex: string): string {
-  const clean = hex.replace("#", "");
-  const r = parseInt(clean.slice(0, 2), 16);
-  const g = parseInt(clean.slice(2, 4), 16);
-  const b = parseInt(clean.slice(4, 6), 16);
-  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-  return brightness >= 150 ? "#111111" : "#FFFFFF";
 }
 
 export function CategoryDialog({
@@ -182,7 +175,7 @@ export function CategoryDialog({
                   <DynamicIcon
                     name={watchedIcon as IconName}
                     className="h-5 w-5"
-                    style={{ color: getContrastColor(safeColor) }}
+                    style={{ color: getContrastTextColor(safeColor) }}
                   />
                 </span>
                 <div>
@@ -271,7 +264,7 @@ export function CategoryDialog({
                             <DynamicIcon
                               name={field.value as IconName}
                               className="h-3 w-3"
-                              style={{ color: getContrastColor(safeColor) }}
+                              style={{ color: getContrastTextColor(safeColor) }}
                             />
                           </span>
                           <span className="truncate text-xs">{field.value}</span>
@@ -382,16 +375,11 @@ export function CategoryDialog({
                       </span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        step="0.01"
-                        min="0"
+                      <CurrencyInput
                         placeholder={t("dialog.limitPlaceholder")}
                         disabled={isSubmitting}
-                        value={field.value ?? ""}
-                        onChange={(e) =>
-                          field.onChange(e.target.value === "" ? null : e.target.value)
-                        }
+                        value={field.value ?? undefined}
+                        onChange={(value) => field.onChange(value ?? null)}
                       />
                     </FormControl>
                     <p className="text-xs text-muted-foreground">{t("dialog.limitHint")}</p>

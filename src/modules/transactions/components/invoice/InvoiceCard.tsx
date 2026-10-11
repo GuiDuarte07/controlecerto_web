@@ -91,7 +91,13 @@ export function InvoiceCard({ invoice, onTransactionClick }: InvoiceCardProps) {
           )}
           <div className="mt-1 flex items-center gap-1">
             <Button asChild size="sm" variant="outline" className="h-7 px-2 text-xs">
-              <Link href={`/${locale}/credit-cards/${invoice.creditCard.id}/invoices`}>
+              <Link href={{
+                pathname: `/${locale}/credit-cards/${invoice.creditCard.id}/invoices`,
+                query: {
+                  year: invoice.invoiceDate.slice(0, 4),
+                  month: invoice.invoiceDate.slice(5, 7),
+                },
+              }}>
                 {tCreditCards("actions.viewInvoices")}
               </Link>
             </Button>

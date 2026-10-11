@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
@@ -54,8 +54,8 @@ export function DepositWithdrawDialog({
     [accounts],
   );
 
-  const form = (useForm<DepositWithdrawFormData>({
-    // @ts-ignore - Temporary Zod v4 resolver typing mismatch
+  const form = useForm<DepositWithdrawFormData>({
+    // @ts-expect-error - Installed resolver and Zod versions have incompatible type declarations.
     resolver: zodResolver(depositWithdrawSchema),
     defaultValues: {
       amount: undefined,
@@ -63,7 +63,7 @@ export function DepositWithdrawDialog({
       occurredAt: new Date(),
       note: "",
     },
-  }) as unknown) as UseFormReturn<DepositWithdrawFormData>;
+  });
 
   useEffect(() => {
     if (open) {
@@ -79,7 +79,7 @@ export function DepositWithdrawDialog({
   const resolveError = (message?: string) => {
     if (!message) return "";
     try {
-      return t(message as Parameters<typeof t>[0]);
+      return t(message.replace(/^investments\./, "") as Parameters<typeof t>[0]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {
       return message;

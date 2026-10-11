@@ -67,6 +67,7 @@ function toCreditExpenseInitial(tx: Transaction): Partial<CreditExpenseFormData>
     creditCardId: cp?.creditCardId,
     destination: tx.destination ?? "",
     description: tx.description ?? "",
+    observations: tx.observations ?? "",
   };
 }
 
@@ -160,6 +161,7 @@ export function CreateTransactionDialog({
         purchaseDate: format(data.purchaseDate, "yyyy-MM-dd'T'HH:mm:ss"),
         destination: data.destination || undefined,
         description: data.description || undefined,
+        observations: data.observations,
         creditCardId: data.creditCardId,
         categoryId: data.categoryId,
       });
@@ -172,6 +174,7 @@ export function CreateTransactionDialog({
         purchaseDate: format(data.purchaseDate, "yyyy-MM-dd'T'HH:mm:ss"),
         destination: data.destination,
         description: data.description || undefined,
+        observations: data.observations || undefined,
         creditCardId: data.creditCardId,
         categoryId: data.categoryId,
       });

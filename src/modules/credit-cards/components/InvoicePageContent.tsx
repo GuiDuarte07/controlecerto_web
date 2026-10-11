@@ -7,7 +7,6 @@ import { ptBR } from "date-fns/locale";
 import { Plus, TriangleAlert, CreditCard } from "lucide-react";
 import { usePageHeader } from "@/shared/hooks/use-page-header";
 import { MonthNavigator } from "@/shared/components/MonthNavigator";
-import { Button } from "@/shared/components/ui/button";
 import { Badge } from "@/shared/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Skeleton } from "@/shared/components/ui/skeleton";
@@ -25,6 +24,8 @@ import type { InvoiceTransaction } from "../types/invoice.types";
 
 interface InvoicePageContentProps {
   creditCardId: number;
+  initialYear?: number;
+  initialMonth?: number;
 }
 
 function getInvoiceStatus(isPaid: boolean, closingDate: string): "paid" | "open" | "future" {
@@ -58,7 +59,7 @@ function toTransactionRow(tx: InvoiceTransaction): Transaction {
   };
 }
 
-export function InvoicePageContent({ creditCardId }: InvoicePageContentProps) {
+export function InvoicePageContent({ creditCardId, initialYear, initialMonth }: InvoicePageContentProps) {
   const t = useTranslations("invoices");
   const locale = useLocale();
   const dateLocale = locale === "pt" ? ptBR : undefined;
@@ -69,7 +70,7 @@ export function InvoicePageContent({ creditCardId }: InvoicePageContentProps) {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isPurchaseEditDialogOpen, setIsPurchaseEditDialogOpen] = useState(false);
 
-  const { currentInvoice, browsedDate, isLoading, error } = useInvoiceData(creditCardId);
+  const { currentInvoice, browsedDate, isLoading, error } = useInvoiceData(creditCardId, initialYear, initialMonth);
   const loadById = useInvoiceStore((s) => s.loadById);
   const loadByDate = useInvoiceStore((s) => s.loadByDate);
   const { navigateNext, navigatePrev, hasNext, hasPrev, isLoading: navLoading } =
@@ -118,8 +119,10 @@ export function InvoicePageContent({ creditCardId }: InvoicePageContentProps) {
     : null;
 
   const remainingAmount = currentInvoice
-    ? Math.max(0, currentInvoice.totalAmount - currentInvoice.totalPaid)
+    ? Math.max(0, Math.round((currentInvoice.totalAmount - currentInvoice.totalPaid) * 100) / 100)
     : 0;
+
+  const canPayInvoice = !!currentInvoice && !currentInvoice.isPaid && remainingAmount > 0;
 
   const paidPercent =
     currentInvoice && currentInvoice.totalAmount > 0
@@ -291,7 +294,7 @@ export function InvoicePageContent({ creditCardId }: InvoicePageContentProps) {
               payments={currentInvoice.invoicePayments ?? []}
               isSubmitting={isSubmitting}
               onDelete={(id) => void deletePayment(id)}
-              onAdd={openPaymentDialog}
+              onAdd={canPayInvoice ? openPaymentDialog : undefined}
             />
           </CardContent>
         </Card>
@@ -320,14 +323,17 @@ export function InvoicePageContent({ creditCardId }: InvoicePageContentProps) {
               purchaseDate: data.purchaseDate,
               installments: data.totalInstallment,
               categoryId: data.categoryId,
+              observations: data.observations,
             });
           }
         }}
       />
 
-      {currentInvoice && (
+      {currentInvoice && isPaymentDialogOpen && canPayInvoice && (
         <InvoicePaymentDialog
-          open={isPaymentDialogOpen}
+          key={currentInvoice.id}
+          invoiceDate={currentInvoice.invoiceDate}
+          open={isPaymentDialogOpen && canPayInvoice}
           remainingAmount={remainingAmount}
           isSubmitting={isSubmitting}
           onClose={closePaymentDialog}
